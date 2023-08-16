@@ -21,6 +21,10 @@ public class Basics08142023 {
         System.out.println(varsha.marks);
       //  System.out.println(jigar.marks);
         // TODO code application logic here
+        A obj; 
+        for(int i = 1; i < 1000000000;i++){
+            obj  = new A("Random name");
+        }
     }
 }
 
@@ -51,3 +55,16 @@ class Student{
     
    
 }
+class A {
+
+    String name;
+    public A(String name){
+     this.name = name;
+    }
+    
+    @Override
+    protected void finalize() throws Throwable{
+        System.out.println("Object is being destroyed");
+    }
+}
+
