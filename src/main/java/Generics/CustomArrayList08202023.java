@@ -64,6 +64,7 @@ public class CustomArrayList08202023 {
         list.add(1);
         list.add(2);
         list.add(3);
+       // list.remove();
         
 //        ArrayList random = new ArrayList();
 //        random.add(1);
@@ -72,6 +73,13 @@ public class CustomArrayList08202023 {
 //        random.add(true);
 //        System.out.println(random);
         
+        System.out.println(list);
+        System.out.println(list.remove());
+        System.out.println(list.get(0));
+        
+        for(int i = 0; i < 14;i++){
+            list.add(2*i);
+        }
         System.out.println(list);
         // TODO code application logic here
     }
