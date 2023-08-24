@@ -9,6 +9,7 @@ package OOPs;
  * @author parth
  */
 public class Basics08142023 {
+  public static int x = 5;
 
     /**
      * @param args the command line arguments
@@ -16,13 +17,18 @@ public class Basics08142023 {
     public static void main(String args[]) {
         //Human parth = new Human();
        // parth.greeting();
+      Basics08142023 obj21 = new Basics08142023();
+      Basics08142023 obj2 = new Basics08142023();
+      obj2.x =25;
+        System.out.println(obj21.x);
+        System.out.println(obj2.x);
         Student jigar = new Student();
         Student varsha = new Student("Varsha Desai",8,95);
         System.out.println(varsha.marks);
       //  System.out.println(jigar.marks);
         // TODO code application logic here
         A obj; 
-        for(int i = 1; i < 1000000000;i++){
+        for(int i = 1; i < 100;i++){
             obj  = new A("Random name");
         }
     }

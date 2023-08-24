@@ -20,6 +20,9 @@ public class FibonacciwithRecursion {
         int number = console.nextInt();
         System.out.println("The first" + number + "of the fibonacci series are " + number);
         System.out.println(fibonacci(15));
+        for(int i = 0; i <= 10; i++){
+            System.out.println(fibonacci(i));
+        }
         
         // TODO code application logic here
     }
@@ -32,8 +35,11 @@ public class FibonacciwithRecursion {
         }
         else {
             return fibonacci(result - 2) + fibonacci(result - 1);
+       
         }
     }
 }
+    
+ 
     
 

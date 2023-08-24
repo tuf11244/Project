@@ -30,7 +30,7 @@ public class AreaofCuboid {
         System.out.println("Enter the String that you want to reverse");
         Scanner console = new Scanner(System.in);
         String text = console.nextLine();
-        String reverse = Reverse(text);
+        String reverse = reverse(text);
         System.out.println("The original string is "+ " " + text);
         System.out.println("The reverse string is " + " " + reverse);
         
@@ -47,4 +47,12 @@ public class AreaofCuboid {
       }
       return rev;
   }
+ 
+ public static String reverse(String S){
+     String rev = "";
+     for(int i = S.length()-1; i>= 0;i--){
+         rev = rev + S.charAt(i);
+     }
+     return rev;
+ }
 }
