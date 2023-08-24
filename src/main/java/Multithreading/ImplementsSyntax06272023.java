@@ -13,6 +13,7 @@ class Mythread2 implements Runnable{
     public void run(){
         System.out.println("My Thread running");
     }
+   
 }
 
 
@@ -28,6 +29,7 @@ public class ImplementsSyntax06272023 {
         t1.start();
         t1.toString();
         System.out.println(t1.getState());
+        System.out.println(t1);
        // t1.getState();
         // TODO code application logic here
     }

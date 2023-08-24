@@ -14,8 +14,8 @@ public class StaticSynchronization07062023 {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        Bank object1 = new Bank(2000);
-        Bank object2 = new Bank(2000);
+        Bank object1 = new Bank(5000);
+         Bank object2 = new Bank(2000);
        
         Thread t1 = new Thread(object1);
         Thread t2 = new Thread(object1);
