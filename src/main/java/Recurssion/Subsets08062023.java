@@ -18,7 +18,7 @@ public class Subsets08062023 {
      */
     public static void main(String args[]) {
         int[] arr = {1,2,2};
-        List<List<Integer>> ans = subsetswithDuplicates(arr);
+        List<List<Integer>> ans = subsets(arr);
         for(List<Integer> i : ans){
             System.out.println(i);
         }

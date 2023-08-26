@@ -33,8 +33,6 @@ public class CyclicSortAlgorithm07192023 {
             else{
                i++;
             }
-        }
-            
-        
+        }     
     }
 }

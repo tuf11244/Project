@@ -14,7 +14,7 @@ public class FindAllDuplicatesInAnArray07202023 {
 
     /**
      * @param args the command line arguments
-     * Insertion Sorting question
+     * Cyclic Sorting question
      */
     public static void main(String args[]) {
         int[] arr = {1,1,2};

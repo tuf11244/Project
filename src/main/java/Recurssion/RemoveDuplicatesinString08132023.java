@@ -14,16 +14,34 @@ public class RemoveDuplicatesinString08132023 {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        System.out.println(removeDuplicates("abbaxy"));
-        // TODO code application logic here
+        String s = "abbaxy";
+      //  System.out.println(removeDuplicates(s));
+        removeDuplicates("",s);
     }
     public static String removeDuplicates(String S){
-        if(S.length()<= 1){
-            return S;
+        String newString = "";
+        for(int i = 0; i < S.length();i++){
+            char ch = S.charAt(i);
+            if(newString.indexOf(ch)== -1){
+                newString = newString + ch;
+            }
         }
-        if(S.charAt(0) == S.charAt(1)){
-            return removeDuplicates(S.substring(1));
-        }
-        return S.charAt(0) + removeDuplicates(S.substring(1));
+        return newString;
     }
-}
+    
+    public static void removeDuplicates(String processed, String unprocessed){
+        if(unprocessed.isEmpty()){
+            System.out.println(processed);
+           return;
+        }
+        char ch = unprocessed.charAt(0);
+        if(processed.indexOf(ch)== -1){
+          removeDuplicates(processed+ch,unprocessed.substring(1));
+        }
+        else{
+            removeDuplicates(processed,unprocessed.substring(1));
+        }
+    }
+       
+    }
+

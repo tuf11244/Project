@@ -22,7 +22,7 @@ public class RecurssionPracticeQuestionsStringsPart0408042023 {
         //System.out.println(str.substring(2));
         //System.out.println(removeAllthea(str));  //Question 1
         //System.out.println(removetheString(str)); //Question 2
-        //System.out.println(subSequence(" ","abc")); //Question 4
+        System.out.println(subSequence(" ","abc")); //Question 4
         //System.out.println(subSequencewithAscii("","abc")); //Question 5
         // TODO code application logic here
     }

@@ -16,8 +16,8 @@ public class Dice08082023 {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        //diceCombination("",4);
-        System.out.println(diceCombinationList("",4));
+        diceCombination("",4);
+      //  System.out.println(diceCombinationList("",4));
         // TODO code application logic here
     }
     
