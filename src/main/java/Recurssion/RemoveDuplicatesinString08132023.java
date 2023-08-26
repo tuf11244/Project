@@ -17,6 +17,7 @@ public class RemoveDuplicatesinString08132023 {
         String s = "abbaxy";
       //  System.out.println(removeDuplicates(s));
         removeDuplicates("",s);
+        System.out.println(removeDuplicateswithString("",s).length());
     }
     public static String removeDuplicates(String S){
         String newString = "";
@@ -42,6 +43,19 @@ public class RemoveDuplicatesinString08132023 {
             removeDuplicates(processed,unprocessed.substring(1));
         }
     }
+    
+    public static String removeDuplicateswithString(String processed, String unprocessed){
+        if(unprocessed.isEmpty()){
+           return processed;
+        }
+        char ch = unprocessed.charAt(0);
+        if(processed.indexOf(ch)== -1){
+           return removeDuplicateswithString(processed+ch,unprocessed.substring(1));
+        }
+        
+           return removeDuplicateswithString(processed,unprocessed.substring(1));
        
+    }
+         
     }
 
