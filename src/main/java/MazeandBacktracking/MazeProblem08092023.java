@@ -77,7 +77,7 @@ public class MazeProblem08092023 {
         }
        ArrayList<String> answer = new ArrayList<>();
         if(row > 1 && column > 1){
-          answer.addAll(printPathsListDiagonal(processed + 'D',row -1, column -1));
+          answer.addAll(printPathsListDiagonal(processed + 'D',row -1, column -1)); //For diagonal
         }
         if(row > 1){
           answer.addAll(printPathsListDiagonal(processed + 'V',row-1,column));
