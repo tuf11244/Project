@@ -24,7 +24,7 @@ public class WordSearch {
           {'S','F','C','S'},
           {'A','D','E','E'}
       };
-        System.out.println(exist(board,"SEE"));
+        System.out.println(exist(board,"BFCS"));
         // TODO code application logic here
     }
     
@@ -43,7 +43,6 @@ public class WordSearch {
         return false;
         
     }
-
     private static boolean isValid(char[][] board, int row, int column) {
        return row >= 0 && row < board.length && column >= 0 && column < board[0].length;
     }
