@@ -4,6 +4,7 @@
  */
 package PracticeQuestions;
 
+
 /**
  *
  * @author parth
@@ -19,8 +20,8 @@ public class WordSearch {
     public static void main(String args[]) {
       //  char[][] board = {[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]}
       char[][] board = {
-          {'A','B','c','E'},
-          {'S','F','C','E'},
+          {'A','B','C','E'},
+          {'S','F','C','S'},
           {'A','D','E','E'}
       };
         System.out.println(exist(board,"SEE"));
@@ -33,7 +34,7 @@ public class WordSearch {
         visited = new boolean[row][column];
         for(int i = 0; i < row; i++){
             for(int j = 0; j < column; j++){
-                if(isValid(board,i,j) && board[i][j] == word.charAt(0) && search(board,word, i, j, 0)){
+                if(board[i][j] == word.charAt(0) && search(board,word, i, j, 0)){
                     return true;
                 }
             }
@@ -44,7 +45,7 @@ public class WordSearch {
     }
 
     private static boolean isValid(char[][] board, int row, int column) {
-       return row > 0 && row < board.length && column > 0 && column < board[0].length;
+       return row >= 0 && row < board.length && column >= 0 && column < board[0].length;
     }
     
     private static boolean search(char[][] board, String word, int row, int column, int index){
@@ -52,16 +53,17 @@ public class WordSearch {
         if(index == word.length()){
             return true;
         }
-        if(board[row][column] != word.charAt(index) || visited[row][column] ){
+         if (!isValid(board, row, column) || board[row][column] != word.charAt(index) || visited[row][column]) {
             return false;
         }
         visited[row][column] = true;
-        if(search(board,word,row+1,column,index+1) || 
-          (search(board,word,row,column+1,index+1) || 
-          (search(board,word,row-1,column,index+1) ||
-          (search(board,word,row,column-1,index+1))))){
+        if (search(board, word, row + 1, column, index + 1) ||
+            search(board, word, row, column + 1, index + 1) ||
+            search(board, word, row - 1, column, index + 1) ||
+            search(board, word, row, column - 1, index + 1)) {
             return true;
         }
+        
         
         visited[row][column] = false;    
         
