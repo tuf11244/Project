@@ -17,6 +17,7 @@ public abstract class ParentAbstraction {
    
    public ParentAbstraction(int age){
        this.age = age;
+     //  System.out.println(age);
    }
    
    static void hello(){

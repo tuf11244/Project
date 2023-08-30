@@ -19,6 +19,7 @@ public class MainAbstraction {
         
         son.career();
         daughter.career();
+        System.out.println(son.age);
         
         ParentAbstraction.hello();
         SonAbstraction.hello();
