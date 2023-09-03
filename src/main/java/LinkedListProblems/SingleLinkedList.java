@@ -111,7 +111,7 @@ public class SingleLinkedList {
         }
         return node;
     }
-    //Remove Duplicates from a sorted List;
+    //Remove Duplicates from a sorted List; //Date: 09/01/2023
     public void removeDuplicates(){
         Node temp = head;
         while(temp.next!=null){
@@ -125,7 +125,7 @@ public class SingleLinkedList {
             tail.next = null;
     }
     }
-    //Merge two Sorted List
+    //Merge two Sorted List Date: 09/01/2023
     public SingleLinkedList MergeSortedList(SingleLinkedList first, SingleLinkedList second){
         SingleLinkedList answer = new SingleLinkedList();
         Node f = first.head;
@@ -149,6 +149,97 @@ public class SingleLinkedList {
         }   
         return answer;
               
+    }
+    //If the linkedList has cycle or not
+    public boolean hasCycle(SingleLinkedList list){
+        Node fast = head;
+        Node slow = head;
+        while(fast !=null && fast.next!=null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if(fast == slow){
+                return true;
+            }
+        }
+        return false;      
+    }
+    //Find out the length of cycle
+    public int lengthofCycle(Node node){
+        Node fast = head; 
+        Node slow = head;
+        int length = 0;
+        while(fast!=null && fast.next!=null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if(fast == slow){
+                Node temp = slow;
+                do{
+                    temp = temp.next;
+                    length = length + 1;
+                }while(temp!= slow);
+                return length;
+            }
+        }
+        return 0;
+    }
+    //Node from which the cycle has started
+    public Node detectCycle(SingleLinkedList list){
+        int length = 0; 
+        Node fast = head;
+        Node slow = head;
+        while(fast !=null && fast.next!=null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if(fast == slow){
+                length = lengthofCycle(slow);
+            }
+        }
+        
+        //find the start node;
+        Node first = head;
+        Node second = head;
+        
+        //move the second node length times
+        while(length > 0){
+            second = second.next;
+            length = length - 1;
+        }
+        
+        //keep moving forward until they will meet at cycle start
+        while(first != second){
+            first = first.next;
+            second = second.next;
+        }
+        return second;
+    }
+    
+    //Find the middle of LinkedList 
+    public Node middleNode(Node head){
+        Node fast = head;
+        Node second = head;
+        
+        while(fast!= null && fast.next != null){
+            fast = fast.next.next;
+            second = second.next;
+        }
+        return second;
+    }
+    
+    //Sort the LinkedList
+    public void bubbleSort(){
+        bubbleSort(size-1,0);
+    }
+    public void bubbleSort(int row, int column){
+        if(row == 0){
+            return;
+        }
+        if(column < row){
+            Node first = get(column);
+            Node second = get(column+1);
+        }
+        if(){
+            
+        }
     }
 
     /**
