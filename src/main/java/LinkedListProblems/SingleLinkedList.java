@@ -226,21 +226,7 @@ public class SingleLinkedList {
     }
     
     //Sort the LinkedList
-    public void bubbleSort(){
-        bubbleSort(size-1,0);
-    }
-    public void bubbleSort(int row, int column){
-        if(row == 0){
-            return;
-        }
-        if(column < row){
-            Node first = get(column);
-            Node second = get(column+1);
-        }
-        if(){
-            
-        }
-    }
+  
 
     /**
      * @param args the command line arguments

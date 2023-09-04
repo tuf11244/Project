@@ -17,7 +17,7 @@ public class Main {
      * https://leetcode.com/problems/linked-list-cycle/
      * https://leetcode.com/problems/linked-list-cycle-ii/
      * https://leetcode.com/problems/middle-of-the-linked-list/
-     * https://leetcode.com/problems/sort-list/
+     * 
      * @param args the command line arguments
      */
     public static void main(String args[]) {
