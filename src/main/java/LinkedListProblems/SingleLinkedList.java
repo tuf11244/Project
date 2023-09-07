@@ -59,6 +59,18 @@ public class SingleLinkedList {
        temp.next = node;
        size = size + 1;
     }
+    public void insertRecurssion(int val, int index){
+        head = insertRecurssion(val,index,head);
+    }
+    private Node insertRecurssion(int val, int index, Node node){
+        if(index == 0){
+            Node temp = new Node(val, node.next);
+            size = size + 1;
+            return temp;
+        }
+        node.next = insertRecurssion(val,index-1,node.next);
+        return node;
+    }
     
     public int deleteFirst(){
         int val = head.value;
