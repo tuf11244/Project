@@ -15,17 +15,18 @@ public class QueueMain {
      */
     public static void main(String args[]) throws Exception {
         CustomQueue<String> queue = new CustomQueue<>();
-        queue.insert("Parth");
-        queue.insert("Jigar");
-        queue.insert("Tanvi");
-        queue.insert("Hriday");
-        queue.insert("Pia");
-        
-        queue.display();
-        
-        queue.remove();
+        CustomCircularQueue<String> queue1 = new CustomCircularQueue<>();
+        queue1.insert("Parth");
+        queue1.insert("Jigar");
+        queue1.insert("Tanvi");
+        queue1.insert("Hriday");
+        queue1.insert("Pia");
+        queue1.display();
         System.out.println("");
-        queue.display();
+        System.out.println(queue1.remove());
+        System.out.println("");
+        queue1.insert("Varsha");
+        queue1.display();
         // TODO code application logic here
     }
 }
