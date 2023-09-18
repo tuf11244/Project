@@ -3,26 +3,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package PracticeQuestions;
-
+import java.util.Arrays;
 /**
- *
+ *Date: 09/18/2023
  * @author parth
  */
-public class countDigitsinNumber {
+public class MajorityElement {
 
     /**
-     * Date: 08/29/2023
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        System.out.println(countDigits(-110,1));
+        int[] arr = {2,3,2};
+        System.out.println(majorityElement(arr));
         // TODO code application logic here
     }
-    
-    public static int countDigits(int number, int count){
-        if(number >= -9 && number <=9){
-            return count;
-        }
-        return countDigits(number/10, count +1);
+    //O(NLogN) time complexity
+    public static int majorityElement(int[] arr){
+        Arrays.sort(arr);
+        return arr[arr.length/2];
     }
 }
