@@ -5,15 +5,17 @@
 package Trees;
 
 /**
- *Date:09/19/2023
+ *Date: 09/20/2023
  * @author parth
  */
-public class BST {
+public class AVL {
+
+
     private Node root;
     
-    public BST(){     
+    public AVL(){     
     }
-    public int height(){
+     public int height(){
         return height(root);
     }
     public int height(Node node){
@@ -41,7 +43,59 @@ public class BST {
             node.right = insert(node.right,value);
         }
         node.height = Math.max(height(node.left),height(node.right)) + 1;
-        return node;       
+        return rotate(node);       
+    }
+    private Node rotate(Node node){
+        //Left heavy tree
+        if(height(node.left) - height(node.right) > 1){
+            if(height(node.left.left) - height(node.left.right) > 0){
+                //Left-Left case 
+                return rightRotate(node);
+            }
+            if(height(node.left.left) - height(node.left.right) < 0){
+                //Left-Right Case 
+                node.left = leftRotate(node.left);
+                return rightRotate(node);
+            }
+        }
+        
+        //Right heavy tree 
+         if(height(node.left) - height(node.right) < -1){
+            if(height(node.right.left) - height(node.right.right) < 0){
+                //Right-Right case 
+                return leftRotate(node);
+            }
+            if(height(node.right.left) - height(node.right.right) > 0){
+                //Right - Left Case 
+                node.right = rightRotate(node.right);
+                return leftRotate(node);
+            }
+        }
+         return node;
+    }
+    public Node rightRotate(Node p){
+        Node c = p.left;
+        Node t = c.right;
+        
+        c.right = p;
+        p.left = t;
+        
+        p.height = Math.max(height(p.left), height(p.right)) + 1;
+        c.height = Math.max(height(c.left), height(c.right)) + 1;
+        return c;
+    }
+    
+    public Node leftRotate(Node c){
+        Node p = c.right;
+        Node t = p.left;
+        
+        p.left = c;
+        c.right = t;
+        
+        p.height = Math.max(height(p.left), height(p.right)) + 1;
+        c.height = Math.max(height(c.left), height(c.right)) + 1;
+        
+        return p;
     }
     public void display(){
         display(this.root,"Root value is :");
@@ -98,15 +152,16 @@ public class BST {
     }
 
     public static void main(String args[]) {
-      // int [] arr = {5,27,31,9,2,79,65,89,0,1};
       //  int[] arr = {1,2,3,4,5,6,7,8,9,10};
-        BST tree = new BST();
-    //    tree.populate(arr);
-    for(int i = 0; i < 1000; i++){
-        tree.insert(i);
-    }
+        AVL tree = new AVL();
+        for(int i = 0; i < 1000; i++){
+            tree.insert(i);
+        }
         tree.display();
-        System.out.println(tree.balanced());
         System.out.println(tree.height());
+       
+        
     }
 }
+
+
