@@ -87,7 +87,7 @@ public class DiameterofBinaryTree {
         Scanner scanner = new Scanner(System.in);
         tree.insert(scanner);
         tree.display();
-        System.out.println(tree.diameter());
+        System.out.println(tree.diameter() + " is the diameter of the tree ");
         // TODO code application logic here
     }
 }
