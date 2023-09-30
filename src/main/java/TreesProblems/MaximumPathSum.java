@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  *Date: 09/23/2023
  * https://leetcode.com/problems/binary-tree-maximum-path-sum/
- * 
+ * https://leetcode.com/problems/path-sum/ (Date: 09/29/2023 : function hasPathSum)
  * @author parth
  */
 public class MaximumPathSum {
@@ -88,6 +88,21 @@ public class MaximumPathSum {
         result = Math.max(result, answer);
         return temp;
     }
+    public boolean hasPathSum(){
+        return hasPathSum(root,22);
+    }
+    private boolean hasPathSum(Node node, int target){
+        if(node == null){
+            return false;
+        }
+        //Found the answer
+        if(node.value == target && node.left == null && node.right == null){
+            return true;
+        }
+        //call recurssion
+        return hasPathSum(node.left,target-node.value) || hasPathSum(node.right,target-node.value);
+    }
+    
     
     
     
