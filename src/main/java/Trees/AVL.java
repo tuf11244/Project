@@ -159,6 +159,7 @@ public class AVL {
         }
         tree.display();
         System.out.println(tree.height());
+        System.out.println(tree.balanced());
        
         
     }
