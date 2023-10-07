@@ -4,6 +4,9 @@
  */
 package TreesProblems;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Date: 09/27/2023
  *https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
@@ -30,6 +33,33 @@ public class ConnectNodes {
         }
             leftMost = leftMost.left;
     }
+        return node;
+    }
+    public Node connectNodeUsingQueue(Node node){
+        if(node == null){
+            return null;
+        }
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(node);
+        while(!queue.isEmpty()){
+            int levelSize = queue.size();
+            Node previous= null;
+            for(int i = 0; i < levelSize;i++){
+                Node currentNode = queue.poll();
+                if(previous!=null){
+                    previous.next = currentNode;
+                }
+                previous = currentNode;
+               
+                if(currentNode.left!=null){
+                    queue.offer(currentNode.left);
+                }
+                if(currentNode.right!=null){
+                    queue.offer(currentNode.right);
+                }
+            }
+            previous.next = null;
+        }
         return node;
     }
 

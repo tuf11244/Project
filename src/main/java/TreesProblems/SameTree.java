@@ -4,27 +4,14 @@
  */
 package TreesProblems;
 
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Scanner;
 
 /**
- * Date : 09/27/2023
- * We are returning level order Successor of a Node 
- * for example below is the tree 
- *                       3
- *                     4    8
- *                  12 14  7 11
- * you will be given a value to find the successor, for example if you are given a value 14 and than the successor should 7
- * as the item is right next in the queue;
- * Breadth First Search is Used
+ *
  * @author parth
  */
-public class SuccessorofNode {
+public class SameTree {
     private Node root;
-    public SuccessorofNode(){
-        
-    }
     public void insert(Scanner scanner){
         System.out.println("Enter the root value ");
         int value = scanner.nextInt();
@@ -49,46 +36,25 @@ public class SuccessorofNode {
             insert(node.right,scanner);
         }
     }
-    private Node succesorofNode(){
-        return successorofNode(root,14);
-    }
-    private Node successorofNode(Node node,int key){
-        if(node == null){
-            return null;
+    public boolean isSameTree(Node p, Node q){
+        if(p == null && q == null){
+            return true;
         }
-        Queue<Node> queue = new LinkedList<>();
-        queue.offer(node);
-        while(!queue.isEmpty()){
-            Node currentNode = queue.poll();
-            if(currentNode.left!=null){
-                queue.offer(currentNode.left);
-            }
-            if(currentNode.right!=null){
-                queue.offer(currentNode.right);
-            }
-            if(currentNode.value == key){
-                break;
-            }
+        if(p == null || q == null || p.value!=q.value){
+            return false;
         }
-        return queue.peek(); //return the value next to it;
+        return isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
     }
-    
     
     private class Node{
         int value;
         Node left;
         Node right;
-        
         public Node(int value){
             this.value = value;
         }
     }
-    
     public static void main(String args[]) {
-       SuccessorofNode tree = new SuccessorofNode();
-       Scanner scanner = new Scanner(System.in);
-       tree.insert(scanner);
-       Node successor = tree.succesorofNode();
-       System.out.println(successor.value);
+        // TODO code application logic here
     }
 }

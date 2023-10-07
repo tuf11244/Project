@@ -5,7 +5,7 @@
 package PracticeQuestions;
 
 /**
- *
+ *https://leetcode.com/problems/number-of-islands/
  * @author parth
  */
 public class NumberofIslands {
@@ -16,10 +16,10 @@ public class NumberofIslands {
     static boolean visited[][];
     public static void main(String args[]) {
         char[][] board = {
-          {'1','1','1','1','1'},
+          {'1','1','0','0','0'},
           {'1','1','0','1','0'},
           {'1','1','0','0','0'},
-          {'0','0','0','0','0'}
+          {'0','0','0','1','0'}
       };
        System.out.println(numberofIslands(board));
         // TODO code application logic here
@@ -31,8 +31,9 @@ public class NumberofIslands {
         visited = new boolean[row][column];
         for(int i = 0; i < row; i++){
             for(int j = 0; j < column; j++){
-                if(board[i][j] == '1' && search(board,i,j,0)){
+                if(board[i][j] == '1' && !visited[i][j]){
                     count++;
+                    search(board,i,j);
                 }
             }
         }
@@ -42,21 +43,15 @@ public class NumberofIslands {
        return row >= 0 && row < board.length && column >= 0 && column < board[0].length;
     }
     
-    public static boolean search(char[][] board, int row, int column, int index){
-      if(index == board.length * board[0].length -1){
-          return true;
-      }
-      if(!isValid(board,row,column) || visited[row][column]){
-          return false;
+    public static void search(char[][] board, int row, int column){
+      if(!isValid(board,row,column) || visited[row][column] || board[row][column]!= '1'){
+          return;
       }
       visited[row][column] = true;
-       if (search(board,row + 1, column, index + 1) ||
-            search(board,row, column + 1, index + 1) ||
-            search(board,row - 1, column, index + 1) ||
-            search(board,row, column - 1, index + 1)) {
-            return true;
-        }
-       visited[row][column] = true;
-       return false;
+       search(board,row + 1, column);
+       search(board,row, column + 1);
+       search(board,row - 1, column);
+       search(board,row, column - 1);
+        
     }
 }

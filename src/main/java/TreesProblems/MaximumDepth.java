@@ -7,6 +7,7 @@ package TreesProblems;
 /**
  *Date: 09/28/2023
  * https://leetcode.com/problems/maximum-depth-of-binary-tree/
+ * https://leetcode.com/problems/minimum-depth-of-binary-tree/
  * @author parth
  */
 public class MaximumDepth {
@@ -25,6 +26,22 @@ public class MaximumDepth {
         int right = maximumDepth(node.right);
         
         return Math.max(left, right) + 1;
+    }
+    public int minimumDepthofTree(){
+        return minimumDepthofTree(root);
+    }
+    private int minimumDepthofTree(Node node){
+        if(node == null){
+            return 0;
+        }
+        
+        int left = minimumDepthofTree(node.left);
+        int right = minimumDepthofTree(node.right);
+        if(left == 0 || right == 0){
+            return Math.max(left, right) + 1;
+        }
+       
+        return Math.min(left, right) + 1;
     }
 
     private class Node{

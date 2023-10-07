@@ -88,7 +88,6 @@ public class BinaryTree {
         
     }
     
-    
     private class Node{
         int value;
         Node left; 
