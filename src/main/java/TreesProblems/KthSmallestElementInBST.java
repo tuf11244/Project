@@ -4,6 +4,8 @@
  */
 package TreesProblems;
 
+import java.util.Scanner;
+
 /**
  *Date: 09/28/2023
  * https://leetcode.com/problems/kth-smallest-element-in-a-bst/
@@ -16,9 +18,36 @@ public class KthSmallestElementInBST {
     
     public KthSmallestElementInBST(){
         this.count = 0;
-        this.k = k;
+        this.k = 5;
+    }
+    public void insert(Scanner scanner){
+        System.out.println("Enter the root node value : ");
+        int value = scanner.nextInt();
+        root = new Node(value);
+        insert(scanner,root);
+    }
+    private void insert(Scanner scanner, Node node){
+        System.out.println("Do you want to enter left of :" + node.value);
+        boolean left = scanner.nextBoolean();
+        if(left){
+            System.out.println("Enter the value of the left of :" + node.value);
+            int value = scanner.nextInt();
+            node.left = new Node(value);
+            insert(scanner,node.left);
+        }
+        System.out.println("Do you want to enter right of : " + node.value);
+        boolean right = scanner.nextBoolean();
+        if(right){
+            System.out.println("Enter the value of the right of :" + node.value);
+            int value = scanner.nextInt();
+            node.right = new Node(value);
+            insert(scanner, node.right); 
+        }      
     }
     public int kthSmallest(){
+        if(kthSmallest(root,k) == null){
+            return -1;
+        }
         return kthSmallest(root,k).value;
     }
     private Node kthSmallest(Node node, int k){
@@ -45,6 +74,11 @@ public class KthSmallestElementInBST {
         }
     }
     public static void main(String args[]) {
+        KthSmallestElementInBST tree = new KthSmallestElementInBST();
+        Scanner scanner = new Scanner(System.in);
+        tree.insert(scanner);
+        int answer = tree.kthSmallest();
+        System.out.println("The Kth Smallest value in the tree is " + answer);
         // TODO code application logic here
     }
 }
