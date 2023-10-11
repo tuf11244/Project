@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
+ *https://leetcode.com/problems/binary-tree-paths/
  * @author parth
  */
 public class BinaryTreePaths {
