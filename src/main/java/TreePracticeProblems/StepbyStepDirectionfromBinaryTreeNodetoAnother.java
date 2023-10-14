@@ -18,12 +18,14 @@ public class StepbyStepDirectionfromBinaryTreeNodetoAnother {
        Scanner scanner = new Scanner(System.in);
        tree.insert(scanner);
        
-       String answer = tree.directions(5);
+       String answer = tree.getDirections(3, 6);
         System.out.println(answer);
     }
 }
 class Solution6{
     private Node root;
+    StringBuilder startpath = new StringBuilder();
+    StringBuilder endpath = new StringBuilder();
     public Solution6(){
         
     }
@@ -51,43 +53,66 @@ class Solution6{
             insert(node.right,scanner);
         }
     }
-    public String directions(int start){
-        return directionsfromNodetoStart(root,start);
+    public String getDirections(int start, int end){
+        return getDirections(root,start,end);
     }
-   public String directionsfromNodetoStart(Node node, int start) {
-    if (node == null) {
-        return "";
+    private String getDirections(Node node, int start, int end){
+        
+        dfs(node,start,true);
+        dfs(node,end,false);
+        
+        startpath.reverse();
+        endpath.reverse();
+        int i = 0;
+        int j = 0;
+        
+        while(i < startpath.length() && j < endpath.length()){
+            if(startpath.charAt(i) == endpath.charAt(j)){
+                i++;
+                j++;
+            } else {
+                break;
+            }
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        while( i  < startpath.length() ){
+            sb.append("U");
+            i++;
+        }
+        sb.append(endpath.substring(j));
+        return sb.toString();
+    }
+    private boolean dfs(Node node, int startValue, boolean start){
+        if(node == null){
+            return false;
+        }
+        if(node.value == startValue){
+            return true;
+        }
+        boolean left = dfs(node.left,startValue,start);
+        if(left){
+            if(start){
+                startpath.append("L");
+            } else {
+                endpath.append("L");
+            }
+            return true;
+        }
+        boolean right = dfs(node.right,startValue,start);
+          if(right){
+            if(start){
+                startpath.append("R");
+            } else {
+                endpath.append("R");
+            }
+            return true;
+        }
+          return false;
     }
     
-    if (node.value == start) {
-        return "";
-    }
-    
-    String left = directionsfromNodetoStart(node.left, start);
-    if (!left.isEmpty()) {
-        return "L" + left;
-    }
-    
-    String right = directionsfromNodetoStart(node.right, start);
-        return "R" + right;
-   }
-   public String directionfromNodetoEnd(Node node, int end){
-       if (node == null) {
-        return "";
-    }
-    
-    if (node.value == end) {
-        return "";
-    }
-    
-    String left = directionsfromNodetoStart(node.left, end);
-    if (!left.isEmpty()) {
-        return "L" + left;
-    }
-    
-    String right = directionsfromNodetoStart(node.right, end);
-        return "R" + right; 
-   }
+
+
 
     
     private class Node{
