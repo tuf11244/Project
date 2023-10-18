@@ -50,10 +50,12 @@ public class MinimumAbsoluteDifferenceInBST{
         return;
         }
     getMinimumAbsoluteDifference(node.left);
+    
     if (prev != null) {
         MIN_VALUE = Math.min(MIN_VALUE, Math.abs(node.value - prev));
         }
     prev = node.value;
+    
     getMinimumAbsoluteDifference(node.right);
     }
     private class Node{

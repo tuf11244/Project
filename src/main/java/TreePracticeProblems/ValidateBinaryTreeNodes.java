@@ -4,9 +4,16 @@
  */
 package TreePracticeProblems;
 
+import java.util.Arrays;
+
 /**
  *Date: 10/12/2023
  * https://leetcode.com/problems/validate-binary-tree-nodes/
+ * A binary tree is valid when 
+ * - One one root is there 
+ * - One one parent 
+ * - Parent at most have 2 children 
+ * - There is no cycle 
  * @author parth
  */
 class Solution3{
@@ -21,18 +28,19 @@ class Solution3{
        //Calculate in-degrees for each node
        for(int i = 0; i < n; i++){
            if(leftchild[i]!= -1){
-               indegrees[leftchild[i]]++;
+               indegrees[leftchild[i]]= indegrees[leftchild[i]] + 1;
                if(indegrees[leftchild[i]] > 1){
                    return false;
                }
            }
            if(rightchild[i]!= -1){
-               indegrees[rightchild[i]]++;
+               indegrees[rightchild[i]] = indegrees[rightchild[i]] + 1;
                if(indegrees[rightchild[i]] > 1){
                    return false;
                }
            }
        }
+       System.out.println(Arrays.toString(indegrees));
        int rootcount = 0;
        
        // Check in-degrees and count the root nodes
