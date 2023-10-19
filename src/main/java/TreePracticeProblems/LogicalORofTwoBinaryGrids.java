@@ -49,7 +49,7 @@ class Solution {
         return new Node(false, false, topLeft, topRight, bottomLeft, bottomRight);
     }
 
-    public static class Node {
+    public class Node {
         boolean val;
         boolean isLeaf;
         Node topLeft;

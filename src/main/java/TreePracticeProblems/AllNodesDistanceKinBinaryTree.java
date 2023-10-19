@@ -9,7 +9,7 @@ class Solution {
     private int k;
 
     public Solution() {
-        this.k = 2;
+        this.k = 3;
     }
 
     public List<Integer> distance(Node target, int k) {
@@ -120,7 +120,7 @@ public class AllNodesDistanceKinBinaryTree {
         tree.insert(scanner);
         // Set the target node (you need to implement this logic)
         Solution.Node targetNode = tree.root.left;
-        List<Integer> answer = tree.distance(targetNode, 2);
+        List<Integer> answer = tree.distance(targetNode, 4);
 
         System.out.println(answer);
     }
