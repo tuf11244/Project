@@ -22,7 +22,7 @@ public class RemoveAllAdjacentDuplicatesinString {
         if(input.length() == 0){
             return "";
         }
-        String answer = input.charAt(input.length()-1) + "";
+        String answer = "";
         Stack<Character> stack = new Stack<>();
         for(int i = 0; i < input.length()-1;i++){
             stack.push(input.charAt(i));
