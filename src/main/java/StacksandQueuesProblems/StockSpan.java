@@ -40,6 +40,7 @@ public class StockSpan {
             stack.push(arr[i]);
             indexStack.push(i);
         }
+        
 
         // Calculate the span by subtracting indices
         for (int i = 0; i < queue.size(); i++) {

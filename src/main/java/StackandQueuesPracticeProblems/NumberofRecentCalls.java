@@ -22,6 +22,7 @@ public class NumberofRecentCalls {
         
         System.out.println(object.ping(200));
         System.out.println(object.ping(300));
+        System.out.println(object.ping(400));
         
     }
 }
