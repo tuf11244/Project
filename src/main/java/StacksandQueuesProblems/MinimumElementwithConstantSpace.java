@@ -16,6 +16,7 @@ public class MinimumElementwithConstantSpace {
         MinStack object = new MinStack();
         object.push(5);
         object.push(7);
+        object.push(0);
         object.push(1);
         object.display();
         System.out.println(object.getMin());
