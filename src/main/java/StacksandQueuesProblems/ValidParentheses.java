@@ -30,7 +30,7 @@ public class ValidParentheses {
             char currentChar = expression.charAt(i);
 
             if (currentChar == '(' || currentChar == '{' || currentChar == '[') {
-                stack.push(currentChar);
+                stack.push(currentChar);  //Only 1 set of parentheses need to be pushed to stack
             } else {
                 if (stack.isEmpty()) {
                     return false; // There is no corresponding opening bracket.

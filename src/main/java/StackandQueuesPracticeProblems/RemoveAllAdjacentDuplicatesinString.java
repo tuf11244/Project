@@ -8,6 +8,8 @@ import java.util.Stack;
 
 /**
  *https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/
+ * Solved by own good job parth; 
+ * Date: 10/20/2023
  * @author parth
  */
 public class RemoveAllAdjacentDuplicatesinString {
@@ -16,24 +18,35 @@ public class RemoveAllAdjacentDuplicatesinString {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        System.out.println(removeAdjacentDuplicates("abbaca"));
+        System.out.println(removeAdjacentDuplicates("azxxzy"));
     }
     public static String removeAdjacentDuplicates(String input){
-        if(input.length() == 0){
-            return "";
-        }
-        String answer = "";
-        Stack<Character> stack = new Stack<>();
-        for(int i = 0; i < input.length()-1;i++){
-            stack.push(input.charAt(i));
-        }
-        while(!stack.isEmpty()){
-            if(stack.peek()!=answer.charAt(0)){
-            answer = answer + stack.peek();
-            }else{
-                 stack.pop();
+       if(input.length() == 0){
+           System.out.println("Nothing to remove..not a damn thing");
+       }
+       Stack<Character> stack = new Stack<>();
+       for(int i = 0; i < input.length();i++){
+          char currentChar = input.charAt(i);
+          if(stack.isEmpty()){
+              stack.push(currentChar);
+          }else{
+              char top = stack.peek();
+              if(top!= currentChar){
+                  stack.push(currentChar);
+              } else{
+                  stack.pop();
               }
-        }
-        return answer;
+          }         
+       }
+       String answer = "";
+       while(!stack.isEmpty()){
+           char currentchar = stack.pop();
+           answer = answer + currentchar;
+       }
+       String reverse = "";
+       for(int i = answer.length()-1; i>=0;i--){
+           reverse = reverse + answer.charAt(i);
+       }
+        return reverse;
     }
     }
