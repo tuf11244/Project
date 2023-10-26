@@ -14,6 +14,18 @@ import java.util.Queue;
 public class SnakesandLadders {
     public static void main(String[] args){
         System.out.println("hello,world !");
+            // Example test case
+        int[][] board = {
+            {-1, -1, -1, -1, -1, -1},
+            {-1, -1, -1, -1, -1, -1},
+            {-1, -1, -1, -1, -1, -1},
+            {-1, 35, -1, -1, 13, -1},
+            {-1, -1, -1, -1, -1, -1},
+            {-1, 15, -1, -1, -1, -1}
+        };
+
+        int result = snakesAndLadders(board);
+        System.out.println("Minimum number of moves: " + result);
     }
     
     public static int snakesAndLadders(int[][] board) {
