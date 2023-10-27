@@ -18,7 +18,7 @@ public class MinimumElementwithExtraSpace {
     public static void main(String args[]) {
         MinStack object = new MinStack();
         object.push(5);
-        object.push(3);
+        object.push(11);
         object.push(2);
         object.push(10);
         object.display(); 
