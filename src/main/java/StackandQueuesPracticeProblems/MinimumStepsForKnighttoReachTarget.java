@@ -45,7 +45,7 @@ public class MinimumStepsForKnighttoReachTarget {
             int size = queue.size();
             answer = answer + 1; 
             while(size!= 0){
-            Pair current = queue.remove();
+            Pair current = queue.poll();
             int xx = current.x;
             int yy = current.y;
             int[] ax = {1,1,-1,-1,2,-2,2,-2};
