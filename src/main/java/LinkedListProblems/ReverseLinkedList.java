@@ -13,6 +13,7 @@ public class ReverseLinkedList {
     /**
      * Date: 09/05/2023
      * https://leetcode.com/problems/reverse-linked-list/
+     * https://leetcode.com/problems/reverse-linked-list-ii/
      * @param args the command line arguments
      */
     public static void main(String args[]) {
