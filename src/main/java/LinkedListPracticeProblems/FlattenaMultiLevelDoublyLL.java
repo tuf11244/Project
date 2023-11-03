@@ -16,40 +16,37 @@ public class FlattenaMultiLevelDoublyLL {
         
     }
     public Node flatten(Node node) {
-    if (node == null) {
-        return null;
-    }
-
-    Node temp = node;
-    Node tail = node;
-    while (temp != null) {
-        Node child = temp.child;
-        Node next = temp.next;
-
-        if (child != null) {
-            Node childTail = flatten(child);
-            temp.child = null;
-            temp.next = child;
-            child.previous = temp;
-
-            if (next != null) {
-                tail.next = next;
-                next.previous = tail;
-            }
-
-            tail = childTail;
-        } else {
-            tail = temp;
+        if (node != null) {
+            flattenRecursive(node);
         }
-
-        temp = next;
+        return node;
     }
 
-    return tail;
-}
-
-
-
+    private Node flattenRecursive(Node currentNode) {
+        Node tailNode = currentNode;
+        while (currentNode != null) {
+            Node nextNode = currentNode.next;
+            Node childNode = currentNode.child;
+            if (childNode != null) {
+                Node childTailNode = flattenRecursive(childNode);
+                childTailNode.next = nextNode;
+                if (nextNode != null) {
+                    nextNode.previous = childTailNode;
+                }
+                currentNode.next = childNode;
+                currentNode.child = null;
+                childNode.previous = currentNode;
+                currentNode = childTailNode;
+            } else {
+                currentNode = nextNode;
+                if (currentNode != null) {
+                    tailNode = currentNode;
+                }
+            }
+        }
+        return tailNode;
+    }
+    
     private class Node{
         int value;
         Node next;
@@ -61,29 +58,6 @@ public class FlattenaMultiLevelDoublyLL {
         }
     }
     public static void main(String args[]) {
-        FlattenaMultiLevelDoublyLL list = new FlattenaMultiLevelDoublyLL();
-
-    // Create nodes for the multi-level doubly linked list
-    FlattenaMultiLevelDoublyLL.Node node1 = list.new Node(1);
-    FlattenaMultiLevelDoublyLL.Node node2 = list.new Node(2);
-    FlattenaMultiLevelDoublyLL.Node node3 = list.new Node(3);
-    FlattenaMultiLevelDoublyLL.Node node4 = list.new Node(4);
-
-    // Connect the nodes as a multi-level doubly linked list
-    node1.next = node2;
-    node2.previous = node1;
-    node2.next = node3;
-    node3.previous = node2;
-    node3.child = node4;
-
-    // Flatten the multi-level doubly linked list
-    FlattenaMultiLevelDoublyLL.Node flattenedList = list.flatten(node1);
-
-    // Print the flattened doubly linked list
-    FlattenaMultiLevelDoublyLL.Node temp = flattenedList;
-    while (temp != null) {
-        System.out.print(temp.value + " <-> ");
-        temp = temp.next;
-    }
+        
     }
 }
