@@ -135,15 +135,15 @@ public class FindMinandMaxDistanceBetweenCriticalPoints
 		LL.insertFirst(3);
 		LL.insertFirst(5); 
 		
-		LL.insertFirst(7);
-		LL.insertFirst(2);
-		LL.insertFirst(2);
-		LL.insertFirst(2);
-		LL.insertFirst(3);
-		LL.insertFirst(2);
-		LL.insertFirst(2);
-		LL.insertFirst(3);
-		LL.insertFirst(1); 
+//		LL.insertFirst(7);
+//		LL.insertFirst(2);
+//		LL.insertFirst(2);
+//		LL.insertFirst(2);
+//		LL.insertFirst(3);
+//		LL.insertFirst(2);
+//		LL.insertFirst(2);
+//		LL.insertFirst(3);
+//		LL.insertFirst(1); 
 		
 		LL.display();
 		

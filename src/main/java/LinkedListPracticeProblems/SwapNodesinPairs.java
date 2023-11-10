@@ -29,20 +29,7 @@ public class SwapNodesinPairs {
             temp = temp.next;
         }
     }
-    public void reverse(){
-        Node previous = null;
-        Node present = head;
-        Node next = present.next;
-        while(present!=null){
-            present.next = previous;
-            previous = present;
-            present = next;
-            if(next!=null){
-              next = next.next;  
-            }
-        }
-       head = previous;
-    }
+   
     public void swapinPairs() {
     head = swapinPairs(head);
     }

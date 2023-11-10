@@ -54,7 +54,7 @@ public class DeleteMiddleofaLinkedList
         if(previous.next!=null){
             previous.next = slow.next;
         }
-        previous = head;
+        //previous = head;
     }
     private int getIndex(Node node){
         Node temp = head;
@@ -87,10 +87,10 @@ public class DeleteMiddleofaLinkedList
 	public static void main(String[] args) {
 		System.out.println("Hello World");
 		DeleteMiddleofaLinkedList LL = new DeleteMiddleofaLinkedList();
-		LL.insertFirst(6);
-                LL.insertFirst(2);
-		LL.insertFirst(1);
-		LL.insertFirst(7);
+//		LL.insertFirst(6);
+//                LL.insertFirst(2);
+//		LL.insertFirst(1);
+//		LL.insertFirst(7);
                 LL.insertFirst(4);
 		LL.insertFirst(3);
 		LL.insertFirst(2);
