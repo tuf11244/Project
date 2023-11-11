@@ -35,24 +35,26 @@ public class SwapNodesinPairs {
     }
 
     private Node swapinPairs(Node node) {
-    if (node == null || node.next == null) {
-        return node;
+    Node dummy =new Node(0);
+    dummy.next = head;
+    
+    Node point = dummy;
+    
+    //Ensure node were are swapping are not null
+    while(point.next!=null && point.next.next !=null){
+        Node swap1 = point.next;
+        Node swap2 = point.next.next;
+        
+        //swap 
+        swap1.next = swap2.next;
+        swap2.next = swap1;
+        point.next = swap2;
+        
+        //Update the point 
+        point = swap1;
+        
     }
-
-    Node newHead = node.next;
-    Node prev = null;
-
-    while (node != null && node.next != null) {
-        Node nextPair = node.next.next;
-        if (prev != null) {
-            prev.next = node.next;
-        }
-        node.next.next = node;
-        node.next = nextPair;
-        prev = node;
-        node = nextPair;
-    }
-    return newHead;
+        return dummy.next;
 }
 
         
