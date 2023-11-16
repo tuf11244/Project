@@ -16,7 +16,15 @@ public class RotateLinkedList {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        // TODO code application logic here
+        LinkedList4 LL = new LinkedList4();
+        for(int i = 1; i <=5;i++){
+            LL.insertFirst(i);
+        }
+        LL.display();
+        System.out.println("After rotating :");
+        LL.rotateRight(2);
+        LL.display();
+        
     }
 }
 class LinkedList4{
@@ -26,9 +34,12 @@ class LinkedList4{
     
     public LinkedList4(){
         this.size = 0;
+        this.head = null;
     }
-    
-    public Node rotateRight(Node head, int k){
+    public void rotateRight(int k){
+        head = rotateRight(head,k);
+    }
+    private Node rotateRight(Node head, int k){
         if(k <= 0 || head == null || head.next == null){
             return head;
         }
@@ -52,6 +63,20 @@ class LinkedList4{
         newTemp.next = null;
         return head;
     }
+    public void insertFirst(int val){
+        Node node = new Node(val);
+        node.next = head;
+        head = node;
+        size = size + 1;
+    }
+    public void display(){
+        Node temp = head;
+        while(temp!=null){
+            System.out.print(temp.value + " ");
+            temp = temp.next;
+        }
+    }
+    
     private class Node{
         private int value;
         private Node next;

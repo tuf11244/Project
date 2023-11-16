@@ -50,11 +50,7 @@ class LinkedList3{
         //Setting tail to null
         if(headfirst!=null){
             headfirst.next = null;
-        }
-        
-        
-        
-        
+        }    
     }
      public Node middleNode(Node head){
         Node fast = head;

@@ -60,7 +60,7 @@ public class ReverseNodesinEvenLengthGroups {
             // Increment the length of the current group
             groupLength++;
         }
-        //head = dummy.next;
+        head = dummy.next;
         
     }
     private Node reverse(Node start, Node end){
