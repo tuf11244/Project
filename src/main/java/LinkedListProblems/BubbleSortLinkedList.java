@@ -98,9 +98,6 @@ class LinkedList{
              
     }
     }
-    
-    
-    
     private class Node{
         private int value;
         private Node next;
@@ -111,8 +108,6 @@ class LinkedList{
         public Node(int value, Node next){
             this.value = value;
             this.next = next;
-        }
-        
-        
+        }        
     }
 }
