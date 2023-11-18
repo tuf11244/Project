@@ -21,11 +21,12 @@ public class RecursionPracticeQuestionsPart107302023 {
         //System.out.println(sumfromNto1(5)); Question 4
         //System.out.println(sumofDigits(12)); Question 5
         //System.out.println(productofDigits(1230)); Question 6
-        //reverseNumber(1234); Question 7 ; Way 1
+        System.out.println(reverseNumber(1234));
+        reverseNumber(1234); //Question 7 ;// Way 1
         //System.out.println(sum); Question 7 ; Way 1
         //System.out.println(reverseNumberMethod2(1234)); Question 7 : Way 2
         //System.out.println(countZeroes(30204)); Question 9 
-        System.out.println(numberofSteps(8));
+        //System.out.println(numberofSteps(8));
        
     }
     
@@ -87,13 +88,14 @@ public class RecursionPracticeQuestionsPart107302023 {
     }
     
     //Question 7 : 1st Way = Reverse a number
-    public static void reverseNumber(int number){
+    public static int reverseNumber(int number){
        if(number == 0){
-           return;
+           return 0;
        }
        int lastdigit = number % 10;
        sum = sum*10 + lastdigit;
        reverseNumber(number/10);
+       return sum;
     }
     
     //Question 7 : 2nd Way = Reverse a number

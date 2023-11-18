@@ -5,7 +5,7 @@
 package Arrays;
 
 /**
- *
+ *https://www.geeksforgeeks.org/program-check-array-sorted-not-iterative-recursive/
  * @author parth
  */
 public class ChecktoSeeiftheArrayisSorted08012023 {
@@ -28,5 +28,14 @@ public class ChecktoSeeiftheArrayisSorted08012023 {
         }
         return true;
     }
+    public static boolean isSorted(int[] arr, int index){
+	    if(index == 0 || index == 1){
+	        return true;
+	    }
+	   if(arr[index] > arr[index+1]){
+	       return false;
+	   }
+	  return isSorted(arr,index-1);
+}
     
 }

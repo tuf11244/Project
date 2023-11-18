@@ -14,7 +14,7 @@ public class Factorial07232023 {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        System.out.println(factorial(6));
+        System.out.println(factorial(11));
         // TODO code application logic here
     }
     public static int factorial(int number){
