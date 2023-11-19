@@ -38,4 +38,17 @@ public class DeleteMiddleofStack {
         }
         System.out.println(stack);
     }
+    //Using Recursion
+    public static Stack<Integer> deleteMiddle(Stack<Integer> stack, int middle){
+	    if(middle == 1){
+	         stack.pop();
+	         return stack;
+	    }
+	    int temp = stack.pop();
+	    stack = deleteMiddle(stack,middle-1);
+	    
+	    //Induction 
+	    stack.push(temp);
+	    return stack;
+	}
 }
