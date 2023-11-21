@@ -14,7 +14,7 @@ public class PowerofThree {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        System.out.println(isPowerOfThree(3));
+        System.out.println(isPowerOfThree(27));
         // TODO code application logic here
     }
     
@@ -22,9 +22,9 @@ public class PowerofThree {
         if(number < 1){
             return false;
         }
-        while(number % 3 == 0){
-            number = number/3;
-        }
-        return number == 1;
+//        if(number == 1){
+//            return true;
+//        }
+        return number == 1 || isPowerOfThree(number/3);
     }
 }

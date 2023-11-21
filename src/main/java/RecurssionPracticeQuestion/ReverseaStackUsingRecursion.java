@@ -23,9 +23,9 @@ public class ReverseaStackUsingRecursion {
         if(stack.isEmpty() || stack.size() == 1){
             return stack;
         }
-            int temp = stack.pop();
-            stack = reverse(stack);
-            insertBottom(stack,temp);
+            int temp = stack.pop(); //Statement 1
+             reverse(stack); //statement 2 
+            insertBottom(stack,temp); //statement 3
         
         return stack;
         }

@@ -31,7 +31,7 @@ public class SortAnArrayUsingRecursion {
 	    }
 	    int temp = arr.get(arr.size()-1);
 	    arr.remove(arr.size()-1);
-	    arr = sortArray(arr);
+	    sortArray(arr);
 	    insert(arr,temp);
 	    return arr;
 	}
