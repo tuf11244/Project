@@ -17,8 +17,13 @@ public class Permutations08082023 {
      */
     public static void main(String args[]) {
        // permutations("","parth");
-        System.out.println(permutationsList("","parth"));
-        System.out.println(permutationsList("","parth").size());
+      //  System.out.println(permutationsList("","parth"));
+       // System.out.println(permutationsList("","parth").size());
+      // permutationswithSpaces("A","BCD");
+       //permutationswithCases("","abc");
+       ArrayList<String> answer = new ArrayList<>();
+       permutationswithLetterCase("","a1B2",answer);
+        System.out.println(answer);
         // TODO code application logic here
     }
     
@@ -71,5 +76,59 @@ public class Permutations08082023 {
         return count;
         
     }
-     
-}
+    //Permutations with Spaces
+    public static void permutationswithSpaces(String processed,String unprocessed){
+        if(unprocessed.isEmpty()){
+            System.out.println(processed);
+            return;
+        }
+        char ch = unprocessed.charAt(0);
+        
+        String first = processed + " " + ch;
+        String second = processed + ch;
+        
+        //Recursivce calls 
+        permutationswithSpaces(first,unprocessed.substring(1));
+        permutationswithSpaces(second,unprocessed.substring(1));
+        
+        return;
+       
+    }
+    //Permutation with Cases
+    public static void permutationswithCases(String processed,String unprocessed){
+        if(unprocessed.isEmpty()){
+            System.out.println(processed);
+            return;
+        }
+        char ch = unprocessed.charAt(0);
+        
+        String first = processed + Character.toUpperCase(ch);
+        String second = processed + ch;
+        
+        //Recursivce calls 
+        permutationswithCases(first,unprocessed.substring(1));
+        permutationswithCases(second,unprocessed.substring(1));
+        
+        return;
+       
+    }
+    public static void permutationswithLetterCase(String processed,String unprocessed, ArrayList<String> answer){
+        if(unprocessed.isEmpty()){
+            answer.add(processed);
+            return;
+        }
+        char ch = unprocessed.charAt(0);
+        if(Character.isDigit(ch)){
+            String first = processed + ch;
+            permutationswithLetterCase(first, unprocessed.substring(1),answer);
+            
+        } else {
+             String first = processed + Character.toLowerCase(ch);
+             String second = processed + Character.toUpperCase(ch);
+             permutationswithLetterCase(first,unprocessed.substring(1),answer);
+             permutationswithLetterCase(second,unprocessed.substring(1),answer);
+            }
+        }
+    }
+    
+
