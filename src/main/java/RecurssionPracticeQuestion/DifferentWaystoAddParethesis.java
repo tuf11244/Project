@@ -17,18 +17,5 @@ public class DifferentWaystoAddParethesis {
     public static void main(String args[]) {
         // TODO code application logic here
     }
-    public static List<Integer> diffWaystoCompute(String expression){
-        List<Integer> answer = new ArrayList<>();
-        
-        if(expression.length() == 1){
-        }
-        for(int i = 0; i < expression.length();i++){
-            if(expression.charAt(i) == '+' || expression.charAt(i) == '-' || expression.charAt(i) == '*'){
-                String left = 
-            }
-        }
-        List<Integer> answerleft = diffWaystoCompute();
-        
-        
-    }
+   
 }
