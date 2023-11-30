@@ -11,37 +11,42 @@ package RecurssionPracticeQuestion;
  */
 public class CheckforBalancedParethesis {
 
- 
-    public static void main(String args[]) {
-        String input = "[()]{}{[()()]()}";
-        char[] arr = new char[input.length()];
-        for(int i = 0; i < input.length();i++){
-            arr[i] = input.charAt(i);
-        }
+    public static boolean areBracketsBalanced(String exp) {
+        return areBracketsBalancedRecursive(exp, 0, 0);
     }
-    public static boolean isBalanced(char[] arr, int n){
-        if(n == 0){
-            return true;
+
+    private static boolean areBracketsBalancedRecursive(String exp, int index, int balance) {
+        // Base case: reach the end of the expression
+        if (index == exp.length()) {
+            return balance == 0; // Check if all brackets are closed
         }
-        if(n == 1){
+
+        char currentChar = exp.charAt(index);
+
+        // Update balance based on the current character
+        if (currentChar == '(' || currentChar == '{' || currentChar == '[') {
+            balance++;
+        } else if (currentChar == ')' || currentChar == '}' || currentChar == ']') {
+            balance--;
+        }
+
+        // If balance goes negative at any point, brackets are not balanced
+        if (balance < 0) {
             return false;
         }
-        char ch = arr[0];
-        if(ch =='>' || ch == ']' || ch == ')'|| ch == '}'){
-            return false;
-        }
-        return true;
+
+        // Recursive call to process the next character
+        return areBracketsBalancedRecursive(exp, index + 1, balance);
     }
-    public static char findClosing(char c){
-        if(c == '('){
-            return ')';
+
+    public static void main(String[] args) {
+        String expression = "{[()]}";
+
+        if (areBracketsBalanced(expression)) {
+            System.out.println("Brackets are balanced.");
+        } else {
+            System.out.println("Brackets are not balanced.");
         }
-        if(c == '<'){
-            return '>';
-        }
-        if(c == '['){
-            return ']';
-        }
-        return '}';
     }
 }
+
