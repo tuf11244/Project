@@ -15,8 +15,8 @@ public class CountGoodNumbers {
     public static long MOD = 1000_000_007;
     public static void main(String args[]) {
        // System.out.println(power(3,9));
-      //  System.out.println(goodNumbers(50));
-        System.out.println(pow(2.0,-5));
+        System.out.println(goodNumbers(50));
+       // System.out.println(pow(2.0,-5));
         
        
     }

@@ -49,7 +49,7 @@ public class BeautifulArrangement{
                 current.add(nums[i]);
                 generatePermutations(nums, used, current, result);
                 current.remove(current.size() - 1);
-                used[i] = false;
+               used[i] = false;
             }
         }
     }

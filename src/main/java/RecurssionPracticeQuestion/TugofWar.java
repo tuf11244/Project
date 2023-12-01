@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  *https://www.geeksforgeeks.org/tug-of-war/
+ * Also known as Minimum Set Difference 
  * 11/28/2023
  * @author parth
  */

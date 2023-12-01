@@ -5,28 +5,32 @@
 package RecurssionPracticeQuestion;
 
 /**
- *
+ *https://leetcode.com/problems/target-sum/
  * @author parth
  */
 
 public class TargetSum {
 
-    public static int findTargetSumWays(int[] nums, int S) {
-        return calculate(nums, 0, S);
+    public static int findTargetSumWays(int[] nums, int target) {
+        return calculate(nums, 0, target);
     }
 
-    private static int calculate(int[] nums, int i, int S) {
+    private static int calculate(int[] nums, int i, int target) {
         if (i == nums.length) {
             // If we have reached the end of the array, check if the sum is equal to the target.
-            return S == 0 ? 1 : 0;
+            if(target == 0){
+                return 1;
+            } else{
+                return 0;
+            }
         } else {
             // Calculate the number of ways by either adding or subtracting the current element.
-            return calculate(nums, i + 1, S - nums[i]) + calculate(nums, i + 1, S + nums[i]);
+            return calculate(nums, i + 1, target - nums[i]) + calculate(nums, i + 1, target + nums[i]);
         }
     }
 
     public static void main(String[] args) {
-        int[] nums = {1,2,3,1};
+        int[] nums = {1,1,1,1,1};
         int target = 3;
         int result = findTargetSumWays(nums, target);
         System.out.println(result);
