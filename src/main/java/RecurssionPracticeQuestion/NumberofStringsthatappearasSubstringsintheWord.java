@@ -16,8 +16,8 @@ public class NumberofStringsthatappearasSubstringsintheWord {
 
     public static void main(String args[]) {
         System.out.println(helper("","abc"));
-	String[] patterns = {"a","a","a"};
-	System.out.println(numberofString(patterns,"ab"));
+	String[] patterns = {"a","abc","bc","d"};
+	System.out.println(numberofString(patterns,"abc"));
     }
     public static List<String> helper(String processed,String unprocessed){
 	    List<String> answer = new ArrayList<>();

@@ -5,51 +5,42 @@
 package RecurssionPracticeQuestion;
 
 //https://leetcode.com/problems/path-with-maximum-gold/
+
+import java.util.ArrayList;
+
 public class PrimeNumbersafterPrimePSumS {
-    static boolean[][] visited;
     public static void main(String[] args) {
-        System.out.println("Hello World");
-        int[][] grid = {
-            {1,0,7},
-            {2,0,6},
-            {3,4,5},
-            {0,3,0},
-            {9,0,20}
-        };
-      visited = new boolean[grid.length][grid[0].length];
-        System.out.println(getMaximumGold(grid));
-        
+        int N = 3;
+        int P = 2;
+        int S = 23;
+        findNPrimesWithSum(N, P, S, new ArrayList<>());
     }
-    public static int getMaximumGold(int[][] grid){
-        int sum = 0;
-        for(int i = 0; i < grid.length;i++){
-            for(int j = 0; j < grid[0].length;j++){
-                if(grid[i][j] != 0 && !visited[i][j]){
-                    sum = Math.max(sum, findMaxSum(grid, i, j));
-                }
+
+    public static void findNPrimesWithSum(int N, int P, int S, ArrayList<Integer> current) {
+        // Base Case
+        if (N == 0 && S == 0) {
+            System.out.println(current);
+            return;
+        }
+
+        for (int i = P + 1; i <= S; i++) {
+            if (isPrime(i)) {
+                current.add(i);
+                findNPrimesWithSum(N - 1, i, S - i, current);
+                current.remove(current.size() - 1);
             }
         }
-        return sum;
     }
-    public static boolean isValid(int[][] grid, int row, int column){
-        return row >= 0 && column >=0 && column < grid[0].length && row < grid.length;
-    }
-    public static int findMaxSum(int[][] grid, int row, int column) {
-        if (!isValid(grid, row, column) || grid[row][column] == 0 || visited[row][column]) {
-            return 0;
+
+    public static boolean isPrime(int number) {
+        if (number < 2) {
+            return true;
         }
-
-        visited[row][column] = true;
-
-        int sum = grid[row][column];
-
-        sum += Math.max(findMaxSum(grid, row + 1, column),
-                        Math.max(findMaxSum(grid, row, column + 1),
-                                 Math.max(findMaxSum(grid, row - 1, column),
-                                          findMaxSum(grid, row, column - 1))));
-
-        visited[row][column] = false; // Backtrack
-
-        return sum;
+        for (int i = 2; i <= Math.sqrt(number); i++) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
