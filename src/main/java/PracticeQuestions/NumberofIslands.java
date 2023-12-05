@@ -16,7 +16,7 @@ public class NumberofIslands {
     static boolean visited[][];
     public static void main(String args[]) {
         char[][] board = {
-          {'1','1','0','0','0'},
+          {'1','1','1','1','0'},
           {'1','1','0','1','0'},
           {'1','1','0','0','0'},
           {'0','0','0','1','0'}
@@ -52,6 +52,7 @@ public class NumberofIslands {
        search(board,row, column + 1);
        search(board,row - 1, column);
        search(board,row, column - 1);
-        
+       
+       //visited[row][column] = false;
     }
 }

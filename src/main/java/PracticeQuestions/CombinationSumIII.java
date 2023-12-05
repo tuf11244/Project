@@ -30,7 +30,7 @@ public class CombinationSumIII {
     }
     public static List<List<Integer>> combinationSumIII(int[]arr){
         List<List<Integer>> answer = new ArrayList<>();
-        combinationSumIIIHelper(answer,new ArrayList<>(),arr,7,0,3);
+        combinationSumIIIHelper(answer,new ArrayList<>(),arr,9,0,3);
         return answer;
     }
 

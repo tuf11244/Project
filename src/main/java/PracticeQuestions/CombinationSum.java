@@ -39,6 +39,7 @@ public class CombinationSum {
     private static void combinationSumHelper(List<List<Integer>> myAnswer, ArrayList<Integer> tempList,int[]arr, int target, int index) {
         if(target == 0){
             myAnswer.add(new ArrayList<>(tempList));
+            return;
         }
        for(int i = index; i < arr.length;i++){
         if(target >= arr[index]){
