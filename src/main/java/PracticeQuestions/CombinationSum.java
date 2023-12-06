@@ -19,7 +19,7 @@ public class CombinationSum {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        int[] arr = {2,3,6,7};
+        int[] arr = {2,3,5};
          List<List<Integer>> answer = combinationSum(arr);
          
          for(List<Integer> element : answer){
@@ -30,7 +30,7 @@ public class CombinationSum {
     public static List<List<Integer>> combinationSum(int[] arr){
         List<List<Integer>> myAnswer = new ArrayList<>();
         
-        combinationSumHelper(myAnswer, new ArrayList<>(),arr,7,0);
+        combinationSumHelper(myAnswer, new ArrayList<>(),arr,8,0);
         
         return myAnswer;
         
@@ -42,7 +42,7 @@ public class CombinationSum {
             return;
         }
        for(int i = index; i < arr.length;i++){
-        if(target >= arr[index]){
+        if(target >= arr[i]){
             tempList.add(arr[i]);
             combinationSumHelper(myAnswer,tempList,arr,target-arr[i],i);
             tempList.remove(tempList.size()-1);
