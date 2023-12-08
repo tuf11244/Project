@@ -14,7 +14,7 @@ public class NQueens08102023 {
      * @param args the command line arguments
      */
     public static void main(String[] args){
-        int n = 8;
+        int n = 5;
         boolean[][] board = new boolean[n][n];
         System.out.println(queens(board,0));
         //queens(board,0);

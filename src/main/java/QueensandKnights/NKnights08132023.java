@@ -16,7 +16,7 @@ public class NKnights08132023 {
     public static void main(String args[]) {
         int n = 4; 
         boolean[][] board = new boolean[n][n];
-        knights(board,0,0,8);
+        knights(board,0,0,4);
         // TODO code application logic here
     }
     
