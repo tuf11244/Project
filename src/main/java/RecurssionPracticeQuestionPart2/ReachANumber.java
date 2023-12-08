@@ -5,11 +5,13 @@
 package RecurssionPracticeQuestionPart2;
 
 /**
- *
+ *https://leetcode.com/problems/reach-a-number/
+ * 
  * @author parth
  */
 public class ReachANumber {
-//https://leetcode.com/problems/reach-a-number/
+
+    
         public static void main(String[] args) {
             System.out.println(reachNumber(1)); 
             System.out.println(reachNumber(26)); 
