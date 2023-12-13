@@ -7,7 +7,7 @@ package RecurssionPracticeQuestionPart2;
 import java.util.Arrays;
 
 /**
- *
+ *https://www.geeksforgeeks.org/find-shortest-safe-route-in-a-path-with-landmines/
  * @author parth
  */
 public class FindtheShortestSafeRouteinaPathwithLandmines {
@@ -19,7 +19,14 @@ public class FindtheShortestSafeRouteinaPathwithLandmines {
      * We are allowed to move to only adjacent cells which are not landmines. 
      * i.e. the route cannot contains any diagonal moves.
      * 
+     * 
+     * 
      * Landmines are marked with 0;
+     * 
+     * -1: Represents moving up one row.
+     *  0: Represents staying in the same row.
+     *  0: Represents staying in the same row again.
+     *  1: Represents moving down one row.
      * @param args the command line arguments
      */
     public static boolean visited[][];
@@ -57,9 +64,9 @@ public class FindtheShortestSafeRouteinaPathwithLandmines {
             //if Path is safe from current cell 
             if (board[i][0] == 1){
                 //Intialize visited to false
-                for(int k = 0; k < board.length;k++){
-                   Arrays.fill(visited[k],false); 
-                }
+//                for(int k = 0; k < board.length;k++){
+//                   Arrays.fill(visited[k],false); 
+//                }
                 //Find the shorted Route from board[i][0] to
                 //board[board.length][board[0].length-1] which
                 //is any cell of the last column;
