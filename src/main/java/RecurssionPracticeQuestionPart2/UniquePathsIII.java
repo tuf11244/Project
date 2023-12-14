@@ -31,12 +31,12 @@ public class UniquePathsIII {
                   emptycells = emptycells + 1;
                }
                else if(grid[i][j] == 1){
-                   row = i;
-                   column = j;
+                  row = i;
+                  column = j;
                }
             }
         }
-        return uniquePathHelper(grid,row,column,emptycells);
+         return uniquePathHelper(grid,row,column,emptycells);
     }
     public static boolean isValid(int[][] grid, int row, int column){
         return row >= 0 && row < grid.length && column >= 0 && column < grid[0].length;

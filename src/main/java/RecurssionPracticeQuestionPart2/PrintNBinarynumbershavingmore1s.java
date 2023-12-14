@@ -15,9 +15,9 @@ public class PrintNBinarynumbershavingmore1s {
 
     
     public static void main(String args[]) {
-        int n = 3;
+        int n = 4;
         int countOnes = 0; 
-        int countZeroes = 1;
+        int countZeroes = 0;
         ArrayList<String> answer = new ArrayList<>();
         
         generateBinaryString(n,countOnes, countZeroes,answer,"");
@@ -31,7 +31,7 @@ public class PrintNBinarynumbershavingmore1s {
         }
         generateBinaryString(n-1,countOnes+1,countZeroes,answer,processed+"1");
         
-        if(countOnes >= countZeroes){
+        if(countOnes > countZeroes){
             generateBinaryString(n-1,countOnes,countZeroes+1,answer,processed+"0");
         }                
     }

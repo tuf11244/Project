@@ -14,14 +14,14 @@ public class PermutationSequence {
 
     public static void main(String[] args) {
         System.out.println("Hello World");
-	String answer = makeString(4,"");
+	String answer = makeString(9,"");
         ArrayList<String> list = new ArrayList<>();
 
            permutations("",answer,list);
             Collections.sort(list); 
-            System.out.println(list);
+            System.out.println(list.size());
 
-            String result = getPermutation(list,9);
+            String result = getPermutation(list,116907);
             System.out.println(result);
 	}
 	public static String makeString(int n,String answer){
