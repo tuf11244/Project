@@ -16,10 +16,10 @@ public class NumberofIslands {
     static boolean visited[][];
     public static void main(String args[]) {
         char[][] board = {
-          {'1','1','1','1','0'},
-          {'1','1','0','1','0'},
           {'1','1','0','0','0'},
-          {'0','0','0','1','0'}
+          {'1','1','0','0','0'},
+          {'0','0','1','0','0'},
+          {'0','0','0','1','1'}
       };
        System.out.println(numberofIslands(board));
         // TODO code application logic here

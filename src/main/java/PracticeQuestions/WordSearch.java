@@ -24,7 +24,7 @@ public class WordSearch {
           {'S','F','C','S'},
           {'A','D','E','E'}
       };
-        System.out.println(exist(board,"BFCS"));
+        System.out.println(exist(board,"BFDEE"));
         // TODO code application logic here
     }
     
@@ -57,8 +57,8 @@ public class WordSearch {
         }
         visited[row][column] = true;
         if (search(board, word, row + 1, column, index + 1) ||
-            search(board, word, row, column + 1, index + 1) ||
-            search(board, word, row - 1, column, index + 1) ||
+            search(board, word, row, column+1, index + 1) ||
+            search(board, word, row-1, column, index + 1) ||
             search(board, word, row, column - 1, index + 1)) {
             return true;
         }
