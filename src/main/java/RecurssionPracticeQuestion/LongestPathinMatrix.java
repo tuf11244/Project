@@ -49,10 +49,10 @@ public class LongestPathinMatrix {
             return -1;
         }
         board[row][column] = 0;
-        int right = 1 + longestPathinMatrix(board, row, column + 1);
-        int left = 1 + longestPathinMatrix(board, row, column - 1);
-        int up = 1 + longestPathinMatrix(board, row - 1, column);
-        int down = 1 + longestPathinMatrix(board, row + 1, column);
+        int right =  1+longestPathinMatrix(board, row, column + 1);
+        int left =  1+ longestPathinMatrix(board, row, column - 1);
+        int up = 1+ longestPathinMatrix(board, row - 1, column);
+        int down = 1+  longestPathinMatrix(board, row + 1, column);
 
         board[row][column] = 1;
 
