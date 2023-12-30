@@ -4,7 +4,7 @@
  */
 package Strings;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *https://leetcode.com/problems/longest-common-prefix/
@@ -19,30 +19,17 @@ public class LongestCommonPrefix {
 		System.out.println(longestCommonPrefix(strs));
 	}
     public static String longestCommonPrefix(String[] strs){
-	    ArrayList<String> list = new ArrayList<>();
-	    int i = 0;
-	    int n = strs[0].length();
-	    while(i <= n){
-	        String prefix = strs[0].substring(0,i);
-	        boolean allcontainsPrefix = true;
-	            for(int j = 1; j < strs.length;j++){
-	                if(!strs[j].contains(prefix)){
-	                    allcontainsPrefix = false;
-	                    break;
-	                }
-	            }
-	           if (!allcontainsPrefix) {
+	Arrays.sort(strs);
+        String s1 = strs[0];
+        String s2 = strs[strs.length-1];
+        int idx = 0;
+        while(idx < s1.length() && idx < s2.length()){
+            if(s1.charAt(idx) == s2.charAt(idx)){
+                idx++;
+            } else {
                 break;
-                 }
-                if(allcontainsPrefix){
-                    list.add(prefix);
-                }
-	           i++; 
-	        }
-	     System.out.println(list);
-	     if(list.size()!=0){
-	         return list.get(list.size()-1);
-	     }
-	    return ""; 	    
+            }
+        }
+        return s1.substring(0, idx);   
 	}
 }

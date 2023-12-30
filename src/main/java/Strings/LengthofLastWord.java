@@ -11,12 +11,13 @@ package Strings;
  */
 public class LengthofLastWord {
     public static void main(String[] args) {
-		System.out.println("Hello World");
+		System.out.println("Hello World   ");
 		String input = "my name is Parth";
 		System.out.println(lengthoflastword(input));
 	}
     public static int lengthoflastword(String input){
 	    int count = 0;
+            input = input.trim();
 	    for(int i = input.length() -1; i >= 0; i--){
 	        char ch = input.charAt(i);
 	        if(ch!=' '){
