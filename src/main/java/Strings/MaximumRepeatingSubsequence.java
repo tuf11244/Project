@@ -18,10 +18,12 @@ public class MaximumRepeatingSubsequence {
     public static int maxRepeating(String sequence,String word){
         int count = 0;
         StringBuilder sb = new StringBuilder(word);
+    //    System.out.println(sb.toString());
         while (sequence.contains(sb)) {
             count++;
             sb.append(word);
         }
+        System.out.println(sb.toString());
         return count;
     }    
   
