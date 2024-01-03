@@ -4,6 +4,8 @@
  */
 package StringsPart2;
 
+import java.util.Arrays;
+
 /**
  * Date: 12/20/2023
  *https://leetcode.com/problems/maximum-number-of-removable-characters/
@@ -13,8 +15,8 @@ public class MaximumNumberofRemovableCharacters {
 
     public static void main(String[] args) {
         System.out.println("Hello World");
-        int[] removable = {0, 1, 2, 3, 4};
-        System.out.println(maximalRemovals("abcab", "abc", removable));
+        int[] removable = {3,2,1,4,5,6};
+        System.out.println(maximalRemovals("abcbddddd", "abcd", removable));
     }
 
     // Function to find the maximum number of removable characters
@@ -24,7 +26,7 @@ public class MaximumNumberofRemovableCharacters {
 
         // Binary search to find the maximum number of removable characters
         while (left < right) {
-            int mid = (left + right + 1) / 2;
+            int mid = (left + right +1) / 2;
 
             // Check if p is a subsequence of s after removing mid characters
             if (isSubsequence(s, p, removable, mid)) {
@@ -46,14 +48,16 @@ public class MaximumNumberofRemovableCharacters {
         for (int i = 0; i < k; i++) {
             removed[removable[i]] = true;
         }
-
+        System.out.println(Arrays.toString(removed));
         int j = 0;
         // Check if p is a subsequence of s after removing the marked characters
         for (int i = 0; i < s.length() && j < p.length(); i++) {
+            System.out.println(!removed[i] + " " + i + "  " + s.charAt(i) + " " + j + " " + p.charAt(j) );
             if (!removed[i] && s.charAt(i) == p.charAt(j)) {
                 j++;
             }
         }
+       System.out.println("value of j is " + j);
 
         // If j equals the length of p, then p is a subsequence of s
         return j == p.length();

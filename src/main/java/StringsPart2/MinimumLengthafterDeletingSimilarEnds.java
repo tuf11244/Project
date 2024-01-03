@@ -17,7 +17,7 @@ public class MinimumLengthafterDeletingSimilarEnds {
 		
 	}
 	public static int minimumLength(String s){
-	    int i = 0;
+	int i = 0;
         int j = s.length() - 1;
 
         while (i < j) {
