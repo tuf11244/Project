@@ -52,7 +52,7 @@ public class MaximumNumberofRemovableCharacters {
         int j = 0;
         // Check if p is a subsequence of s after removing the marked characters
         for (int i = 0; i < s.length() && j < p.length(); i++) {
-            System.out.println(!removed[i] + " " + i + "  " + s.charAt(i) + " " + j + " " + p.charAt(j) );
+            System.out.println(!removed[i] + " " + i + "  " + s.charAt(i) + " " + j + " " + p.charAt(j));
             if (!removed[i] && s.charAt(i) == p.charAt(j)) {
                 j++;
             }

@@ -12,36 +12,35 @@ package Strings;
 public class ValidPalindromeII {
     public static void main(String[] args) {
 		System.out.println("Hello World");
-		System.out.println(validPalindromeII("abca"));
-	
+		System.out.println(validPalindromeII("abc"));	
 	}
-	public static boolean validPalindromeII(String s){
-	   int start = 0;
-	   int end = s.length()-1;
-	   while(start <= end){
-	       if(s.charAt(start) == s.charAt(end)){
-	           start++;
-	           end--;
-	       }else{
-	           return isPalindrome(s,start+1,end) || isPalindrome(s,start,end-1);
-	       }
-	       
-	       if(start > end){
-	           return true;
-	       }
-	   }
-	   return false;
-	}
+    
+    public static boolean validPalindromeII(String s) {
+      int start = 0; 
+      int end = s.length()-1;
+      
+        while(start < end){
+            if(s.charAt(start) == s.charAt(end)){
+                start++;
+                end--;
+            }else{
+                return isPalindrome(s,start+1,end) || isPalindrome(s,start,end-1);
+            }
+        }
+    
+        return true;
+    }
+
 	public static boolean isPalindrome(String s, int start, int end){
-	    while(start <= end){
+	    while(start < end){
 	        if(s.charAt(start) == s.charAt(end)){
 	            start++;
 	            end--;
-	        }
-	        if(start > end){
-	            return true;
-	        }
+	        }else{
+                    return false;
+                }
+	       
 	    }
-	    return false;
+	    return true;
 	}
 }
