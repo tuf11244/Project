@@ -40,6 +40,8 @@ public class NumberofWaystoSplitaString {
                 if (ones == oneThird) ways1++;
                 if (ones == 2 * oneThird) ways2++;
             }
+             System.out.println(ways1);
+             System.out.println(ways2);
             return (int) ((ways1 * ways2) % MOD);
         }
 }
