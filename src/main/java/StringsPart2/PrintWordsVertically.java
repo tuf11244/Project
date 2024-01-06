@@ -44,9 +44,11 @@ public class PrintWordsVertically {
                 }
             }
             //The replaceAll("\\s+$", "") is used to remove trailing spaces from each result line
-            answer.add(result.toString().replaceAll("\\s+$", ""));
+           answer.add(result.toString().replaceAll("\\s+$", ""));
+           //answer.add(result.toString());
             pointer++;
         }
+        
 
         System.out.println(answer);
     }
