@@ -50,10 +50,11 @@ public class SumofLeftLeaves {
         if(node == null){
             return 0;
         }
-        if(node.left!=null && node.left.left == null && node.right.right == null){
-            return  node.left.value + sumofLeftLeavesRecurrsion(node.right);
+        int sum = 0;
+        if(node.left!=null && node.left.left == null && node.left.right == null){
+            sum = sum + node.left.value;
         }
-        return sumofLeftLeavesRecurrsion(node.left) + sumofLeftLeavesRecurrsion(node.right);
+        return sumofLeftLeavesRecurrsion(node.left) + sumofLeftLeavesRecurrsion(node.right) + sum;
     }
     
     private class Node{
