@@ -23,6 +23,8 @@ public class SwapAdjacentinLRString {
 
         int n = start.length();
         int i = 0, j = 0;
+        System.out.println(start);
+        System.out.println(end);
 
         while (i < n && j < n) {
             // Skip 'X' characters
