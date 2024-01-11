@@ -17,7 +17,7 @@ public class SelectionSortAlgorithm07192023 {
     public static void main(String args[]) {
         int[] arr = {5,-25,-89,-37,101};
         selectionSort(arr);
-        System.out.println(Arrays.toString(arr));
+        //System.out.println(Arrays.toString(arr));
         // TODO code application logic here
     }
     public static void selectionSort(int[]arr){
