@@ -22,28 +22,35 @@ public class RelativeSortArray {
         // TODO code application logic here
     }
     public int[] relativeSortArray(int[] arr1, int[] arr2) {
-        List<Integer> list = new ArrayList<>();
-        List<Integer> remaining = new ArrayList<>();
+       // Step 1: Find the maximum element in arr1
+        int max = 0;
+        for (int num : arr1) {
+            max = Math.max(max, num);
+        }
 
-        for(int i = 0; i < arr2.length;i++){
-            for(int j = 0; j < arr1.length;j++){
-                if(arr1[j] == arr2[i]){
-                    list.add(arr1[j]);
-                }
+        // Step 2: Use counting sort to count frequencies of elements in arr1
+        int[] count = new int[max + 1];
+        for (int num : arr1) {
+            count[num]++;
+        }
+
+        // Step 3: Custom sort arr1 based on arr2's order and frequency
+        int index = 0;
+        for (int num : arr2) {
+            while (count[num] > 0) {
+                arr1[index++] = num;
+                count[num]--;
             }
         }
-        for(int l = 0; l < arr1.length;l++){
-            if(!list.contains(arr1[l])){
-                remaining.add(arr1[l]);
+
+        // Step 4: Append remaining elements from arr1
+        for (int i = 0; i <= max; i++) {
+            while (count[i] > 0) {
+                arr1[index++] = i;
+                count[i]--;
             }
         }
-        Collections.sort(remaining);
-        list.addAll(remaining);
-        int[] answer = new int[list.size()];
 
-        for(int i = 0; i < list.size();i++){
-            answer[i] = list.get(i);
-        }
-        return answer;
+        return arr1;
     }
 }
