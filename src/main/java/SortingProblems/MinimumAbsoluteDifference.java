@@ -19,35 +19,28 @@ public class MinimumAbsoluteDifference {
      */
     public static void main(String args[]) {
         int[] nums = {3,8,-10,23,19,-4,-14,27};
-        helper(nums);
+        
     }
-    public static void helper(int[] nums){
-        int min = Integer.MAX_VALUE;
+    public static List<List<Integer>> minimumAbsDifference(int[] nums) {
+        Arrays.sort(nums);
+       int min = Integer.MAX_VALUE;
         for(int i = 1; i < nums.length;i++){
             min = Math.min(min,Math.abs(nums[i-1] - nums[i]));            
         }
         min = Math.min(min,Math.abs(nums[nums.length-1] - nums[0]));
         System.out.println(min);
-        Arrays.sort(nums);
+        
         List<List<Integer>> list = new ArrayList<>();
-        List<Integer> temp = new ArrayList<>();
-        helper(list,temp,nums,min,0);
-        
-        for(List<Integer> element : list){
-            System.out.println(element);
-        }
-        
-    }
 
-    private static void helper(List<List<Integer>> list, List<Integer> temp, int[] nums, int min, int start) {
-        if(temp.size() == 2 && temp.get(0) < temp.get(1) && Math.abs(temp.get(1) - temp.get(0)) == min){
-            list.add(new ArrayList<>(temp));
-            return;
-        }
-        for(int i = start; i < nums.length;i++){
-            temp.add(nums[i]);
-            helper(list,temp,nums,min,start+1);
-            temp.remove(temp.size()-1);
-        }
+        for(int j = 1; j < nums.length;j++){
+            if(nums[j] - nums[j-1] == min){
+                List<Integer> temp = new ArrayList<>();
+                temp.add(nums[j-1]);
+                temp.add(nums[j]);
+                list.add(temp);
+            }
+        }      
+    
+        return list;       
     }
 }
