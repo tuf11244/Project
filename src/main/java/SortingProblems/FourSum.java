@@ -33,10 +33,6 @@ public class FourSum {
         }
         Arrays.sort(nums);
         
-        if(nums[0] > 0 && nums[nums.length-1] > 0 && target < 0){
-            return list;
-        }
-        
         for(int i = 0; i < nums.length - 3;i++){
             if(i > 0 && nums[i] == nums[i-1]){
                 continue;
