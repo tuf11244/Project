@@ -5,6 +5,7 @@
 package ArraysPracticeQuestions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**Date: 01/24/2024
@@ -23,7 +24,8 @@ public class SpiralMatrix {
             {4,5,6},
             {7,8,9}
         };
-        spiralOrder(arr);
+       // spiralOrder(arr);
+       spiralOrderII(4);
     }
     public static void spiralOrder(int[][] arr){
         List<Integer> list = new ArrayList<>();
@@ -69,8 +71,51 @@ public class SpiralMatrix {
     System.out.println(list);
 }
     public static void spiralOrderII(int n){
-        int[][] answer = new int[n][n];
+        int[][] arr = new int[n][n];
         
+        int rowStart = 0; 
+        int rowEnd = arr.length - 1;
+        int colStart = 0, colEnd = arr[0].length -1;
+        int count = 1 ;
+        
+        while(rowStart <= rowEnd && colStart <= colEnd){
+            //Traverse Right in the current Row
+            for(int j = colStart; j <= colEnd;j++){
+                arr[rowStart][j] = count;
+                count++;
+            }
+            rowStart++;
+            
+            //Traverse down in the current column
+            for(int i = rowStart; i <= rowEnd;i++){
+                arr[i][colEnd] = count;
+                count++;
+            }
+            colEnd--;
+           
+            //Travere Left in the current Row
+            if(rowStart <= rowEnd){
+                for(int j = colEnd; j>= colStart; j--){
+                    arr[rowEnd][j] = count;
+                    count++;
+                }
+                rowEnd--;
+            }
+            
+            
+            // Traverse up in the current column
+        if (colStart <= colEnd) {
+            for (int i = rowEnd; i >= rowStart; i--) {
+                arr[i][colStart] = count;
+                count++;
+            }
+            colStart++;
+        }
+        }
+        
+        for(int[] x : arr){
+            System.out.println(Arrays.toString(x));
+        }
         
     }
 }
