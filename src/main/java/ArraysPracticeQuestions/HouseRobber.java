@@ -7,6 +7,11 @@ package ArraysPracticeQuestions;
 /**
  * Date: 01/25/2024
  *https://leetcode.com/problems/house-robber/
+ * 
+ * Note : This is question is DP question we solved it using Greedy Approach, 
+ * this question is nothing but maximum sum of non adjacent elements 
+ * https://www.geeksforgeeks.org/maximum-sum-such-that-no-two-elements-are-adjacent/
+ * Source : PepCoding 
  * @author parth
  */
 public class HouseRobber {
@@ -15,20 +20,20 @@ public class HouseRobber {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        int[] arr = {2,7,9,3,1};
+        int[] arr = {2,1,1,2};
         System.out.println(rob(arr));
     }
     public static int rob(int[] arr){
-        int sumOdd = 0;
-        int sumEven = 0;
+        int include = arr[0];
+        int exclude = 0;
         
-        for(int i = 0; i < arr.length;i++){
-            if(i%2== 0){
-                sumEven = sumEven + arr[i];
-            }else{
-                sumOdd = sumOdd + arr[i];
-            }
+        for(int i = 1; i < arr.length;i++){
+            int newInclude = exclude + arr[i];
+            int newExclude = Math.max(include,exclude);
+            
+            include = newInclude;
+            exclude = newExclude;
         }
-        return Math.max(sumOdd, sumEven);
+        return Math.max(include, exclude);
     }
 }
