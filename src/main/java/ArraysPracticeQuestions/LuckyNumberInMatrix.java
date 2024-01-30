@@ -43,6 +43,8 @@ public class LuckyNumberInMatrix {
                 columns[j] = Math.max(columns[j], nums[i][j]);
             }
         }
+        System.out.println(Arrays.toString(rows));
+        System.out.println(Arrays.toString(columns));
 
         // Check if the number is the smallest in its row and largest in its column
         for (int i = 0; i < row; i++) {
@@ -54,4 +56,5 @@ public class LuckyNumberInMatrix {
         }
         return list;
     }
+    
 }

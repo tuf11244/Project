@@ -41,14 +41,26 @@ public class DetermineWeatherMatrixCanbeObtainedbyRotation {
     
     // Helper function to rotate the matrix 90 degrees clockwise
     private static void rotate(int[][] mat) {
-        int n = mat.length;
-        for (int i = 0; i < n / 2; i++) {
-            for (int j = i; j < n - i - 1; j++) {
+        //Transpose the Matrix 
+        for(int i = 0; i < mat.length;i++){
+            for(int j = i; j < mat[0].length;j++){
                 int temp = mat[i][j];
-                mat[i][j] = mat[n - j - 1][i];
-                mat[n - j - 1][i] = mat[n - i - 1][n - j - 1];
-                mat[n - i - 1][n - j - 1] = mat[j][n - i - 1];
-                mat[j][n - i - 1] = temp;
+                mat[i][j] = mat[j][i];
+                mat[j][i] = temp;
+            }
+        }
+        
+        //Reverse the Row in the matrix 
+        for(int i = 0; i < mat.length;i++){
+            int left = 0;
+            int right = mat[i].length - 1;
+            
+            while(left < right){
+                int temp = mat[i][left];
+                mat[i][left] = mat[i][right];
+                mat[i][right] = temp;
+                left++;
+                right--;
             }
         }
     }
