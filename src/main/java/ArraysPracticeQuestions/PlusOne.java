@@ -4,9 +4,12 @@
  */
 package ArraysPracticeQuestions;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
+ * Same logic as Add to Array Form of Integer question 
  * Date: 01/27/2024
  *https://leetcode.com/problems/plus-one/
  * @author parth
@@ -22,19 +25,22 @@ public class PlusOne {
         int[] result = plusOne(arr);
         System.out.println(Arrays.toString(result));
     }
-    public static int[] plusOne(int[] arr) {
-        int n = arr.length;
-        for (int i = n - 1; i >= 0; i--) {
-            if (arr[i] < 9) {
-                arr[i]++;
-                return arr;
-            } else {
-                arr[i] = 0;
+    public static int[] plusOne(int[] digits) {
+       int k =1;
+        List<Integer> list = new ArrayList<>();
+        for(int i = digits.length-1; i >= 0 || k > 0;i--){
+            if(i >= 0){
+                list.add(0,(digits[i] + k)%10);
+                k = (digits[i] + k)/10;
+            }else{
+                list.add(0,k%10);
+                k = k/10;
             }
         }
-        // If we reach here, it means all digits were 9
-        int[] result = new int[n + 1];
-        result[0] = 1;
-        return result;
+        int[] answer = new int[list.size()];
+        for(int i = 0; i < list.size();i++){
+            answer[i] = list.get(i);
+        }
+        return answer;
     }
 }
