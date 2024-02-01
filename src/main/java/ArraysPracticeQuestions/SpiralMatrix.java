@@ -24,8 +24,8 @@ public class SpiralMatrix {
             {4,5,6},
             {7,8,9}
         };
-       // spiralOrder(arr);
-       spiralOrderII(4);
+        spiralOrder(arr);
+       //spiralOrderII(4);
     }
     public static void spiralOrder(int[][] arr){
         List<Integer> list = new ArrayList<>();
@@ -44,13 +44,13 @@ public class SpiralMatrix {
             list.add(arr[rowStart][j]);
         }
         rowStart++;
-
+      
         // Traverse down in the current column
         for (int i = rowStart; i <= rowEnd; i++) {
             list.add(arr[i][colEnd]);
         }
         colEnd--;
-
+    
         // Traverse left in the current row
         if (rowStart <= rowEnd) {
             for (int j = colEnd; j >= colStart; j--) {

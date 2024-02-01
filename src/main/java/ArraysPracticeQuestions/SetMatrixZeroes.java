@@ -62,31 +62,6 @@ public class SetMatrixZeroes {
     }
 }
 
-    public static void helper(int[][] arr, int row, int column){
-        int down = row;
-        int up = row;
-        int downColumn = column;
-        int upColumn = column;
-        while(down >= 0){
-            arr[down][column] = Integer.MAX_VALUE;
-            down--;
-        }
-        while(up < arr.length){
-            arr[up][column] = Integer.MAX_VALUE;
-            up++;
-        }
-        
-        while(downColumn >= 0){
-            arr[row][downColumn] = Integer.MAX_VALUE;
-            downColumn--;
-        }
-         while(upColumn < arr[0].length){
-            arr[row][upColumn] = Integer.MAX_VALUE;
-            upColumn++;
-        }
-        
-        
-    }
     public static void print(int[][] arr){
         for(int i = 0; i < arr.length;i++){
             for(int j = 0; j < arr[0].length;j++){
