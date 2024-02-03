@@ -14,7 +14,7 @@ public class CountnumberofOnes07182023 {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        int[] arr = {0,0,0,1,1,1};
+        int[] arr = {0,0,0,0};
         int target = 1;
         System.out.println(search(arr,1));
         // TODO code application logic here
