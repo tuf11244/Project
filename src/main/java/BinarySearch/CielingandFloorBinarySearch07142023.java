@@ -20,7 +20,7 @@ public class CielingandFloorBinarySearch07142023 {
         
         System.out.println(cielingOfTarget(arr,target));
         System.out.println(floorOfTarget(arr,target));
-        System.out.println(cielingOfTargetwithLetters(letters,'c'));
+        System.out.println(nextGreatestLetter(letters,'c'));
         // TODO code application logic here
     }
     
@@ -64,21 +64,22 @@ public class CielingandFloorBinarySearch07142023 {
         
     }
    
-   public static int cielingOfTargetwithLetters(char[] arr, char c){
-        //Cieling is the smallest number greater than equal to target
-        int start = 0;
-        int end = arr.length-1;
-        while(start <= end){
-            int middle = start + (end - start)/2;
-           if (c < arr[middle]){
-                end = middle - 1;
+   public static char nextGreatestLetter(char[] letters, char target) {
+        int low = 0;
+        int end = letters.length - 1;
+        char result = '#';
+        while(low <= end){
+            int mid = low + (end - low)/2;
+                if(letters[mid] == target){
+                    low = mid + 1;
+                }else if(letters[mid] < target){
+                    low = mid + 1;
+                }else{
+                    result = letters[mid];
+                    end = mid - 1;
+                }
             }
-            else if(c > arr[middle]){
-                start = middle + 1;
-            }
-        }
-        return arr[start%arr.length] ;
-        
+        return result == '#' ? letters[0] : result;
     }
     
 }
