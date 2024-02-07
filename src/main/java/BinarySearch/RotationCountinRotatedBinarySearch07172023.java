@@ -33,6 +33,7 @@ public class RotationCountinRotatedBinarySearch07172023 {
     public static void main(String args[]) {
         int[]arr = {4,5,6,7,0,1,2};
        // System.out.println(countRotation(arr));
+        System.out.println(countRotations(arr));
        // System.out.println(findMin(arr));
         // TODO code application logic here
     }
@@ -65,23 +66,65 @@ public class RotationCountinRotatedBinarySearch07172023 {
         
     }
     
+    //https://www.geeksforgeeks.org/find-rotation-count-rotated-sorted-array/
+    //In the count Rotations problem we using the same logic as finding the minimum in rotated sorted array
+    //Over here, we are just introducing the index variable which keeps track of the minimum element in the array
+    //and returning it;
+    public static int countRotations(int[] arr){
+        int low = 0;
+        int end = arr.length - 1;
+        int minimum = Integer.MAX_VALUE;
+        int index = -1;
+        while(low <= end){
+            int mid = low + (end - low)/2;
+            //If the search space is already sorted, than 
+            //the minimum would always be arr[low];
+            if(arr[low] < arr[end]){
+                if(arr[low] < minimum){
+                    index = low;
+                    minimum = arr[low];
+                }
+                break;
+            }
+            if(arr[low] <= arr[mid]){
+                if(arr[low] < minimum){
+                    index = low;
+                    minimum = arr[low];
+                }
+                low = mid + 1;
+            }else{
+                if(arr[mid] < minimum){
+                    index = mid;
+                    minimum = arr[mid];
+                }
+                end = mid - 1;
+            }            
+        }
+        return index;
+    }
+    
     
     //https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/
     public static int findMin(int[] arr){
         int low = 0;
         int end = arr.length - 1;
-        int answer = Integer.MAX_VALUE;
+        int minimum = Integer.MAX_VALUE;
         while(low <= end){
             int mid = low + (end - low)/2;
-           
+            //If the search space is already sorted, than 
+            //the minimum would always be arr[low];
+            if(arr[low] < arr[end]){
+                minimum = Math.min(minimum,arr[low]);
+                break;
+            }
             if(arr[low] <= arr[mid]){
-                answer = Math.min(answer,arr[low]);
+                minimum = Math.min(minimum,arr[low]);
                 low = mid + 1;
             }else{
-                answer = Math.min(answer,arr[mid]);
+                minimum = Math.min(minimum,arr[mid]);
                 end = mid - 1;
             }            
         }
-        return answer;
+        return minimum;
     }
 }
