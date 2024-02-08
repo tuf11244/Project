@@ -82,4 +82,20 @@ public class BinarySearchin2DArrays {
         }
         return false;
     }
+    
+    //https://leetcode.com/problems/search-a-2d-matrix-ii/
+    public boolean searchMatrixII(int[][] matrix, int target) {
+        int row = matrix.length - 1;
+        int column = 0;
+        while(row >= 0 && column < matrix[0].length){
+            if(matrix[row][column] == target){
+                return true;
+            }else if(matrix[row][column] < target){
+                column++;
+            }else{
+                row--;
+            }
+        }
+        return false;
+    }
 }
