@@ -16,9 +16,9 @@ public class MedianofaRowWiseSortedMatrix {
      */
     public static void main(String args[]) {
         int[][] arr = {
-            {1,3,5},
-            {2,6,9},
-            {3,6,6}
+            {1,3,4},
+            {2,5,6},
+            {7,8,9}
         };
         median(arr);
     }
@@ -28,9 +28,13 @@ public class MedianofaRowWiseSortedMatrix {
         
         //Total number of elements 
         int size = rows * columns;
-        int low = findMin(arr,rows,columns);
-        int end = findMax(arr,rows,columns);
+        int low = Integer.MAX_VALUE;
+        int end = Integer.MIN_VALUE;
         
+        for(int i = 0; i < rows;i++){
+            low = Math.min(arr[i][0], low);
+            end = Math.max(arr[i][columns-1], end);
+        }
         while(low <= end){
             int mid = low + (end - low)/2;
             int smallerThanEqualTo = helper(arr,mid);
@@ -43,49 +47,28 @@ public class MedianofaRowWiseSortedMatrix {
         
         System.out.println(low);
     }
-    public static int findMin(int[][] arr, int rows,int columns){
-        int index = -1;
-        int min = Integer.MAX_VALUE;
-        for(int i = 0; i < rows;i++){
-            if(arr[i][0] < min){
-                min = arr[i][0];
-                index = i;
-            }
-        }
-        return index;
-    }
-     public static int findMax(int[][] arr, int rows,int columns){
-        int index = -1;
-        int max = Integer.MIN_VALUE;
-        for(int i = 0; i < rows;i++){
-            if(arr[i][columns-1] > max){
-                max = arr[i][columns-1];
-                index = i;
-            }
-        }
-        return index;
-    }
+    
     public static int helper(int[][] arr, int mid){
     int count = 0;
-    int rows = arr.length;
-    int columns = arr[0].length;
-    
-    for(int i = 0; i < rows; i++){
-        int low = 0;
-        int end = columns - 1;
-        while(low <= end){
-            int middle = low + (end - low) / 2;
-            if(arr[i][middle] <= mid){
-                count += middle + 1;
-                low = middle + 1;
-            } else {
-                end = middle - 1;
-            }
-        }
+    for(int i = 0; i < arr.length;i++){
+        count = count + cieling(arr[i],mid);
     }
     
     return count;
-}
+    }
+    public static int cieling(int[] arr, int target){
+        int low = 0;
+        int end = arr.length-1;
+        while(low <= end){
+         int  mid = low + (end - low)/2;
+            if(arr[mid] > target){
+                end = mid - 1;
+            }else{
+                low = mid + 1;
+            }
+        }
+        return low;
+    }
 
 }
 
