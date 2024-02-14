@@ -5,7 +5,8 @@
 package BinarySearch;
 
 /**
- *
+ *https://www.geeksforgeeks.org/find-position-element-sorted-array-infinite-numbers/
+ * https://www.geeksforgeeks.org/find-index-first-1-infinite-sorted-array-0s-1s/
  * @author parth
  */
 public class TargetElementinInfiniteArray {
@@ -15,41 +16,54 @@ public class TargetElementinInfiniteArray {
      */
     public static void main(String args[]) {
         int[]arr ={3,5,7,9,10,20,30,40,150,160,170,180,190,200};
+        int[] nums = {0,0,1,1,1,1};
+        
         int target = 10;
         System.out.println(elementinInfiniteArray(arr,target));
+        System.out.println(firstOccurrenceinInfiniteSortedArray(nums));
         
         // TODO code application logic here
     }
  public static int elementinInfiniteArray(int[]arr, int target){
-     //Box of size 2 
-     int start = 0;
+     //box of size 2
+     int low = 0;
      int end = 1;
-     //condition to checkif the target element is in the range
-     while(arr[end] < target){
-         int temp = end + 1;
-         
-         //double the size of the box value 
-         // end = previous end + 2*sizeofthebox
-         end = end + (end-start+1)*2;
-         start = temp;
+     while (arr[end] < target) {
+            low = end;
+            end = end * 2;
+        }
+     while(low <= end){
+         int mid = low + (end - low)/2;
+    
+         if(arr[mid] == target){
+             return mid;
+         }
+         else if(arr[mid] > target){
+             end = mid - 1;
+         }else{
+             low = mid + 1;
      }
- return search(arr,target,start,end);    
+}    	return -1;
+ }
+ 
+ public static int firstOccurrenceinInfiniteSortedArray(int[] arr){
+     int low = 0;
+     int end = 1;
+     while(arr[end] < 1){
+         low = end;
+         end = end * 2;
+     }
+     int answer = -1;
+     while(low <= end){
+         int mid = low + (end - low)/2;
+         if(arr[mid] == 1){
+             answer= mid;
+             end = mid -1;
+        }else{
+             low = mid + 1;
+         }
+ }
+        return answer;
 }
-   public static int search(int[]arr, int target, int start, int end){
-	    while(start <= end){
-	        int middle = (start+end)/2;
-	        if(arr[middle] < target){
-	            start = middle + 1;
-	        }
-	        else if(arr[middle] > target){
-	            end = middle - 1;
-	        }
-	        else{
-	            //Potential Answer is found
-	           return middle;
-	        }
-	    
-	}
-	return -1;
 }
-}
+
