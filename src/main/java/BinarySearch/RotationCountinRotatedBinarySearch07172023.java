@@ -8,6 +8,7 @@ package BinarySearch;
  * Date: 02/05/2024
  *https://www.geeksforgeeks.org/find-rotation-count-rotated-sorted-array/
  * https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
+ * https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/
  * @author parth
  */
 public class RotationCountinRotatedBinarySearch07172023 {
@@ -117,6 +118,38 @@ public class RotationCountinRotatedBinarySearch07172023 {
                 minimum = Math.min(minimum,arr[low]);
                 break;
             }
+            if(arr[low] <= arr[mid]){
+                minimum = Math.min(minimum,arr[low]);
+                low = mid + 1;
+            }else{
+                minimum = Math.min(minimum,arr[mid]);
+                end = mid - 1;
+            }            
+        }
+        return minimum;
+    }
+    //https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/
+    public static int findMinwithDuplicates(int[] arr) {
+       int low = 0;
+        int end = arr.length - 1;
+        int minimum = Integer.MAX_VALUE;
+        if(arr.length == 1){
+            return arr[0];
+        }
+        while(low <= end){
+            int mid = low + (end - low)/2;
+            //If the search space is already sorted, than 
+            //the minimum would always be arr[low];
+            if(arr[low] == arr[mid] && arr[mid]== arr[end]){
+                minimum = Math.min(minimum, arr[low]);
+                low++;
+                end--;
+                continue;
+            }
+            if(arr[low] < arr[end]){
+                minimum = Math.min(minimum,arr[low]);
+                break;
+            } 
             if(arr[low] <= arr[mid]){
                 minimum = Math.min(minimum,arr[low]);
                 low = mid + 1;
