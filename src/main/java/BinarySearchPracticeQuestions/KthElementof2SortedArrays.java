@@ -5,7 +5,7 @@
 package BinarySearchPracticeQuestions;
 
 /**
- *
+ *https://www.geeksforgeeks.org/k-th-element-two-sorted-arrays/
  * @author parth
  */
 public class KthElementof2SortedArrays {
@@ -33,6 +33,18 @@ public class KthElementof2SortedArrays {
         if(n1 > n2){
             return kthElement(nums2, nums1,k);
         }
+   /* Suppose we want to find the 5th element (k = 5) in the merged array of arr1 = {2, 3, 6, 7, 9} and arr2 = {1, 4, 8, 10}.
+    Calculate n1 and n2, which are the lengths of nums1 and nums2, respectively.
+    n1 = 5
+    n2 = 4
+    Calculate totalLength, which is the sum of the lengths of both arrays.
+    totalLength = n1 + n2 = 9
+    Since we are performing binary search on the smaller array (nums2 in this case), we set low and end accordingly:
+    low = Math.max(0, k - n2) = Math.max(0, 5 - 4) = Math.max(0, 1) = 1
+    This ensures that we don't go below index 0 in nums2.
+    end = Math.min(k, n1) = Math.min(5, 5) = 5
+    This ensures that we don't go beyond index 5 in nums1.*/
+   
         int low = Math.max(0, k-n2);
         int end = Math.min(k,n1);
         int left = k;
