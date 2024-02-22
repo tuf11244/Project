@@ -110,7 +110,7 @@ public class Heap<T extends Comparable<T>> {
     }
     
     public static void main(String[] args) throws Exception{
-        Heap<Integer> heap = new Heap<>();
+        Heap<Integer> heap = new Heap();
         heap.insert(34);
         heap.insert(22);
         heap.insert(38);
