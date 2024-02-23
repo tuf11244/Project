@@ -97,6 +97,7 @@ public class Heap<T extends Comparable<T>> {
     }
     
     //Build an maxHeap from the unsorted array 
+    //Also known as Heapify Method
     public void buildMaxHeap(T[] arr){
         
         //Copy the array elements inside out list

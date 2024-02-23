@@ -5,9 +5,12 @@
 package Heaps;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.PriorityQueue;
 
 /**
  *https://leetcode.com/problems/maximum-product-of-two-elements-in-an-array/
+ * Multiple Ways to Solve the problem
  * @author parth
  */
 public class MaximumProductof2ElementsinArray {
@@ -20,30 +23,13 @@ public class MaximumProductof2ElementsinArray {
         System.out.println(maxProduct(arr));
     }
     public static int maxProduct(int[] arr){
-        int i = 0;
-        int left = 2*i + 1;
-        int right = 2*i + 2;
-        int parent = (i-1)/2;
-        //Build Heap 
-        while(i < arr.length){
-            if(parent >= 0 && left < arr.length && right < arr.length){
-                if((arr[parent] >= arr[left]) && arr[parent] >= arr[right]){
-                i++;
-            }
-                else if ((arr[parent] < arr[left]) || (arr[parent] < arr[right])){
-                    swap(arr,parent,arr[left] > arr[right] ? left : right);
-                }
-           }else{
-                i++;
-            }
-          
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        for(int x : arr){
+            pq.add(x);
         }
-        System.out.println(Arrays.toString(arr));
-        return (arr[0] - 1) * Math.max(arr[1]-1,arr[2]-1);
-    }
-    public static void swap(int[] arr, int first, int second){
-        int temp = arr[first];
-        arr[first] = arr[second];
-        arr[second] = temp;
-    }
+        int max1 = pq.poll();
+        int max2 = pq.poll();
+        
+        return (max1-1) * (max2-1);
+}
 }
