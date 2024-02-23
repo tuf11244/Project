@@ -24,12 +24,15 @@ public class MaximumProductof2ElementsinArray {
     }
     public static int maxProduct(int[] arr){
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        
         for(int x : arr){
             pq.add(x);
         }
+        System.out.println(pq);
         int max1 = pq.poll();
         int max2 = pq.poll();
         
         return (max1-1) * (max2-1);
 }
+    
 }
