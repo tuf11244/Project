@@ -55,7 +55,7 @@ class HashMapUsingLL <K,V>{
         }
         
         entities.add(new Entity(key,value));
-        
+        size++;
     }
    /**
      * Rehashes the HashMap when the load factor is exceeded.
