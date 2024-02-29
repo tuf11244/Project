@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package HeapsQuestions;
-import java.util.*;
+import java.util.HashMap;
+import java.util.PriorityQueue;
+import java.util.Collections;
 /**
  *Date:02/28/2024
  * https://leetcode.com/problems/sort-characters-by-frequency/
@@ -41,7 +43,12 @@ public class SortCharactersbyFrequency {
         
         StringBuilder sb = new StringBuilder();
         while(!pq.isEmpty()){
-            sb.append(pq.poll().c);
+            Pair remove = pq.poll();
+            int frequency = remove.frequency;
+            while(frequency!=0){
+                sb.append(remove.c);
+                frequency--;
+            }
         }
         return sb.toString();
         
@@ -59,7 +66,7 @@ class Pair implements Comparable<Pair>{
 
     @Override
     public int compareTo(Pair o) {
-        return o.frequency - this.frequency;
+        return this.frequency - o.frequency;
     }
 
     @Override
