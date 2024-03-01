@@ -27,7 +27,7 @@ public class FindKClosestElements {
     public static List<Integer> findClosestElements(int[] arr, int k, int x) {
         List<Integer> list = new ArrayList<>();
         //Max Heap
-        PriorityQueue<Pair> pq = new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue<Pair1> pq = new PriorityQueue<>(Collections.reverseOrder());
         
         for(int i = 0; i < arr.length;i++){
             //We keep adding values in our priority queue until it reaches size k 
@@ -36,21 +36,21 @@ public class FindKClosestElements {
             //              gap =  2,1,0,1,2
             //Pair is nothing but the value which is arr[i] and the gap which is arr[i] - x
             if(pq.size() < k){
-                pq.add(new Pair(arr[i],Math.abs(arr[i] - x)));
+                pq.add(new Pair1(arr[i],Math.abs(arr[i] - x)));
             }else{
                 //Now the size of our priority queue is greater than k 
                 //below statement compare the gap of the first pair in our priorty queue with our current gap 
                 //if its greater than we remove it and add our current gap in 
                 if(pq.peek().gap > Math.abs(arr[i] - x)){
                     pq.poll();
-                    pq.add(new Pair(arr[i], Math.abs(arr[i] - x)));
+                    pq.add(new Pair1(arr[i], Math.abs(arr[i] - x)));
                 }
             }
         }
         
         while(!pq.isEmpty()){
-            //Remove Pair form our priority queue
-            Pair remove = pq.poll();
+            //Remove Pair1 form our priority queue
+            Pair1 remove = pq.poll();
             list.add(remove.value);
         }
         
@@ -107,20 +107,20 @@ public class FindKClosestElements {
     }
 }
 
- class Pair implements Comparable <Pair> {
+ class Pair1 implements Comparable <Pair1> {
     int value;
     int gap;
     
-    Pair(){
+    Pair1(){
         
     }
-    Pair(int value, int gap){
+    Pair1(int value, int gap){
         this.value = value;
         this.gap = gap;
     }
 
     @Override
-    public int compareTo(Pair o) {
+    public int compareTo(Pair1 o) {
         //if the gap is same than compare on the basis of value
         if(this.gap == o.gap){
             return this.value - o.value;
