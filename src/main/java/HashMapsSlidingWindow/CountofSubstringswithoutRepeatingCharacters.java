@@ -2,12 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
-package HashMapsQuestions;
+package HashMapsSlidingWindow;
 
 import java.util.HashMap;
 
 /**
  * Date: 03/08/2024
+ * LC 2743
  *https://www.geeksforgeeks.org/count-of-all-unique-substrings-with-non-repeating-characters/
  * @author parth
  */
