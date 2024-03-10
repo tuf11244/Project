@@ -54,10 +54,11 @@ public class LongestKUniqueCharactersSubstring {
                     int length = i - j;
                     if(length > maxLength){
                     maxLength = length;
-                } else{
+                } 
+                }
+                else{
                         break;
                     }
-                }               
             }
             // Release
             while(j < i){
@@ -71,15 +72,12 @@ public class LongestKUniqueCharactersSubstring {
                     hm.put(ch, hm.get(ch)-1);
                 }
                 
-                if(hm.size() > k){
-                    continue;
-                } else if(hm.size() == k){
+                if(hm.size() == k){
                     int length = i - j;
                     if(length > maxLength){
                     maxLength = length;
-                    }else{
-                        break;
                     }
+                    break;
                 }
                 
             }
@@ -92,53 +90,5 @@ public class LongestKUniqueCharactersSubstring {
         return maxLength;
     }
     
-    public static int longestkSubstr(String s, int k) {
-          int i=-1;
-          int j=-1,max=-1;
-          int n = s.length();
-          
-          HashMap<Character,Integer> st = new HashMap<Character,Integer>();
-          while(true){
-              boolean f1 = false;
-              boolean f2 = false;
-              while(j<n-1){
-                  f1 = true;
-                  j++;
-                  char ch  = s.charAt(j);
-                  st.put(ch,st.getOrDefault(ch,0)+1);
-                  
-                  if(st.size() < k){
-                      continue;
-                  }
-                  else if(st.size() == k){
-                      int len = j-i;
-                      max = Math.max(max,len);
-                  }
-                  else{
-                      break;
-                  }
-              }
-              while(i<j){
-                  f2 = true;
-                  i++;
-                  char t = s.charAt(i);
-                  if(st.get(t) == 1){
-                      st.remove(t);
-                  }
-                  else{
-                      st.put(t,st.get(t)-1);
-                  }
-                  
-                  if(st.size() == k){
-                      int mn = j-i;
-                      max = Math.max(max,mn);
-                      break;
-                  }
-              }
-              if(f1 == false && f2 == false){
-                  break;
-              }
-          }
-          return max;
-    }
+   
 }
