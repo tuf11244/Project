@@ -10,7 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- *
+ * Date: 03/12/2024
+ *https://leetcode.com/problems/find-anagram-mappings/
  * @author parth
  */
 public class FindAllAnagramsMapping {
