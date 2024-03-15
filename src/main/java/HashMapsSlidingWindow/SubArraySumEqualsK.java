@@ -41,8 +41,25 @@ public class SubArraySumEqualsK {
     //https://leetcode.com/problems/subarray-sums-divisible-by-k
     public static int subarraysDivByK(int[] nums, int k) {
         int count = 0;
+        int sum = 0;
+        int remainder = 0;
+        //Create a HashMap of remainder and its frequencies 
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        hm.put(0,1);
         
-        
+        for(int i = 0; i < nums.length;i++){
+            sum = sum + nums[i];
+            remainder = sum % k;
+            if(remainder < 0){
+                remainder = remainder + k;
+            }
+            if(hm.containsKey(remainder)){
+                count = count + hm.get(remainder);
+                hm.put(remainder,hm.get(remainder)+1);
+            }else{
+                hm.put(remainder,1);
+            }
+        }       
         return count;
     }
 }
