@@ -6,6 +6,7 @@ package HashMapsQuestions;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  *https://www.geeksforgeeks.org/problems/completing-tasks0454
