@@ -71,21 +71,14 @@ public class LongestKUniqueCharactersSubstring {
                 }else{
                     hm.put(ch, hm.get(ch)-1);
                 }
-                
+                //that means the hm.size() is alreay valid;
                 if(hm.size() == k){
-                    int length = i - j;
-                    if(length > maxLength){
-                    maxLength = length;
-                    }
                     break;
-                }
-                
+                }               
             }
             if(f1 == false && f2 == false){
                 break;
-            }
-        
-        
+            }       
     }
         return maxLength;
     }
