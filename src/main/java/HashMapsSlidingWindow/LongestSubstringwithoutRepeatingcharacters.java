@@ -9,6 +9,8 @@ import java.util.HashMap;
 /**
  * Date: 03/08/2024
  *https://leetcode.com/problems/longest-substring-without-repeating-characters/
+ *  LC 2743
+ *https://www.geeksforgeeks.org/count-of-all-unique-substrings-with-non-repeating-characters/
  * @author parth
  */
 public class LongestSubstringwithoutRepeatingcharacters {
@@ -60,4 +62,52 @@ public class LongestSubstringwithoutRepeatingcharacters {
     }
     return answer;
 }
+    
+ //https://www.geeksforgeeks.org/count-of-all-unique-substrings-with-non-repeating-characters/
+    public static int countofSubstrings(String s){
+        int count = 0;
+        HashMap<Character,Integer> hm = new HashMap<>();
+        int i = -1;
+        int j = -1;
+        
+        while(true){
+            boolean f1 = false;
+            boolean f2 = false;
+            
+            //acquire 
+            while(i < s.length()-1){
+                f1 = true;
+                i++;
+                char ch = s.charAt(i);
+                hm.put(ch,hm.getOrDefault(ch, 0) + 1);
+                if(hm.get(ch) == 2){
+                    break;
+                }else{
+                    int length = i - j;
+                    count = count + length;
+                }
+            }
+            
+            //release
+            while(j < i){
+                f2 = true;
+                j++;
+                char ch = s.charAt(j);
+                
+                hm.put(ch,hm.get(ch)-1);
+                //Below statement means string is valid so we have to collect the answer
+                if(hm.get(ch) == 1){
+                    int length = i - j;
+                    count = count + length;
+                    break;
+                }
+                
+            }
+            if(f1 == false && f2 == false){
+                break;
+            }
+        }
+               
+        return count;
+    }
 }
