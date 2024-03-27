@@ -13,6 +13,7 @@ import java.util.Random;
 /**
  * Date: 03/26/2024
  *https://leetcode.com/problems/insert-delete-getrandom-o1/
+ * https://leetcode.com/problems/insert-delete-getrandom-o1-duplicates-allowed/
  * @author parth
  */
 public class InsertDeleteGetRandom {
