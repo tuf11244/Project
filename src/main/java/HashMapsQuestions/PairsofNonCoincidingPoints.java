@@ -57,7 +57,7 @@ public class PairsofNonCoincidingPoints {
            int xyFreq = xyMap.getOrDefault(key,0);
            
            answer = answer + xFreq + yFreq - (2 * xyFreq);
-           
+         //  System.out.println(answer);
            xMap.put(x, xFreq+1);
            yMap.put(y, yFreq+1);
            xyMap.put(key, xyFreq+1);
