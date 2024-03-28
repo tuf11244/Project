@@ -130,8 +130,12 @@ class RandomizedCollection {
         int newValue = list.get(removeIdx);
         //Now get the set for the new value 
         HashSet<Integer> temp = hm.get(newValue);
+        
+        //Now we have to remove the existing index in our HashMap for the new value 
         temp.remove(list.size());
+        //Below, we are adding the index in the HashMap at which the newValue is present in our ArrayList 
         temp.add(removeIdx);
+        //Put the new value and temp in our HashMap 
         hm.put(newValue, temp);
         return true;
 
