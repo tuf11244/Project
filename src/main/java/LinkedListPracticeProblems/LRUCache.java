@@ -8,7 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * Date Revised : 03/28
+ *https://leetcode.com/problems/lru-cache/
  * @author parth
  */
 public class LRUCache {
@@ -23,6 +24,7 @@ public class LRUCache {
 }
 class LRUCachehelper{
    private int capacity;
+   //We are using 2 dummy node so that we not stuck the null pointer exception 
    Node head = new Node(0,0);
    Node tail = new Node(0,0);
    
@@ -36,6 +38,11 @@ class LRUCachehelper{
    public int get(int key){
        if(map.containsKey(key)){
            Node node = map.get(key);
+           //Below 2 statements mean nothing but its make the node most recently used 
+           //1st - its remove the node 
+           //2nd = it inserts the same node so that it is on the first position 
+           //Always remember the first one would be the most recently used 
+           //and the last one would be the least recently used 
            remove(node);
            insert(node);
            return node.value;
@@ -48,6 +55,8 @@ class LRUCachehelper{
       if(map.containsKey(key)){
           remove(map.get(key));
       }
+      //if the map size is at capacity we delete the least recently used 
+      //which is the last node aka tail to previous because tail is dummy node 
       if(map.size() == capacity){
           remove(tail.previous);
       }
