@@ -4,6 +4,8 @@
  */
 package LinkedListPracticeProblems;
 
+import java.util.PriorityQueue;
+
 /**
  *
  * @author parth
@@ -112,4 +114,50 @@ public class MergeKSortedList{
 		LL.display();
 		
 	}
+}
+
+
+//Solution Based on PriorityQueue 
+class Solution {
+    private class ListNode{
+        int value; 
+        ListNode next;
+        public ListNode(int value){
+            this.value = value;
+        }
+        public ListNode(int value, ListNode next){
+            this.value = value;
+            this.next = next;
+        }
+    }
+
+    public ListNode mergeKLists(ListNode[] lists) {
+        // Create a priority queue with a custom comparator to compare ListNode objects
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((a, b) -> a.value - b.value);
+
+        // Add the heads of all lists to the priority queue
+        for (ListNode head : lists) {
+            if (head != null) {
+                pq.add(head);
+            }
+        }
+
+        ListNode dummy = new ListNode(0);
+        ListNode tail = dummy;
+
+        // Process the nodes from the priority queue
+        while (!pq.isEmpty()) {
+            // Pop the smallest node from the priority queue
+            ListNode smallest = pq.poll();
+            // Append the smallest node to the result list
+            tail.next = smallest;
+            tail = tail.next;
+            // Move to the next node of the popped node in its list
+            if (smallest.next != null) {
+                pq.add(smallest.next);
+            }
+        }
+
+        return dummy.next;
+}
 }
