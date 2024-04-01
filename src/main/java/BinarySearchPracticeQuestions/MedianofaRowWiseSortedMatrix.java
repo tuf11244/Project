@@ -7,6 +7,8 @@ package BinarySearchPracticeQuestions;
 /**
  *Date: 02/07/2024
  * https://www.geeksforgeeks.org/find-median-row-wise-sorted-matrix/
+ * Date: 04/01/2024
+ * https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/
  * @author parth
  */
 public class MedianofaRowWiseSortedMatrix {
@@ -45,6 +47,25 @@ public class MedianofaRowWiseSortedMatrix {
             }
         }
         
+        System.out.println(low);
+    }
+    
+    public static void kthSmallest(int[][] arr, int k){
+        int rows = arr.length;
+        int columns = arr[0].length;
+        
+        int low = arr[0][0];
+        int end = arr[rows-1][columns-1];
+        
+        while(low<= end){
+            int mid = low +(end - low)/2;
+            int smallerThanEqualTo = helper(arr,mid);
+            if(smallerThanEqualTo < k){
+                low = mid + 1;
+            }else{
+                end = mid - 1;
+            }
+        }
         System.out.println(low);
     }
     
