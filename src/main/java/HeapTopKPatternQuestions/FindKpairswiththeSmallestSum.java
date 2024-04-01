@@ -91,7 +91,7 @@ public class FindKpairswiththeSmallestSum {
            }
            
            //Push Pair (i+1,j) if possible
-           if(i+1 < nums2.length && !set.contains(new Element11(i+1,j))){
+           if(i+1 < nums1.length && !set.contains(new Element11(i+1,j))){
                pq.add(new Pair11(nums1[i+1] + nums2[j], i+1,j));
                //Also add it in our set 
                set.add(new Element11(i+1,j));
