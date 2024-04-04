@@ -37,7 +37,7 @@ public class MinimumCosttoHireKWorkers {
         
         // Sort the workers based on their wage-to-quality ratio
         Arrays.sort(workers, (a, b) -> Double.compare(a.ratio, b.ratio));
-        
+        System.out.println(Arrays.toString(workers));
         // Max heap to keep track of the maximum quality within a given window
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
         int sumQuality = 0; // Initialize the sum of quality
@@ -74,5 +74,11 @@ class Worker {
         this.wage = wage;
         this.ratio = (double) wage / quality; // Calculate the wage-to-quality ratio
     }
+
+    @Override
+    public String toString() {
+        return "Worker{" + "quality=" + quality + ", wage=" + wage + ", ratio=" + ratio + '}';
+    }
+    
 }
 
