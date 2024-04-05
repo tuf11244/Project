@@ -69,7 +69,7 @@ public class EmployeeFreeTime {
                 }else{
                     newCurrentEndTime = current.endTime;
                 }
-                
+                //We can also write the above loop as Math.max(current.endTime, pq.peek().endTime)
             }           
         }
 
