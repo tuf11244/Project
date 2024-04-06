@@ -15,32 +15,35 @@ public class TaskScheduler {
     }
 
     public static int leastInterval(char[] tasks, int n) {
-        int[] frequency = new int[26]; // Frequency array for each task
+        int[] map = new int[26]; // Frequency array for each task
 
-        // Count the frequency of each task
+        // Count the map of each task
         for (char task : tasks) {
-            frequency[task - 'A']++;
+            map[task - 'A']++;
         }
-        System.out.println(Arrays.toString(frequency));
-        // Find the task with the maximum frequency
-        int maxFrequency = 0;
-        for (int freq : frequency) {
-            maxFrequency = Math.max(maxFrequency, freq);
+        System.out.println(Arrays.toString(map));
+        Arrays.sort(map);
+        System.out.println(Arrays.toString(map));
+        // Find the task with the maximum map
+        int maxFrequency = map[25];
+       
+        int holes = maxFrequency - 1;
+        /*
+        for example A - 4
+                    B - 3
+                    C - 2
+        and n = 2
+        holes is -- between  A--A--A--A
+        
+        */
+        int idleSlots = holes * n;
+        for(int i = 24; i >= 0; i--){
+            idleSlots = idleSlots - Math.min(map[i],holes);
         }
-
-        // Calculate the number of tasks with maximum frequency
-        int countMaxFrequency = 0;
-        for (int freq : frequency) {
-            if (freq == maxFrequency) {
-                countMaxFrequency++;
-            }
+        
+        if(idleSlots > 0){
+            return tasks.length + idleSlots;
         }
-
-        // Calculate the minimum time required to execute the tasks
-        int idleSlots = (n - countMaxFrequency + 1) * (maxFrequency - 1);
-        int remainingTasks = tasks.length - maxFrequency * countMaxFrequency;
-        int idleTime = Math.max(0, idleSlots - remainingTasks);
-
-        return tasks.length + idleTime;
+        return tasks.length;
     }
 }
