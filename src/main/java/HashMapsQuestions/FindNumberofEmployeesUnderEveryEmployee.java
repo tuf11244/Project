@@ -54,6 +54,7 @@ public class FindNumberofEmployeesUnderEveryEmployee {
                     }
                 }
             }
+            System.out.println(tree);
             
             HashMap<String,Integer> result = new HashMap<>();
             //CEO is the root of the tree in this context
