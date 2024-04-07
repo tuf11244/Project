@@ -14,10 +14,12 @@ import java.util.HashMap;
 public class KdiffPairsinArray {
 
     /**
+     * Good Questions
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        // TODO code application logic here
+       int[] nums = {3,1,4,1,5};
+        System.out.println(findPairs(nums,2));
     }
     public static int findPairs(int[] nums, int k) {
         int count = 0;
@@ -26,7 +28,7 @@ public class KdiffPairsinArray {
         for(int i = 0; i < nums.length;i++){
             fmap.put(nums[i],fmap.getOrDefault(nums[i],0)+1);
         }
-
+        System.out.println(fmap);
         // Now iterate over the HashMap
         for (int key : fmap.keySet()) {
             if (k == 0) {
