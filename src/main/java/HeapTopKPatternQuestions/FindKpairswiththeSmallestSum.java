@@ -105,8 +105,8 @@ public class FindKpairswiththeSmallestSum {
         }
 
         while(!pq.isEmpty() && answer.size() < k){
-            int i = pq.peek().x;
-            int j = pq.poll().y;
+            int i = pq.peek().x;   //First we are using pq.peek()
+            int j = pq.poll().y;  //Because if we use pq.poll in the above line it would give us a null point exception 
             answer.add(nums1[i]+ nums2[j]);
             if(j+1 < nums2.length){
                  pq.add(new Pair10(i,j+1,nums1[i]+nums2[j+1]));
