@@ -35,9 +35,11 @@ public class FindKpairswithSmallestSumOptimized {
         int n = nums2.length;
         PriorityQueue<Pairs<Integer, Pairs<Integer, Integer>>> pq = new PriorityQueue<>();
         Set<Pairs<Integer, Integer>> visited = new HashSet<>();
+     
         visited.add(new Pairs<>(0, 0));
         int sum = nums1[0] + nums2[0];
         pq.add(new Pairs<>(sum, new Pairs<>(0, 0)));
+        
         List<List<Integer>> result = new ArrayList<>();
         while (k-- > 0 && !pq.isEmpty()) {
             Pairs<Integer, Pairs<Integer, Integer>> temp = pq.poll();
@@ -80,5 +82,11 @@ class Pairs<K extends Comparable<K>, V> implements Comparable<Pairs<K, V>> {
     public int compareTo(Pairs<K, V> other) {
         return this.key.compareTo(other.getKey());
     }
+
+    @Override
+    public String toString() {
+        return "Pairs{" + "key=" + key + ", value=" + value + '}';
+    }
+        
 }
 
