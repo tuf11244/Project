@@ -41,6 +41,8 @@ public class EmployeeFreeTime {
     public static List<List<Integer>> employeeFreeTime(int[][] schedule){
         List<List<Integer>> answer = new ArrayList<>();
         PriorityQueue<Schedule> pq = new PriorityQueue<>();   //Min heap 
+        //Sort the min heap based on the start time 
+        //if the start time is equal sort it by the difference 
         if(schedule.length == 1){
             return answer;
         }
