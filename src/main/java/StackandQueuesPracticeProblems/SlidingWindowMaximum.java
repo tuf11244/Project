@@ -6,8 +6,12 @@ package StackandQueuesPracticeProblems;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
+import java.util.PriorityQueue;
 
 /**
  *Date: 04/09/2024
@@ -22,8 +26,8 @@ public class SlidingWindowMaximum {
      */
     public static void main(String args[]) {
         int[] arr = {1,3,-1,-3,5,3,6,7};
-        int[] answer = maxSlidingWindow(arr,3);
-        System.out.println(Arrays.toString(answer));
+        int[] answer = slidingWindowMaximum(arr,3);
+        System.out.println(answer);
     }
     public static int[] maxSlidingWindow(int[] arr, int k) {
        //The logic is based on the Next greater Element to the Right covered in Stack and Questions Question 
@@ -71,6 +75,40 @@ public class SlidingWindowMaximum {
             result[i] = list.get(i);
         }
         return result;
+        
+    }
+    //Using Deque
+    public static int[] slidingWindowMaximum(int[] arr, int k){
+        int[] ans = new int[arr.length - k + 1];
+        int i = 0;
+        int j = 0;
+        Deque<Integer> dq = new LinkedList<>();
+        
+        while(i < arr.length){
+            if(dq.isEmpty()){
+                dq.add(arr[i]);
+            }else{
+                while(!dq.isEmpty() && dq.peekLast() < arr[i]){
+                    dq.removeLast();
+                }
+                dq.add(arr[i]);
+            }
+            
+            if(i-j+1 < k){
+                i++;
+            }else if(i-j+1 == k){
+                ans[j] = dq.peek();
+                if(arr[j] == dq.peek()){
+                    dq.removeFirst();
+                }
+                
+                //Slide the Window 
+                i++;
+                j++;
+            }
+        }
+        return ans;
+        
         
     }
 }
