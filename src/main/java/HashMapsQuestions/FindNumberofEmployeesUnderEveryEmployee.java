@@ -6,6 +6,7 @@ package HashMapsQuestions;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Date: 03/03/2024
@@ -76,8 +77,8 @@ public class FindNumberofEmployeesUnderEveryEmployee {
         }
         
         int size = 0;
-        
-        for(String employee : tree.get(manager)){
+        HashSet<String> employeeList = tree.get(manager);
+        for(String employee : employeeList){
             int employeeSize = getSize(tree,employee,result);
             size = size + employeeSize;
         }
