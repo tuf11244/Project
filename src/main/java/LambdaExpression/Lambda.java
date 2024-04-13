@@ -22,6 +22,14 @@ public class Lambda {
         
         number.forEach((i) -> {System.out.println(i);});
         // TODO code application logic here
+//        Demo object = ()->{System.out.println("This the method 1");};
+//        object.method1();
+        Demo object1 = (a)->{System.out.println("This the method 1" + " " + a);};
+        object1.method1("Parth");
     }
 }
 
+@FunctionalInterface
+interface Demo{
+    void method1(String s);
+ }
