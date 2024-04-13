@@ -10,6 +10,7 @@ import java.util.HashSet;
 /**
  *Date: 09/09/2024
  *https://www.geeksforgeeks.org/problems/longest-k-unique-characters-substring
+ * Same code applicable to https://leetcode.com/problems/fruit-into-baskets/
  * @author parth
  */
 public class LongestKUniqueCharactersSubstring {
