@@ -8,6 +8,10 @@ import java.util.PriorityQueue;
 
 /**
  *Date: 04/18/2024
+ * We can also do this without heap 
+ * just do simple in order traversal 
+ * and substract k every iteration 
+ * until k == 0; 
  *https://leetcode.com/problems/kth-smallest-element-in-a-bst/
  * @author parth
  */
