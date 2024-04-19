@@ -15,7 +15,7 @@ public class NDigitNumbersinIncreasingOrder {
 
     
     public static void main(String args[]) {
-        System.out.println(increasingNumber(9));
+        System.out.println(increasingNumber(2));
     }
     public static ArrayList<Integer> increasingNumber(int N){
         ArrayList<Integer> answer = new ArrayList<>();

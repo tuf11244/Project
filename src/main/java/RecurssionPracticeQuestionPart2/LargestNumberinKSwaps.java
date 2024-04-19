@@ -16,7 +16,7 @@ public class LargestNumberinKSwaps {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        System.out.println(findMaximumNum("5477",2));
+        System.out.println(findMaximumNum("3435335",3));
     }
     public static String findMaximumNum(String s,int k){
         int start = 0;
