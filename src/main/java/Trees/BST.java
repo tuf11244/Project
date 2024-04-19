@@ -95,7 +95,7 @@ public class BST {
         return value ;
         }
         
-    }
+        }
 
     public static void main(String args[]) {
       // int [] arr = {5,27,31,9,2,79,65,89,0,1};
