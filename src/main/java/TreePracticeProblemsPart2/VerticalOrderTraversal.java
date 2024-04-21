@@ -40,13 +40,13 @@ class Vertical{
 
 
  /* Definition for a binary tree node.*/
- class TreeNode {
+ class TNode {
       int val;
-      TreeNode left;
-      TreeNode right;
-      TreeNode() {}
-      TreeNode(int val) { this.val = val; }
-      TreeNode(int val, TreeNode left, TreeNode right) {
+      TNode left;
+      TNode right;
+      TNode() {}
+      TNode(int val) { this.val = val; }
+      TNode(int val, TNode left, TNode right) {
           this.val = val;
          this.left = left;
           this.right = right;
@@ -54,7 +54,7 @@ class Vertical{
  }
  
 class Solution {
-    public List<List<Integer>> verticalTraversal(TreeNode root) {
+    public List<List<Integer>> verticalTraversal(TNode root) {
        HashMap<Integer,List<Pair>> hm = new HashMap<>();
        List<List<Integer>> answer = new ArrayList<>();
        helper(root,hm,0,0);
@@ -74,7 +74,7 @@ class Solution {
 
         return answer;
     }
-    public void helper(TreeNode root, HashMap<Integer,List<Pair>> hm, int row, int column){
+    public void helper(TNode root, HashMap<Integer,List<Pair>> hm, int row, int column){
         if(root == null){
             return;
         }
