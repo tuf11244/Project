@@ -33,7 +33,7 @@ public class WordLadder {
         System.out.println(answer);
     }
     public static int ladderLength(String beginWord, String endWord, List<String> wordDict){
-        int answer = 0;
+        
         HashSet<String> set = new HashSet<>();
         Queue<Ladder> queue = new LinkedList<>();
         queue.add(new Ladder(beginWord,1));
@@ -54,7 +54,7 @@ public class WordLadder {
              }
              
              for(int i = 0; i < word.length();i++){
-                 for(char ch = 'a'; ch <= z;ch++){
+                 for(char ch = 'a'; ch <= 'z';ch++){
                  char[] wordArray = word.toCharArray(); //Changing our word to character array for better manipulation purposes 
                  wordArray[i] = ch;
                  String replacedWord = new String(wordArray);

@@ -19,32 +19,32 @@ public class RecoverBinarySearchTree {
     }
 }
  /* Definition for a binary tree node.*/
-class TreeNode {
+class TNode {
       int val;
-      TreeNode left;
-      TreeNode right;
-      TreeNode() {}
-      TreeNode(int val) { this.val = val; }
-      TreeNode(int val, TreeNode left, TreeNode right) {
+      TNode left;
+      TNode right;
+      TNode() {}
+      TNode(int val) { this.val = val; }
+      TNode(int val, TNode left, TNode right) {
           this.val = val;
          this.left = left;
           this.right = right;
       }
  }
 class Solution {
-    private TreeNode first;
-    private TreeNode previous;
-    private TreeNode middle;
-    private TreeNode second;
+    private TNode first;
+    private TNode previous;
+    private TNode middle;
+    private TNode second;
 
-    public void recoverTree(TreeNode root) {
+    public void recoverTree(TNode root) {
      /* Intution :  There will be 2 violations or 2 nodes that we have been swapped 
        so, we have to find them nodes and just swap them. We can used InOrder traversal 
        as in Binary Tree Inorder traveral gives you a sorted Array */
        first = null;
        middle = null;
        second = null;
-       previous = new TreeNode(Integer.MIN_VALUE);
+       previous = new TNode(Integer.MIN_VALUE);
         inOrderTraversal(root);
         //We the 2 values are not adjacent in array
         if(first != null && second != null){
@@ -64,7 +64,7 @@ class Solution {
         }
         
 }
-    private void inOrderTraversal(TreeNode root){
+    private void inOrderTraversal(TNode root){
         if(root == null){
             return;
         }
