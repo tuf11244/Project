@@ -4,29 +4,31 @@ package TreePracticeProblems;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 class Solution {
-    Node root;
+    KNode root;
     private int k;
 
     public Solution() {
         this.k = 3;
     }
 
-    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
-        HashMap<TreeNode, TreeNode> parentMap = new HashMap<>();
+    public List<Integer> distanceK(KNode root, KNode target, int k) {
+        HashMap<KNode, KNode> parentMap = new HashMap<>();
         populateParentMap(root, null, parentMap);
         
         List<Integer> result = new ArrayList<>();
-        Set<TreeNode> visited = new HashSet<>();
+        Set<KNode> visited = new HashSet<>();
         findNodesAtDistanceK(target, k, parentMap, result, visited);
         
         return result;
     }
     
-    private void populateParentMap(TreeNode node, TreeNode parent, HashMap<TreeNode, TreeNode> parentMap) {
+    private void populateParentMap(KNode node, KNode parent, HashMap<KNode, KNode> parentMap) {
         if (node == null) return;
         
         parentMap.put(node, parent);
@@ -34,50 +36,50 @@ class Solution {
         populateParentMap(node.right, node, parentMap);
     }
     
-    private void findNodesAtDistanceK(TreeNode node, int k, HashMap<TreeNode, TreeNode> parentMap, List<Integer> result, Set<TreeNode> visited) {
+    private void findNodesAtDistanceK(KNode node, int k, HashMap<KNode, KNode> parentMap, List<Integer> result, Set<KNode> visited) {
         if (node == null || visited.contains(node)) return;
         
         visited.add(node);
         if (k == 0) {
-            result.add(node.val);
+            result.add(node.value);
             return;
         }
         
         // Explore left, right, and parent nodes
         findNodesAtDistanceK(node.left, k - 1, parentMap, result, visited);
         findNodesAtDistanceK(node.right, k - 1, parentMap, result, visited);
-        TreeNode parentNode = parentMap.get(node);
+        KNode parentNode = parentMap.get(node);
         findNodesAtDistanceK(parentNode, k - 1, parentMap, result, visited);
     }
     public void insert(Scanner scanner) {
         System.out.println("Enter the root value ");
         int value = scanner.nextInt();
-        root = new Node(value);
+        root = new KNode(value);
         insert(root, scanner);
     }
 
-    private void insert(Node node, Scanner scanner) {
+    private void insert(KNode node, Scanner scanner) {
         System.out.println("Do you want to enter value to the left of " + node.value);
         int leftValue = scanner.nextInt();
         if (leftValue != -1) {
-            node.left = new Node(leftValue);
+            node.left = new KNode(leftValue);
             insert(node.left, scanner);
         }
 
         System.out.println("Do you want to enter value to the right of " + node.value);
         int rightValue = scanner.nextInt();
         if (rightValue != -1) {
-            node.right = new Node(rightValue);
+            node.right = new KNode(rightValue);
             insert(node.right, scanner);
         }
     }
 
-    public class Node {
+    public class KNode {
         int value;
-        Node left;
-        Node right;
+        KNode left;
+        KNode right;
 
-        public Node(int value) {
+        public KNode(int value) {
             this.value = value;
         }
     }
@@ -90,9 +92,6 @@ public class AllNodesDistanceKinBinaryTree {
 
         tree.insert(scanner);
         // Set the target node (you need to implement this logic)
-        Solution.Node targetNode = tree.root.left;
-        List<Integer> answer = tree.distance(targetNode, 4);
-
-        System.out.println(answer);
+        
     }
 }
