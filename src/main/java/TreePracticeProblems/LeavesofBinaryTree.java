@@ -24,9 +24,9 @@ public class LeavesofBinaryTree {
 }
     
 class Solution {
-    public List<List<Integer>> findLeaves(Node root) {
+    public List<List<Integer>> findLeaves(BTNode root) {
         List<List<Integer>> res = new ArrayList<>();
-        Node prev = new Node(0, root, null);
+        BTNode prev = new BTNode(0, root, null);
         while (prev.left != null) {
             List<Integer> t = new ArrayList<>();
             dfs(prev.left, prev, t);
@@ -35,7 +35,7 @@ class Solution {
         return res;
     }
 
-    private void dfs(Node root, Node prev, List<Integer> t) {
+    private void dfs(BTNode root, BTNode prev, List<Integer> t) {
         if (root == null) {
             return;
         }
@@ -50,14 +50,14 @@ class Solution {
         dfs(root.left, root, t);
         dfs(root.right, root, t);
     }
-    private class Node{
+    private class BTNode{
         int value;
-        Node left;
-        Node right;
-        public Node(int value){
+        BTNode left;
+        BTNode right;
+        public BTNode(int value){
             this.value = value;
         }
-        public Node(int value, Node left, Node right){
+        public BTNode(int value, BTNode left, BTNode right){
             this.value = value;
             this.left = left;
             this.right = right;
