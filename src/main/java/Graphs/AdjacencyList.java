@@ -27,9 +27,10 @@ public class AdjacencyList {
         System.out.println("Please enter the edges information");
         String[] parts = new String[edges];
         for(int i = 0; i < edges;i++){
-            parts[i] = scanner.next();
+            parts[i] = scanner.nextLine();
+            System.out.println(parts[i]);
         }
-        
+        System.out.println(Arrays.toString(parts));
         adjacencyList(edges,vertices,parts);
     }
     public static void adjacencyList(int edges, int vertices, String[] parts){
@@ -41,7 +42,7 @@ public class AdjacencyList {
             graph[i] = new ArrayList<>();
         }
         
-        for(int i = 0; i < edges;i++){
+        for(int i = 0; i <= edges;i++){
             String[] part = parts[i].split(" ");
             int vertex1 = Integer.parseInt(part[0]); //get the source 
             int vertex2 = Integer.parseInt(part[1]); //get the destination 
