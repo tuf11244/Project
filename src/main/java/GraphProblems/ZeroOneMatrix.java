@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
-package PracticeQuestions;
+package GraphProblems;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -42,12 +42,12 @@ public class ZeroOneMatrix {
     }
     
     public static int[][] zeroOne(int[][] grid){
-        Queue<Pair> queue = new LinkedList<>();
+        Queue<ypair> queue = new LinkedList<>();
         
         for(int i = 0; i < grid.length;i++){
             for(int j = 0; j < grid[0].length;j++){
                 if(grid[i][j] == 0){
-                    queue.add(new Pair(i,j));
+                    queue.add(new ypair(i,j));
                 }else{
                     grid[i][j] = -1; //this act sort of like visited array 
                 }
@@ -55,14 +55,14 @@ public class ZeroOneMatrix {
         }
         
         while(!queue.isEmpty()){
-            Pair rem = queue.poll();
+            ypair rem = queue.poll();
             
             for(int i = 0; i < 4;i++){
                 int rowdash = rem.x + directions[i][0];
                 int coldash = rem.y + directions[i][1];
                 
                 if(isValid(grid,rowdash,coldash) && grid[rowdash][coldash] == -1){
-                    queue.add(new Pair(rowdash,coldash));
+                    queue.add(new ypair(rowdash,coldash));
                     grid[rowdash][coldash] = grid[rem.x][rem.y] + 1;
                 }
                
@@ -73,11 +73,11 @@ public class ZeroOneMatrix {
     }
 }
 
-class Pair{
+class ypair{
     int x;
     int y;
     
-    public Pair(int x, int y){
+    public ypair(int x, int y){
         this.x = x;
         this.y = y;
     }
