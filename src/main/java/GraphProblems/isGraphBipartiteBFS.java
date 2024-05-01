@@ -30,7 +30,7 @@ public class isGraphBipartiteBFS {
         int vertices = graph.length;
         List<Edge> [] adjList = new ArrayList[vertices];
         
-        //Below code is to convert the matrix into adjacency matrix 
+        //Below code is to convert the matrix into adjacency list
         for(int i = 0; i < graph.length;i++){
             adjList[i] = new ArrayList<>();
             for(int j = 0; j < graph[i].length;j++){
