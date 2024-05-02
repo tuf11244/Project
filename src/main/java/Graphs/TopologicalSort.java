@@ -66,7 +66,7 @@ public class TopologicalSort {
                 topologicalSort(visited,graph,st,l.nbg);
             }
         }
-        st.push(src);
+        st.push(src);  //this is the post order ..so add it in our stack 
     }
 }
 class Line{
