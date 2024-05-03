@@ -67,7 +67,7 @@ public class AsfarfromLandasPossible {
         }
         int level = -1; //this is our final answer
         while(!queue.isEmpty()){
-            level++;
+            
             int size = queue.size();
            
             while(size > 0){
@@ -85,6 +85,7 @@ public class AsfarfromLandasPossible {
            }
            size--;
         }
+            level++;
     }
         return level;
 }
