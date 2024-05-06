@@ -71,6 +71,7 @@ public class KahnAlgorithm {
         Queue<Integer> queue = new LinkedList<>();
         //Add the vertices with 0 incoming degrees in our queue
         for(int i = 0; i < vertices;i++){
+            //WE ONLY ADD OUR VERTICES IN QUEUE IS THERE INDEGREE IS 0
             if(indegree[i] == 0){
                 queue.add(i);
             }
