@@ -53,23 +53,27 @@ public class PacificAtlanticWaterFlow {
 
         return answer;
     }
-
-    private void dfs(int[][] heights, boolean[][] visited, int i, int j) {
-        int m = heights.length;
-        int n = heights[0].length;
-
-        if (visited[i][j])
+    private static int[][] directions = {
+            {1, 0}, 
+            {-1, 0}, 
+            {0, 1}, 
+            {0, -1}
+    };
+    private static boolean isValid(int[][] heights, int row, int column){
+        return row < heights.length && row >= 0 && column >= 0 && column < heights[0].length;
+    }
+    private void dfs(int[][] heights, boolean[][] visited, int row, int col) {
+        if (visited[row][col])
             return;
 
-        visited[i][j] = true;
-
-        int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-        for (int[] dir : dirs) {
-            int ni = i + dir[0];
-            int nj = j + dir[1];
-
-            if (ni >= 0 && ni < m && nj >= 0 && nj < n && !visited[ni][nj] && heights[ni][nj] >= heights[i][j]) {
-                dfs(heights, visited, ni, nj);
+        visited[row][col] = true;
+        
+        for(int k = 0; k < 4;k++){
+            int rowdash = row + directions[k][0];
+            int coldash = col + directions[k][1];
+            
+            if(isValid(heights,rowdash,coldash) && visited[rowdash][coldash] == false && heights[rowdash][coldash] >= heights[row][col]){
+                dfs(heights,visited,rowdash,coldash);
             }
         }
     }
