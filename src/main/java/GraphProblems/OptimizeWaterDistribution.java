@@ -84,7 +84,7 @@ public class OptimizeWaterDistribution {
             
             for(PairQ p : graph[rem.nbg]){
                 if(visited[p.nbg] == false){
-                    pq.add(new PairQ(p.nbg,p.cost));
+                    pq.add(p); //you can aslo write pq.add(new PairQ(p.nbg,p.cost));
                 }
             }
             
