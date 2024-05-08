@@ -102,6 +102,11 @@ class PairQ implements Comparable<PairQ>{
         this.nbg = nbg;
         this.cost = cost;
     }
+
+    @Override
+    public String toString() {
+        return "PairQ{" + "nbg=" + nbg + ", cost=" + cost + '}';
+    }
     
 
     @Override
