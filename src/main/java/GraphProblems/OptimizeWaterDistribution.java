@@ -13,6 +13,8 @@ import java.util.Queue;
 
 /**
  *Date: 05/07/2024
+ * https://leetcode.com/problems/optimize-water-distribution-in-a-village/
+ * https://www.geeksforgeeks.org/minimum-cost-to-provide-water/
  * @author parth
  */
 public class OptimizeWaterDistribution {
