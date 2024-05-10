@@ -5,7 +5,23 @@
 package Graphs;
 import java.util.*;
 /**
- *
+ * Find the Articulation points in a graph using Tarjan's Algorithm 
+ * 
+ * Articulation points are vertices such that removing them disconnects the graph 
+ * 
+ *We need to DFS of this graph and keep visitedTime(i.e. what time was it discovered) and lowTime for each vertex 
+ * lowTime keeps track of any back edges 
+ * 
+ * if any of the following condition meets, than the vertex is an articulation point 
+ * Condition 1: If the vertex is root of DFS and has atleast 2 independent children (
+ * By Independent it means they are not connected to each other except via the vertex.This condition is needed because 
+ * if we started from a corner vertex, it will meet other condition but won't be an articulation point.
+ * 
+ * Condition 2 : If its not the root of DFS and if visitedTime of vertex <= lowTime of any adjacent vertex 
+ *                                                                  than its an articulation point 
+ * Time Complexity : O(E+V)
+ * Space Complexity : O(V)
+ *http://www.geeksforgeeks.org/articulation-points-or-cut-vertices-in-a-graph/
  * @author parth
  */
 public class ArticulationPoint {
@@ -81,25 +97,34 @@ public class ArticulationPoint {
         for(int i = 0;i < nbrs.size();i++){
             int nbg = nbrs.get(i).nbg;
             
+            //if the nbr vertex is same as the parent than ignore it 
             if(parent[src] ==  nbg){
                 continue;
             }
+            
+            //if the nbr vertex is already visited than see if you can get a better low time
             else if(visited[nbg] == true){
                 low[src] = Math.min(low[src],discovery[nbg]);
+                
+            //if the nbr vertex is not visited than visit it 
             }else{
                 //set the parent 
                 parent[nbg] = src;
+                //increase the count of the children 
                 count++;
                 dfs(nbg,graph);
                 low[src] = Math.min(low[src], low[nbg]);
                 
                 if(parent[src] == -1){
                     //the above the statement means if its an actual source 
+                    //and it has 2 children which are independent meaning not connected any other except this src vertex
+                    //i.e. Condition 1 as mentioned above 
                     if(count >= 2){
                         articulationPoint[src] = true;
                     }
                 }
                 else{
+                    //i.e. Condition 2 as mentioned above 
                     if(low[nbg] >= discovery[src]){
                         articulationPoint[src] = true; //means the point src is articulation point
                     }
