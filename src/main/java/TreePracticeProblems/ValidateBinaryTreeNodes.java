@@ -5,6 +5,10 @@
 package TreePracticeProblems;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
 
 /**
  *Date: 10/12/2023
@@ -17,75 +21,76 @@ import java.util.Arrays;
  * @author parth
  */
 class Solution3{
-    private Node root;
     
     public Solution3(){
         
     }
-    public boolean validateBinaryTreeNodes(int n,int[] leftchild, int[] rightchild){
-       int[] indegrees = new int[n];
-       
-       //Calculate in-degrees for each node
-       for(int i = 0; i < n; i++){
-           if(leftchild[i]!= -1){
-               indegrees[leftchild[i]]= indegrees[leftchild[i]] + 1;
-               if(indegrees[leftchild[i]] > 1){
-                   return false;
-               }
-           }
-           if(rightchild[i]!= -1){
-               indegrees[rightchild[i]] = indegrees[rightchild[i]] + 1;
-               if(indegrees[rightchild[i]] > 1){
-                   return false;
-               }
-           }
-       }
-       System.out.println(Arrays.toString(indegrees));
-       int rootcount = 0;
-       
-       // Check in-degrees and count the root nodes
-       for(int degree : indegrees){
-           if(degree == 0){
-               rootcount = rootcount + 1;
-               if(rootcount > 1){
-                   return false;
-               }
-           } else if (degree > 1){
-               return false;
-           }
-       }
-       
-       boolean visited[] = new boolean[n];
-       
-       // If there is not exactly one root node, it's not a valid binary tree
-       if(rootcount!= 1){
-           return false;
-       }
-       
-       //Perform dfs on each node
-       return helper(0,leftchild, rightchild,visited);
-       
-    }
-    private boolean helper(int node, int[] leftchild, int[] rightchild, boolean[] visited){
-        if(node == -1){
-            return true; //// Not a valid node, return true
-        }
-        if(visited[node]){
-            return false;  // Already visited, return false
-        }
-        visited[node] = true;
-        return helper(leftchild[node],leftchild,rightchild,visited) && helper(rightchild[node],leftchild,rightchild,visited);
+    public boolean validateBinaryTreeNodes(int n, int[] leftChild, int[] rightChild) {
+    // Set to store unique child nodes
+    Set<Integer> uniqueNode = new HashSet<>();
+    
+    // Iterate through leftChild array to find unique child nodes
+    for(int left : leftChild){
+        if(left != -1)
+            uniqueNode.add(left);
     }
     
+    // Iterate through rightChild array to find unique child nodes
+    for(int right : rightChild){
+        if(right != -1)
+            uniqueNode.add(right);
+    }
     
-    private class Node{
-        int value;
-        Node left; 
-        Node right;
-        public Node(int value){
-            this.value = value;
+    // If any node is not a child of any other node, it's considered the root
+    int root = -1;
+    for(int i = 0; i < n; i++){
+        if(uniqueNode.contains(i)){
+            continue; // Skip nodes that are child nodes
+        }
+        root = i; // Set as root if not found in uniqueNode set
+        break;
+    }
+    
+    // If no root is found, return false
+    if(root == -1){
+        return false;
+    }
+    
+    // Queue for BFS traversal, starting with root node
+    Queue<Integer> queue = new LinkedList<>();
+    // Set to track visited nodes
+    Set<Integer> visited = new HashSet<>();
+    queue.add(root); // Add root to queue
+    
+    // BFS traversal
+    while(!queue.isEmpty()){
+        int size = queue.size();
+        while(size > 0){
+            int node = queue.poll();
+            
+            // If node is visited more than once, return false (cycle detected)
+            if(visited.contains(node)){
+                return false;
+            }
+            
+            visited.add(node); // Mark node as visited
+            
+            // Add left child to queue if exists
+            if(leftChild[node] != -1){
+                queue.add(leftChild[node]);
+            }
+            // Add right child to queue if exists
+            if(rightChild[node] != -1){
+                queue.add(rightChild[node]);
+            }
+            size--; // Decrement size to track level nodes
         }
     }
+    
+    // Check if all nodes are visited, return true if all nodes are visited exactly once
+    return visited.size() == n;
+}
+
 }
 public class ValidateBinaryTreeNodes {
 
