@@ -48,13 +48,13 @@ public class KrushkalsAlgorithm {
             arr[i] = new kPair(graph[i][0],graph[i][1],graph[i][2]);
         }
         
-        Arrays.sort(arr);
+        Arrays.sort(arr); //sort them based on their weight
         
         parent = new int[vertices];
         rank = new int[vertices];
         
         for(int i = 0; i < vertices;i++){
-            parent[i] = 1;
+            parent[i] = i;
             rank[i] = 1;
         }
         int answer = 0;

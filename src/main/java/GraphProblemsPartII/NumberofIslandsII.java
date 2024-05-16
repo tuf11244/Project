@@ -70,6 +70,10 @@ public class NumberofIslandsII {
                 int lx = find(cellnum,parent);
                 int ly = find(celldash,parent);
                 
+                //if lx == ly means they are part of the same components 
+                //so no need to merge them 
+                
+                
                 if(lx != ly){
                     //this loop means we are merging the islands 
                     //so we have to decrease the count
@@ -83,7 +87,7 @@ public class NumberofIslandsII {
                         rank[ly]++;
                     }
                     
-                  count--;  
+                  count--;  //decrease the count because 2 islands are getting merged 
                 }
                 
             }
