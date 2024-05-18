@@ -15,8 +15,10 @@ public class RankTransformofaMatrix {
      * @param args the command line arguments
      */
 
-    public static int row[];  //stores maximum so far in row[i];
-    public static int col[];  //store maximum so far is col[i];
+    public static int row[]; 
+    //This holds the maximum rank assigned so far to any element in row i.
+    public static int col[];  
+    //This holds the maximum rank assigned so far to any element in column j.
     
     public static void main(String args[]) {
         int[][] matrix = {
@@ -49,6 +51,7 @@ public class RankTransformofaMatrix {
         
         //Sort our arr filled up on the values
         Arrays.sort(arr);
+        
        System.out.println(Arrays.toString(arr));
        
        int lastval = Integer.MIN_VALUE;
@@ -59,6 +62,11 @@ public class RankTransformofaMatrix {
            if(val!=lastval){
                helper(list,matrix);
                lastval = val;
+            // By resetting list to a new ArrayList<>, the algorithm ensures that the helper function 
+            // is called for each group of elements with the same value before moving on to the next group. 
+            //This makes the processing of elements efficient and organized, 
+            //allowing the algorithm to handle elements of the same value together 
+            //and then clear the list for the next set of values.
                list = new ArrayList<>();
            }
            list.add(arr[i]);
@@ -88,8 +96,35 @@ public class RankTransformofaMatrix {
              if(parent1!=parent2){
                  
                  int maxRank = Math.min(parent[parent1], Math.min(parent[parent2], -1 *Math.max(row[i], col[j])-1));
+                /* Math.max(row[i], col[j]): This finds the larger of the two maximum ranks for the row and column, 
+                    ensuring the new rank respects the previous ranks. 
+                 
+                - 1 * Math.max(row[i], col[j]) - 1: This converts the maximum rank to a negative value and decreases it by 1. 
+                    The negative sign and the decrement are because the union-find parent array stores ranks as negative values 
+                    to distinguish them from indices.
+                 
+                 Math.min(parent[parent1], -1 * Math.max(row[i], col[j]) - 1): This finds the smaller value between the current parent value 
+                 (representing the rank) of the row and the negative maximum rank needed for the current element. 
+                 The use of Math.min ensures that the rank does not exceed what is currently permissible based on the union-find structure.
+                 
+                 
+                 Math.min(parent[parent1], parent[parent2]): This ensures that the minimum rank between the two parent 
+                 components (row and column) is chosen. This step respects the union-find's requirement 
+                 that ranks within the same connected component remain consistent.
+                 
+                 */
+                
+                
                  parent[parent1] = maxRank;
                  parent[parent2] = parent1;
+                 
+                 /*parent[parent1] = maxRank;: This line sets the rank for the root of the row component. 
+                The maxRank is the calculated rank that respects the ranks of all previous elements in the same row and column.
+
+                parent[parent2] = parent1;: This line makes the root of the column component (parent2) point to the 
+                root of the row component (parent).This effectively merges the two components.
+                
+                */
              }
          }
          
