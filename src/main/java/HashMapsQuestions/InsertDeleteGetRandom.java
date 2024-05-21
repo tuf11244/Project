@@ -80,6 +80,7 @@ class RandomizedCollection {
     HashMap<Integer,HashSet<Integer>> hm;
     List<Integer> list;
     Random rand;
+    //HashSet<Integer> stores the list of indices using the list 
     public RandomizedCollection() {
         hm = new HashMap<>();
         list = new ArrayList<>();

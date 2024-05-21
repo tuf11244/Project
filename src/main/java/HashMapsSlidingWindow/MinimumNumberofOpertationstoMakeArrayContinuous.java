@@ -43,6 +43,7 @@ public class MinimumNumberofOpertationstoMakeArrayContinuous {
         for(int i = 0; i < arr.length;i++){
 
             //expand the size of the window
+            //this window includes the number of elements who can be included in our contiguous array
             while(j < arr.length && arr[j] < arr[i] + nums.length){
                 j++;
             }
