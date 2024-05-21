@@ -34,7 +34,7 @@ public class TaskScheduler {
         for(int i = 0; i < s.length();i++){
             map[s.charAt(i)-'A']++;
         }
-
+     //   System.out.println(Arrays.toString(map));
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
        for(int i = 0; i < map.length;i++){
            if(map[i] > 0){
