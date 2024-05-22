@@ -29,7 +29,7 @@ public class AliensDictionary {
         //HashSet is a set of neighbours 
         HashMap<Character,HashSet<Character>> graph = new HashMap<>();
         
-        //Creater a Hashmap of character vs Integer, this a frequency map which represents the 
+        //Create a Hashmap of character vs Integer, this a frequency map which represents the 
         //indegree array used for kahn's algorithm
         HashMap<Character,Integer> indegree = new HashMap<>();
         
