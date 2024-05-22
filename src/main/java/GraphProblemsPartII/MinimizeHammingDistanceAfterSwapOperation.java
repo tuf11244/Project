@@ -56,7 +56,7 @@ public class MinimizeHammingDistanceAfterSwapOperation {
         fmap.put(source[i], fmap.getOrDefault(source[i], 0) + 1);
         hm.put(p, fmap);
     }
-
+       // System.out.println(hm);
     int hammingD = 0;
     // Iterate over the target array
     for (int i = 0; i < target.length; i++) {
