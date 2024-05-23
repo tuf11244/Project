@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
-package PracticeQuestions;
+package GraphProblemsPartII;
 import java.util.*;
 /**
  *Date: 05/21/2024
@@ -18,24 +18,24 @@ public class AccountsMerge {
     public static int[] rank;
     public static void main(String args[]) {
         
-       List<String> list1 = Arrays.asList("Hanzo","Hanzo2@m.co","Hanzo3@m.co");
-       List<String> list2 = Arrays.asList("Hanzo","Hanzo4@m.co","Hanzo5@m.co");
-       List<String> list3 = Arrays.asList("Hanzo","Hanzo0@m.co","Hanzo1@m.co");
-       List<String> list4 = Arrays.asList("Hanzo","Hanzo3@m.co","Hanzo4@m.co");
-       List<String> list5 = Arrays.asList("Hanzo","Hanzo7@m.co","Hanzo8@m.co");
-       List<String> list6 = Arrays.asList("Hanzo","Hanzo1@m.co","Hanzo2@m.co");
-       List<String> list7 = Arrays.asList("Hanzo","Hanzo6@m.co","Hanzo7@m.co");
-       List<String> list8 = Arrays.asList("Hanzo","Hanzo5@m.co","Hanzo6@m.co");
+       List<String> list1 = Arrays.asList("John","johnsmith@mail.com","john_newyork@mail.com");
+       List<String> list2 = Arrays.asList("John","johnsmith@mail.com","john00@mail.com");
+       List<String> list3 = Arrays.asList("Mary","mary@mail.com");
+       List<String> list4 = Arrays.asList("John","johnnybravo@mail.com");
+//       List<String> list5 = Arrays.asList("Hanzo","Hanzo7@m.co","Hanzo8@m.co");
+//       List<String> list6 = Arrays.asList("Hanzo","Hanzo1@m.co","Hanzo2@m.co");
+//       List<String> list7 = Arrays.asList("Hanzo","Hanzo6@m.co","Hanzo7@m.co");
+//       List<String> list8 = Arrays.asList("Hanzo","Hanzo5@m.co","Hanzo6@m.co");
         
         List<List<String>> accounts = new ArrayList<>();
         accounts.add(list1);
         accounts.add(list2);
         accounts.add(list3);
         accounts.add(list4);
-        accounts.add(list5);
-        accounts.add(list6);
-        accounts.add(list7);
-        accounts.add(list8);
+//        accounts.add(list5);
+//        accounts.add(list6);
+//        accounts.add(list7);
+//        accounts.add(list8);
         
         
        List<List<String>> answer =  accountsMerge(accounts);
@@ -74,15 +74,15 @@ public class AccountsMerge {
             }
             index++;
         }
-//        System.out.println(emailToIndex);
-//        System.out.println(Arrays.toString(parent));
+    //    System.out.println(emailToIndex);
+       System.out.println(Arrays.toString(parent));
         
         // Create a map to associate each root parent index with a set of emails
         HashMap<Integer, Set<String>> indexToEmails = new HashMap<>();
-        // Iterate through each email and its index in the map
-        for (Map.Entry<String, Integer> entry : emailToIndex.entrySet()) {
-            String email = entry.getKey();
-            int rootIndex = find(entry.getValue()); // Find the root parent index for the current email
+        for (String email : emailToIndex.keySet()) {
+            int emailIndex = emailToIndex.get(email);
+            int rootIndex = find(emailIndex); // Find the root parent index for the current email
+
             // If the root parent index is not in the map, add it with a new HashSet
             if (!indexToEmails.containsKey(rootIndex)) {
                 indexToEmails.put(rootIndex, new HashSet<>());
@@ -90,21 +90,23 @@ public class AccountsMerge {
             // Add the email to the set associated with the root parent index
             indexToEmails.get(rootIndex).add(email);
         }
+        
+        //System.out.println(indexToEmails);
+       // Create a list to store the merged accounts
+      List<List<String>> mergedAccounts = new ArrayList<>();
 
-        // Create a list to store the merged accounts
-        List<List<String>> mergedAccounts = new ArrayList<>();
-        // Iterate through each entry in the indexToEmails map
-        for (Map.Entry<Integer, Set<String>> entry : indexToEmails.entrySet()) {
-            int rootIndex = entry.getKey();
-            Set<String> emails = entry.getValue();
-            // Convert the set of emails to a list and sort it
-            List<String> mergedAccount = new ArrayList<>(emails);
-            Collections.sort(mergedAccount);
-            // Add the account name at the front of the list
-            mergedAccount.add(0, accounts.get(rootIndex).get(0));
-            // Add the merged account to the final list
-            mergedAccounts.add(mergedAccount);
-        }
+// Iterate through each key (rootIndex) in the indexToEmails map
+    for (int rootIndex : indexToEmails.keySet()) {
+    // Get the set of emails associated with the current rootIndex
+        Set<String> emails = indexToEmails.get(rootIndex);
+    // Convert the set of emails to a list and sort it
+        List<String> mergedAccount = new ArrayList<>(emails);
+        Collections.sort(mergedAccount);
+    // Add the account name at the front of the list
+        mergedAccount.add(0, accounts.get(rootIndex).get(0));
+    // Add the merged account to the final list
+        mergedAccounts.add(mergedAccount);
+    }
 
         return mergedAccounts;
     }
