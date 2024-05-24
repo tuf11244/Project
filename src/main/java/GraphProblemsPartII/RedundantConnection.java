@@ -60,11 +60,11 @@ public class RedundantConnection {
              continue;  //continuing this case because 0,0 is our dummy node
          }
          
-         int p1 = find(l.get(0)); //finding the parent 
-         int p2 = find(l.get(1)); //finding the parent
+         int lx = find(l.get(0)); //finding the parent 
+         int ly = find(l.get(1)); //finding the parent
          
-         if(p1!=p2){   //if they are not equal than merge them 
-             union(p1,p2);
+         if(lx!=ly){   //if they are not equal than merge them 
+             union(lx,ly);
          }else{
               return new int[]{l.get(0),l.get(1)}; //that means both the parent were equal hence a cycle was deteted
               //so its redundant
