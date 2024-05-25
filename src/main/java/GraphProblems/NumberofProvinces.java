@@ -6,7 +6,7 @@ package GraphProblems;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.*;
 /**
  *Date: 04/24/2024
  * https://leetcode.com/problems/number-of-provinces/
@@ -55,6 +55,61 @@ public class NumberofProvinces {
         for(Integer x : adjList.get(node)){
             if(visited[x] == false){
                 dfs(x,adjList,visited);
+            }
+        }
+    }
+}
+
+//Using DSU
+class Solution {
+    public static int[] parent;
+    public static int[] rank;
+    public int findCircleNum(int[][] isConnected) {
+    //Intialize the parent and rank arrays
+    parent = new int[isConnected.length];
+    rank = new int[isConnected.length];
+
+    for(int i = 0; i < isConnected.length;i++){
+        parent[i] = i;
+        rank[i] = 1;
+    }
+
+    for(int i = 0; i < isConnected.length;i++){
+        for(int j = 0; j < isConnected.length;j++){
+            if(isConnected[i][j] == 1){
+                merge(i,j);
+            }
+        }
+    }
+
+   HashSet<Integer> set = new HashSet<>();
+   for(int i = 0; i < parent.length;i++){
+        int p = find(i);
+        set.add(p);
+   }
+   return set.size();
+
+}
+    public static int find(int x){
+        if(parent[x] == x){
+            return x;
+        }
+        int temp = find(parent[x]);
+        parent[x] = temp;
+        return temp;
+    }
+    public static void merge(int x, int y){
+        int lx = find(x);
+        int ly = find(y);
+        
+        if(lx != ly){
+            if(rank[lx] > rank[ly]){
+                parent[ly] = lx;
+            }else if(rank[lx] < rank[ly]){
+                parent[lx] = ly;
+            }else{
+                parent[lx] = ly;
+                rank[ly]++;
             }
         }
     }
