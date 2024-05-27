@@ -22,7 +22,7 @@ public class FirstNegativeElementinEveryWindowofSizeK {
      */
     public static void main(String args[]) {
         long[] A = {12,-1,-7,8,-15,30,16,28};
-        long[] ans = printFirstNegativeInteger(A,A.length,1);
+        long[] ans = printFirstNegativeInteger(A,A.length,2);
         System.out.println(Arrays.toString(ans));
     }
     
