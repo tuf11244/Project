@@ -17,8 +17,8 @@ public class NumberofClosedIslands {
     public static void main(String args[]) {
         // TODO code application logic here
     }
-}
-class Solution {
+
+
     public int closedIsland(int[][] grid) {
         int count = 0;
 
