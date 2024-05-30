@@ -39,12 +39,12 @@ public class RankTransformofaMatrix {
         col = new int[n];
         
            
-        Pair [] arr = new Pair[m*n]; //we will be using this array for traversing purposes 
+        pair [] arr = new pair[m*n]; //we will be using this array for traversing purposes 
         //arr is 1-D array of which the values are derived from the matrix given 
         for(int i = 0; i < m;i++){
             for(int j = 0; j < n;j++){
                int index = i * n + j;
-               arr[index] = new Pair(matrix[i][j],i,j);
+               arr[index] = new pair(matrix[i][j],i,j);
                 
             }
         }
@@ -55,7 +55,7 @@ public class RankTransformofaMatrix {
        System.out.println(Arrays.toString(arr));
        
        int lastval = Integer.MIN_VALUE;
-       List<Pair> list = new ArrayList<>();
+       List<pair> list = new ArrayList<>();
        for(int i = 0; i < arr.length;i++){
            int val = arr[i].val;
             
@@ -80,13 +80,13 @@ public class RankTransformofaMatrix {
          }
     }
      
-     public static void helper(List<Pair> list, int[][] matrix){
+     public static void helper(List<pair> list, int[][] matrix){
          int m = matrix.length;
          int n = matrix[0].length;
          
          int [] parent = new int[m+n];
          Arrays.fill(parent, -1);
-         for(Pair p : list){
+         for(pair p : list){
              int i = p.x;
              int j = p.y;
              
@@ -129,7 +129,7 @@ public class RankTransformofaMatrix {
          }
          
          //updating the matrix 
-         for(Pair p : list){
+         for(pair p : list){
              int i = p.x;
              int j = p.y;
              
@@ -155,19 +155,19 @@ public class RankTransformofaMatrix {
     
 }
 
-class Pair implements Comparable<Pair>{
+class pair implements Comparable<pair>{
     int val;
     int x;
     int y;
     
-    public Pair(int val, int x, int y){
+    public pair(int val, int x, int y){
         this.val = val;
         this.x = x;
         this.y = y;
     }
 
     @Override
-    public int compareTo(Pair o) {
+    public int compareTo(pair o) {
       return this.val - o.val;
     }
 
