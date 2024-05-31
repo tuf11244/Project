@@ -17,19 +17,19 @@ public class CutofTreesforGoldEvent {
     public static void main(String args[]) {
         // TODO code application logic here
         List<Integer> l1 = new ArrayList<>();
-        l1.add(1);
         l1.add(2);
         l1.add(3);
+        l1.add(4);
         
         List<Integer> l2 = new ArrayList<>();
         l2.add(0);
         l2.add(0);
-        l2.add(0);
+        l2.add(5);
         
         List<Integer> l3 = new ArrayList<>();
+        l3.add(8);
         l3.add(7);
         l3.add(6);
-        l3.add(5);
         
         List<List<Integer>> forest = new ArrayList<>();
         forest.add(l1);
