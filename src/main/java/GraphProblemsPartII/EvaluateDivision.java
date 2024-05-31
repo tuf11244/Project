@@ -27,7 +27,7 @@ public class EvaluateDivision {
 
     public static double[] evaluateDivision(List<List<String>> equations, double[] values, List<List<String>> queries) {
         // We create a HashMap as our adjacency list 
-        HashMap<String, List<pair>> graph = new HashMap<>();
+        HashMap<String, List<pair1>> graph = new HashMap<>();
 
         // Build the graph
         for (int i = 0; i < equations.size(); i++) {
@@ -38,8 +38,8 @@ public class EvaluateDivision {
             graph.putIfAbsent(src, new ArrayList<>());
             graph.putIfAbsent(dest, new ArrayList<>());
 
-            graph.get(src).add(new pair(dest, factor));        // To handle u/v
-            graph.get(dest).add(new pair(src, 1.0 / factor));  // To handle v/u
+            graph.get(src).add(new pair1(dest, factor));        // To handle u/v
+            graph.get(dest).add(new pair1(src, 1.0 / factor));  // To handle v/u
         }
 
         double[] answer = new double[queries.size()];
@@ -62,7 +62,7 @@ public class EvaluateDivision {
         return answer;
     }
 
-    public static void dfs(HashMap<String, List<pair>> graph, String src, String dest, HashSet<String> visited, double product, double[] result) {
+    public static void dfs(HashMap<String, List<pair1>> graph, String src, String dest, HashSet<String> visited, double product, double[] result) {
         if (src.equals(dest)) {
             result[0] = product;
             return;
@@ -70,7 +70,7 @@ public class EvaluateDivision {
 
         visited.add(src);
 
-        for (pair neighbor : graph.get(src)) {
+        for (pair1 neighbor : graph.get(src)) {
             if (!visited.contains(neighbor.vertex)) {
                 dfs(graph, neighbor.vertex, dest, visited, product * neighbor.factor, result);
                 if (result[0] != -1.0) { // Early exit if a valid path is found
@@ -81,11 +81,11 @@ public class EvaluateDivision {
     }
 }
 
-class pair {
+class pair1 {
     String vertex;
     double factor;
 
-    public pair(String vertex, double factor) {
+    public pair1(String vertex, double factor) {
         this.vertex = vertex;
         this.factor = factor;
     }
