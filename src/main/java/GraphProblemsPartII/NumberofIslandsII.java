@@ -46,7 +46,7 @@ public class NumberofIslandsII {
             
             int cellnum = row * n + col; //very import 
             //we are converting a 2d array position to single parent array 
-            if(parent[cellnum]!= -1){ //means it has been accounted for 
+            if(parent[cellnum]!= -1){ //means it has been accounted for or duplicate point 
                answer.add(count);
                continue;
             }
