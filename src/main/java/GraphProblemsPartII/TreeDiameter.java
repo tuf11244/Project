@@ -83,7 +83,7 @@ public class TreeDiameter {
             }
         }
         
-        if(firstChild + secondChild + 1 > diameter){
+        if(firstChild + secondChild > diameter){
             diameter = firstChild + secondChild;
         }
         
