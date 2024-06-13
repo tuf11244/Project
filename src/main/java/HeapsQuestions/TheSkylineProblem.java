@@ -21,6 +21,19 @@ public class TheSkylineProblem {
      */
     public static void main(String args[]) {
         // TODO code application logic here
+        int[][] buildings = {
+            {2,9,10},
+            {3,7,15},
+            {5,12,12},
+            {15,20,10},
+            {19,24,8}    
+        };
+        
+        List<List<Integer>> answer = getSkyline(buildings);
+        
+//        for(List<Integer> list : answer){
+//            System.out.println(list);
+//        }
     }
     
     public static List<List<Integer>> getSkyline(int[][] buildings) {
@@ -35,7 +48,7 @@ public class TheSkylineProblem {
        }
        
        Collections.sort(list);
-       
+        System.out.println(list);
        List<List<Integer>> answer = new ArrayList<>();
        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
        
@@ -79,5 +92,11 @@ class Pair implements Comparable<Pair>{
         }
         return this.height - o.height;
     }
+
+    @Override
+    public String toString() {
+        return "Pair{" + "x=" + x + ", height=" + height + '}';
+    }
+    
     
 }
