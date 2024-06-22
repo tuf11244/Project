@@ -12,6 +12,7 @@ import java.util.*;
 public class FindtheCityWiththeSmallestNumberofNeighboursataThreshholdDistance {
 
     /**
+     * Can be done using Floyd Warshall Algorithm also 
      * @param args the command line arguments
      */
     public static void main(String args[]) {
