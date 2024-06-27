@@ -41,23 +41,27 @@ public class ReorganizeString {
         }
         
         System.out.println(pq);
-        //Remove the peak item from our max frequency 
-        Element1 block = pq.poll();
-        //Append the character which has max frequency to our String builder and decrease the frequency count;
-        sb.append(block.ch);
-        block.frequency--;
-        //Keep building our String Builder until our pq size is greater than 0
-        while(pq.size() > 0){
-            Element1 temp = pq.poll();
-            sb.append(temp.ch);
-            temp.frequency--;
-            if(block.frequency > 0){
-                pq.add(block);
+        while(pq.size() >= 2){
+            Element1 arr[] = new Element1[2];
+            for(int i =0; i < 2;i++){
+                arr[i] = pq.poll();
             }
-            block = temp;
+            for(int i = 0; i < 2;i++){
+                sb.append(arr[i].ch);
+                arr[i].frequency--;
+                if(arr[i].frequency > 0){
+                    pq.add(arr[i]);
+                }
+            }
         }
-        if(block.frequency > 0){
-            return "";
+
+        while(!pq.isEmpty()){
+            Element1 rem = pq.poll();
+            sb.append(rem.ch);
+            rem.frequency--;
+            if(rem.frequency > 0){
+                return "";
+            }
         }
         return sb.toString();
     }

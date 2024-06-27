@@ -18,7 +18,7 @@ public class SortaNearlySortedArray {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        int[] arr = {6,5,3,2,8,10,9};
+        int[] arr = {6,8,10,12,14,15,2,5,3,4};
         System.out.println(nearlySorted(arr,arr.length,3));
     }
     public static ArrayList<Integer> nearlySorted(int[] arr, int num, int k){
