@@ -33,4 +33,21 @@ public class BinaryStringswithConsescutiveOs {
 
         return old0s + old1s;  // Total count of binary strings of length n without consecutive 0s
         }
+        
+        public static int TotalWays(int N){
+        
+        int buildings = 1;
+        int spaces = 1;
+        
+        for(int i = 2; i <= N;i++){
+            int nbuildings = spaces;
+            int nspaces = buildings + spaces;
+            
+            buildings = nbuildings;
+            spaces = nspaces;
+        }
+        
+        int total = buildings + spaces;
+        return total * total;
+    }
 }
