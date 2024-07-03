@@ -19,42 +19,43 @@ public class DecodeWays {
     }
     
     public static int numDecodings(String s){
-        if (s == null || s.length() == 0 || s.charAt(0) == '0') {
+         if(s.charAt(0)== '0'){
             return 0;
-        }
-
-        int n = s.length();
-        int[] dp = new int[n + 1];
-        dp[0] = 1; // Base case: an empty string has one way to decode
-        dp[1] = s.charAt(0) != '0' ? 1 : 0; // First character check
-
-        for (int i = 1; i < n; i++) {
-            // Case 1: When both characters are zeros
-            if (s.charAt(i - 1) == '0' && s.charAt(i) == '0') {
-                dp[i + 1] = 0;
+         }
+         int[] dp = new int[s.length()];
+        
+        dp[0] = 1;
+        
+        for(int i = 1; i < s.length();i++){
+            
+            //Case 1 : When both the characters are zeros 
+            if(s.charAt(i-1) == '0' && s.charAt(i) == '0'){
+                dp[i] = 0;
             }
-            // Case 2: When the previous character is zero and the current character is not zero
-            else if (s.charAt(i - 1) == '0' && s.charAt(i) != '0') {
-                dp[i + 1] = dp[i];
+            //Case 2 : When i-1th character is zero and ith character is not zero
+            else if(s.charAt(i-1) == '0' && s.charAt(i) != '0'){
+                dp[i] = dp[i-1];
             }
-            // Case 3: When the previous character is not zero and the current character is zero
-            else if (s.charAt(i - 1) != '0' && s.charAt(i) == '0') {
-                if (s.charAt(i - 1) == '1' || s.charAt(i - 1) == '2') {
-                    dp[i + 1] = i >= 2 ? dp[i - 1] : 1;
-                } else {
-                    dp[i + 1] = 0;
+            //Case 3 : When i-1th character is not zero and ith character is zero
+            else if(s.charAt(i-1) != '0' && s.charAt(i) == '0'){
+                //i.e. the number is less than equal to 26
+                if(s.charAt(i-1) == '1' || s.charAt(i-1) == '2'){
+                  dp[i] = i >= 2 ? dp[i-2] : 1;  
+                }else{
+                    //i.e. the number is greater than 26
+                    dp[i] = 0;
                 }
             }
-            // Case 4: When both characters are not zeros
-            else {
-                if (Integer.parseInt(s.substring(i - 1, i + 1)) <= 26) {
-                    dp[i + 1] = dp[i] + dp[i - 1];
-                } else {
-                    dp[i + 1] = dp[i];
+            //Case 4 : When the both the characters are not zeros
+            else{
+                if(Integer.valueOf(s.substring(i-1,i+1)) <= 26){
+                    dp[i] = dp[i-1] + (i >= 2 ? dp[i-2] : 1);
+                }else{
+                    dp[i] = dp[i-1];
                 }
+                
             }
         }
-
-        return dp[n];
+        return dp[s.length()-1];
     }
-}
+    }
