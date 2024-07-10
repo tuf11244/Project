@@ -53,7 +53,7 @@ public class ClimbingStairswithMinimumMoves {
         int n = cost.length;
         int[] dp = new int[n + 1];
 
-        dp[n] = 0;
+        dp[n] = 0; //if you are on the top floor than the cost is 0
         dp[n - 1] = cost[n - 1];
 
         for (int i = n - 2; i >= 0; i--) {

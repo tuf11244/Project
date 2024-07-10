@@ -23,15 +23,17 @@ public class CoinChange {
     //Coin change Combination 
     //https://leetcode.com/problems/coin-change-ii/
     public static int change(int amount, int[] coins) {
-        
-        int[] dp = new int[amount+1];
-        dp[0] = 1;
-        for(int i = 0; i < coins.length;i++){
-            for(int j = coins[i]; j < dp.length;j++){
-                dp[j] = dp[j] + dp[j- coins[i]];
-            }
+       int[] dp = new int[amount+1];
+      dp[0] = 1; // The ways to pay 0 amount is by not paying anything hence 1 
+
+      for(int coin : coins){
+        for(int amt = coin; amt <= amount;amt++){
+            int remainingAmt = amt - coin;
+            dp[amt] = dp[amt] + dp[remainingAmt];
         }
-        return dp[amount];
+      }
+   
+      return dp[amount];
         
     }
     
