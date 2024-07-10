@@ -44,7 +44,7 @@ public class KnapsackProblem {
             //We run the loops from i and j = 1 because 0th row and 0th column would be 
             //automatically zero
             for(int j = 1; j < dp[0].length;j++){
-                if(j >= weight[i-1]){ // Case 2 : When we include the item in our knapsack
+                if(weight[i-1] <= j){ // Case 2 : When we include the item in our knapsack
                     int remainingWeight = j - weight[i-1];
                     dp[i][j] = Math.max(dp[i-1][remainingWeight] + values[i-1],dp[i-1][j]);
    
