@@ -7,6 +7,7 @@ package DP;
 /**
  *Date: 07/02/2024
  * https://www.geeksforgeeks.org/problems/consecutive-1s-not-allowed1912/1
+ * https://www.geeksforgeeks.org/count-possible-ways-to-construct-buildings/
  * @author parth
  */
 public class BinaryStringswithConsescutiveOs {
