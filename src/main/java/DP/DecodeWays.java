@@ -16,6 +16,7 @@ public class DecodeWays {
      */
     public static void main(String args[]) {
         // TODO code application logic here
+        System.out.println(numDecodings("2301"));
     }
     
     public static int numDecodings(String s){
