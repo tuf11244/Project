@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package TreePracticeProblems;
-
+import java.util.*;
 import java.util.Scanner;
 
 /**
@@ -18,17 +18,17 @@ public class StepbyStepDirectionfromBinaryTreeNodetoAnother {
        Scanner scanner = new Scanner(System.in);
        tree.insert(scanner);
        
-       String answer = tree.getDirections(3, 6);
+       String answer = tree.getDirection(3, 6);
         System.out.println(answer);
     }
 }
 class Solution6{
     private Node root;
-    StringBuilder startpath = new StringBuilder();
-    StringBuilder endpath = new StringBuilder();
     public Solution6(){
         
     }
+    
+    
     public void insert(Scanner scanner){
         System.out.println("Enter the root value ");
         int value = scanner.nextInt();
@@ -53,67 +53,84 @@ class Solution6{
             insert(node.right,scanner);
         }
     }
-    public String getDirections(int start, int end){
-        return getDirections(root,start,end);
-    }
-    private String getDirections(Node node, int start, int end){
-        
-        dfs(node,start,true);
-        dfs(node,end,false);
-        
-        startpath.reverse();
-        endpath.reverse();
-        int i = 0;
-        int j = 0;
-        
-        while(i < startpath.length() && j < endpath.length()){
-            if(startpath.charAt(i) == endpath.charAt(j)){
-                i++;
-                j++;
-            } else {
-                break;
-            }
-        }
-        
-        StringBuilder sb = new StringBuilder();
-        while( i  < startpath.length() ){
-            sb.append("U");
-            i++;
-        }
-        sb.append(endpath.substring(j));
-        return sb.toString();
-    }
-    private boolean dfs(Node node, int startValue, boolean start){
-        if(node == null){
-            return false;
-        }
-        if(node.value == startValue){
-            return true;
-        }
-        boolean left = dfs(node.left,startValue,start);
-        if(left){
-            if(start){
-                startpath.append("L");
-            } else {
-                endpath.append("L");
-            }
-            return true;
-        }
-        boolean right = dfs(node.right,startValue,start);
-          if(right){
-            if(start){
-                startpath.append("R");
-            } else {
-                endpath.append("R");
-            }
-            return true;
-        }
-          return false;
-    }
     
+    //Naive way 
+    //We are finding the parentNode of each node 
+    //and than doing a normal bfs to find the shortest path
+    public String getDirection(int start, int end){
+         return helper(root, start, end);
+    }
+    public Node findNode(int val, Node root){
+        if(root == null){
+            return null;
+        }
+        if(root.value == val){
+            return root;
+        }
+        
+        Node left = findNode(val,root.left);
+        
+        if(left != null){
+            return left;
+        }
+        return findNode(val,root.right); 
+    }
+    public String helper(Node root, int start, int end){
+        HashMap<Node,Node> parentMap = new HashMap<>();
+        function(root,null,parentMap);
+        Queue<Pair> queue = new LinkedList<>();
+        
+        Node startNode = findNode(start,root);
+        Node endNode = findNode(end,root);
+        queue.add(new Pair(startNode,""));
+        Set<Integer> visited = new HashSet<>();
+        
+        while(!queue.isEmpty()){
+            Pair rem = queue.poll();
+            
+            if(visited.contains(rem.node.value)){
+                continue;
+            }
+            if(rem.node.value == end){
+                return rem.psf;
+            }
+            
+            visited.add(rem.node.value);
+            
+            if(rem.node.left != null && !visited.contains(rem.node.left.value)){
+                queue.add(new Pair(rem.node.left,rem.psf + "L"));
+            }
+            if(rem.node.right != null && !visited.contains(rem.node.right.value)){
+                queue.add(new Pair(rem.node.right,rem.psf + "R"));
+            }
+            Node parentN = parentMap.get(rem.node);
+            if(parentN!= null && !visited.contains(parentN.value)){
+                queue.add(new Pair(parentN,rem.psf + "U"));
+            }
+        }
+        return "";
+        
+    }
+    public void function(Node root,Node parent, HashMap<Node,Node> parentMap){
+        if(root == null){
+            return;
+        }
+        
+        parentMap.put(root,parent);
+        function(root.left,root,parentMap);
+        function(root.right,root,parentMap);
+        
+    }
 
-
-
+   private class Pair{
+       Node node;
+       String psf;
+       
+       public Pair(Node node, String psf){
+           this.node = node;
+           this.psf = psf;
+       }
+   }
     
     private class Node{
         int value;
@@ -126,3 +143,84 @@ class Solution6{
     
     
 }
+
+//Optimized Approach 
+
+// Definition for a binary tree node.
+   class TreeNode {
+      int val;
+      TreeNode left;
+     TreeNode right;
+      TreeNode() {}
+      TreeNode(int val) { this.val = val; }
+      TreeNode(int val, TreeNode left, TreeNode right) {
+         this.val = val;
+          this.left = left;
+          this.right = right;
+      }
+  }
+ 
+
+class Soln {
+    public String getDirections(TreeNode root, int startValue, int destValue) {
+        TreeNode lca = lowestCommonAncestor(root, startValue, destValue);
+        
+        StringBuilder lcaToStart = new StringBuilder();
+        StringBuilder lcaToDest = new StringBuilder();
+        
+        getPath(lca, startValue, lcaToStart);
+        getPath(lca, destValue, lcaToDest);
+        
+        // Replace all characters in lcaToStart with 'U'
+        for (int i = 0; i < lcaToStart.length(); i++) {
+            lcaToStart.setCharAt(i, 'U');
+        }
+        
+        // Concatenate the paths
+        String result = lcaToStart.toString() + lcaToDest.toString();
+        
+        return result;
+    }
+
+    private boolean getPath(TreeNode root, int value, StringBuilder path) {
+        if (root == null) {
+            return false;
+        }
+        if (root.val == value) {
+            return true;
+        }
+        
+        path.append('L');
+        if (getPath(root.left, value, path)) {
+            return true;
+        }
+        path.setLength(path.length() - 1); // backtrack
+        
+        path.append('R');
+        if (getPath(root.right, value, path)) {
+            return true;
+        }
+        path.setLength(path.length() - 1); // backtrack
+        
+        return false;
+    }
+
+    public TreeNode lowestCommonAncestor(TreeNode root, int sv, int dv) {
+        if (root == null) {
+            return null;
+        }
+        if (root.val == sv || root.val == dv) {
+            return root;
+        }
+        
+        TreeNode left = lowestCommonAncestor(root.left, sv, dv);
+        TreeNode right = lowestCommonAncestor(root.right, sv, dv);
+        
+        if (left != null && right != null) {
+            return root;
+        }
+        
+        return left != null ? left : right;
+    }
+}
+
