@@ -7,6 +7,7 @@ package DP;
 /**
  *Date: 07/17/2024
  * https://www.geeksforgeeks.org/stock-buy-sell/
+ * https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
  * @author parth
  */
 public class BestTimetoBuyandSellStockInfiniteTransactions {
