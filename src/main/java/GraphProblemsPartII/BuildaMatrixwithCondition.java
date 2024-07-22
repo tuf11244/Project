@@ -29,24 +29,21 @@ public class BuildaMatrixwithCondition {
         }
     }
 
-    //Now place elements in our matrix 
-    int[][] answer = new int[k][k];
-
-    int[] rowPosition = new int[k + 1];
-    int[] colPosition = new int[k + 1];
+     // Place elements in the matrix using HashMap to keep the sorted order
+        int[][] answer = new int[k][k];
+        Map<Integer, Integer> rowPosition = new HashMap<>();
+        Map<Integer, Integer> colPosition = new HashMap<>();
 
         for (int i = 1; i <= k; i++) {
-            rowPosition[rowOrder[i]] = i - 1;
-            colPosition[colOrder[i]] = i - 1;
+            rowPosition.put(rowOrder[i], i - 1);
+            colPosition.put(colOrder[i], i - 1);
         }
 
         for (int i = 1; i <= k; i++) {
-            answer[rowPosition[i]][colPosition[i]] = i;
+            answer[rowPosition.get(i)][colPosition.get(i)] = i;
         }
 
-
-     return answer;
-    
+        return answer;
     }
 
 
