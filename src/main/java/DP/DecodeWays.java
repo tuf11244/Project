@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package DP;
-
+import java.util.*;
 /**
  *Date: 07/02/2024
  * https://leetcode.com/problems/decode-ways/
@@ -16,7 +16,7 @@ public class DecodeWays {
      */
     public static void main(String args[]) {
         // TODO code application logic here
-        System.out.println(numDecodings("2301"));
+        System.out.println(numDecodings("123"));
     }
     
     public static int numDecodings(String s){
@@ -57,6 +57,36 @@ public class DecodeWays {
                 
             }
         }
+        System.out.println(Arrays.toString(dp));
         return dp[s.length()-1];
+    }
+    
+    
+    public static int numDecodingsOptimized(String s) {
+         if (s == null || s.length() == 0 || s.charAt(0) == '0') {
+            return 0;
+        }
+
+        int n = s.length();
+        int[] dp = new int[n + 1];
+        dp[0] = 1; // Base case: an empty string has one way to decode
+
+        // Initialization for the first character
+        dp[1] = s.charAt(0) != '0' ? 1 : 0;
+
+        for (int i = 2; i <= n; i++) {
+            int oneDigit = Integer.parseInt(s.substring(i - 1, i));
+            int twoDigits = Integer.parseInt(s.substring(i - 2, i));
+
+            if (oneDigit >= 1 && oneDigit <= 9) {
+                dp[i] += dp[i - 1];
+            }
+
+            if (twoDigits >= 10 && twoDigits <= 26) {
+                dp[i] += dp[i - 2];
+            }
+        }
+        System.out.println(Arrays.toString(dp));
+        return dp[n];
     }
     }
