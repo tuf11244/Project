@@ -15,7 +15,7 @@ public class FriendsPairing {
      */
     public static void main(String args[]) {
         // TODO code application logic here
-        int ans = waysofPairing(19);
+        int ans = waysofPairing(3);
         System.out.println(ans);
     }
     
