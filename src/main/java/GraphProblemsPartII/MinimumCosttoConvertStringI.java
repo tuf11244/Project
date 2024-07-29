@@ -1,3 +1,5 @@
+package GraphProblemsPartII;
+
 
 
 /*
@@ -28,21 +30,21 @@ public class MinimumCosttoConvertStringI {
     
      public static long minimumCost(String source, String target, char[] original, char[] changed, int[] cost) {
         
-        HashMap<Character,List<Edge>> graph = new HashMap<>();
+        HashMap<Character,List<Y>> graph = new HashMap<>();
         
         for(int i = 0; i < original.length;i++){
             if(graph.containsKey(original[i]) == true){
-                List<Edge> list = graph.get(original[i]);
-                list.add(new Edge(original[i],changed[i],cost[i]));
+                List<Y> list = graph.get(original[i]);
+                list.add(new Y(original[i],changed[i],cost[i]));
                 
             }else{
-                List<Edge> list = new ArrayList<>();
-                list.add(new Edge(original[i],changed[i],cost[i]));
+                List<Y> list = new ArrayList<>();
+                list.add(new Y(original[i],changed[i],cost[i]));
                 graph.put(original[i], list);
             }
         }
          long totalCost = 0;
-         HashMap<Character,List<Pair>> hm = new HashMap<>();
+         HashMap<Character,List<X>> hm = new HashMap<>();
          for(int i = 0; i < source.length();i++){
              
              if(source.charAt(i)!= target.charAt(i)){
@@ -59,30 +61,30 @@ public class MinimumCosttoConvertStringI {
          return totalCost;
     }
      
-    public static long djikstras(char src, char target, HashMap<Character,List<Pair>> hm,HashMap<Character,List<Edge>> graph){
+    public static long djikstras(char src, char target, HashMap<Character,List<X>> hm,HashMap<Character,List<Y>> graph){
         HashSet<Character> visited = new HashSet<>();
         
         long cost = 0;
         
         if(hm.containsKey(src)){
-            for(Pair p : hm.get(src)){
+            for(X p : hm.get(src)){
                 if(p.c == target){
                     return p.cost;
                 }
             }
         }
         
-        PriorityQueue<Pair> pq = new PriorityQueue<>();
-        pq.add(new Pair(src,0));
+        PriorityQueue<X> pq = new PriorityQueue<>();
+        pq.add(new X(src,0));
         
         while(!pq.isEmpty()){
-            Pair rem = pq.poll();
+            X rem = pq.poll();
             System.out.println(rem);
             
             if(rem.c == target){
                 //First add it to our hashmap to avoid re-calculations 
-                List<Pair> list = hm.getOrDefault(src,new ArrayList<>());
-                list.add(new Pair(rem.c,rem.cost));
+                List<X> list = hm.getOrDefault(src,new ArrayList<>());
+                list.add(new X(rem.c,rem.cost));
                 hm.put(src,list);
                 
                 return rem.cost;
@@ -93,9 +95,9 @@ public class MinimumCosttoConvertStringI {
             }
             visited.add(rem.c);
             
-            for(Edge e : graph.get(rem.c)){
+            for(Y e : graph.get(rem.c)){
                 if(visited.contains(e.nbg) == false){
-                    pq.add(new Pair(e.nbg,rem.cost + e.cost));
+                    pq.add(new X(e.nbg,rem.cost + e.cost));
                 }
             }
             
@@ -106,17 +108,17 @@ public class MinimumCosttoConvertStringI {
     }
 }
 
-class Pair implements Comparable<Pair>{
+class X implements Comparable<X>{
     char c;
     long cost;
     
-    public Pair(char c, long cost){
+    public X(char c, long cost){
         this.c = c;
         this.cost = cost;
     }
 
     @Override
-    public int compareTo(Pair o) {
+    public int compareTo(X o) {
         return (int) (this.cost - o.cost);
     }
 
@@ -130,12 +132,12 @@ class Pair implements Comparable<Pair>{
 
 
 
-class Edge{
+class Y{
     char src;
     char nbg;
     long cost;
      
-    public Edge(char src, char nbg, long cost){
+    public Y(char src, char nbg, long cost){
         this.src = src;
         this.nbg = nbg;
         this.cost = cost;
