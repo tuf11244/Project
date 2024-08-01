@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package DP;
-
+import java.util.*;
 /**
  *Date: 06/29/2024
  * https://www.geeksforgeeks.org/problems/subset-sum-problem-1611555638/1
@@ -53,6 +53,10 @@ public class SubsetSumProblem {
                     }
                 }
             }
+        }
+        
+        for(boolean[] row : dp){
+            System.out.println(Arrays.toString(row));
         }
         return dp[arr.length][target];
     }
