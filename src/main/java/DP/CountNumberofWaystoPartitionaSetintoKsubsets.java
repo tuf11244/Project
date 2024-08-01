@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package DP;
-
+import java.util.*;
 /**
  *
  * @author parth
@@ -46,6 +46,10 @@ and n-th element to existing subsets or creating a new subset.
                     dp[t][p] = dp[t-1][p-1] + dp[t][p-1] * t; //Recurrence Relation
                 }
             }
+        }
+        
+        for(long[] row : dp){
+            System.out.println(Arrays.toString(row));
         }
         return (int) dp[teams][people];
     }
