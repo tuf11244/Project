@@ -31,6 +31,8 @@ public class MinimumSwapstoGroupAll1sTogether {
     }
     
     // Create an array of size 2 * nums.length for sliding window
+    //Because its giving in Question that it is a cicular array 
+    //very Important
     int[] arr = new int[2 * nums.length];
     for (int i = 0; i < nums.length; i++) {
         arr[i] = nums[i];
