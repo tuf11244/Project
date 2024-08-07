@@ -5,46 +5,49 @@
 package RecurssionPracticeQuestionPart2;
 
 /**
+ *Date: 08/06/2024
  *https://leetcode.com/problems/integer-to-english-words/
  * @author parth
  */
 public class IntegerToWords {
-   private static final String[] belowTen = new String[] {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
-   private static final String[] belowTwenty = new String[] {"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
-   private static final String[] belowHundred = new String[] {"", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+    private static final String[] BELOW_20 = {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
+    private static final String[] TENS = {"", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+    private static final String[] HUNDRED = {"Hundred"};
+    private static final String[] THOUSANDS = {"", "Thousand", "Million", "Billion"};
+
     
     public static void main(String[] args){
         System.out.println(numberToWords(1234567));
     }
-    public static String numberToWords(int num) {
-        if (num == 0) return "Zero";
-        return helper(num); 
+   
+    public static  String numberToWords(int num) {
+        if (num == 0) {
+            return "Zero";
+        }
+        int i = 0;
+        String word = "";
+        while (num != 0) {
+            if (num % 1000 != 0) {
+                word = numberToWord(num % 1000) + THOUSANDS[i] + " " + word;
+            }
+            num /= 1000;
+            i++;
+        }
+        return word.trim();
+    }
+
+    private static  String numberToWord(int num) {
+        if (num == 0) {
+            return "";
+        } else if (num < 20) {
+            return BELOW_20[num] + " ";
+        } else if (num < 100) {
+            return TENS[num / 10] + " " + numberToWord(num % 10);
+        } else {
+            return BELOW_20[num / 100] + " " + HUNDRED[0] + " " + numberToWord(num % 100);
+        }
     }
     
-    private static String helper(int num) {
-        String result = "";
-        if (num < 10) {
-            result = belowTen[num];
-        }
-        else if (num < 20){
-            result = belowTwenty[num -10];
-        }
-        else if (num < 100){
-            result = belowHundred[num/10] + " " + helper(num % 10);
-        }
-        else if (num < 1000){
-            result = helper(num/100) + " Hundred " +  helper(num % 100);
-        }
-        else if (num < 1000000){
-            result = helper(num/1000) + " Thousand " +  helper(num % 1000);
-        }
-        else if (num < 1000000000) {
-            result = helper(num/1000000) + " Million " +  helper(num % 1000000);
-        }
-        else {
-            result = helper(num/1000000000) + " Billion " + helper(num % 1000000000);
-        }
-        return result.trim();
-    } 
+ 
 }
 
