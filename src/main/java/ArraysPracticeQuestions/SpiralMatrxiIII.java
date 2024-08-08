@@ -5,9 +5,9 @@
 package ArraysPracticeQuestions;
 
 /**
- *Date: 01/26/2024
+ *Date: 08/08/2024
  * https://leetcode.com/problems/spiral-matrix-iii/
- * Source: BinaryMagic 
+ * Source: CodeStorywithMIK
  * @author parth
  */
 public class SpiralMatrxiIII {
@@ -44,53 +44,43 @@ The final result matrix ans contains the coordinates of the spiral matrix.
     public static void main(String args[]) {
         // TODO code application logic here
     }
-    public static int[][] spiralMatrixIII(int rows, int cols, int r, int c) {
-    int[][] ans = new int[rows * cols][2];
-    ans[0] = new int[]{r, c}; // Starting position
+    
+     public static int[][] directions = {
+        {0,1}, //East
+        {1,0}, //South
+        {0,-1}, //West
+        {-1,0} //North
+    };
+    public int[][] spiralMatrixIII(int rows, int cols, int r, int c) {
+        int[][] ans = new int[rows * cols][2];
+        ans[0] = new int[]{r, c}; // Starting position
 
-    int size = rows * cols;
-    int len = 1; // Initial length of movement
-    int x = r, y = c; // Current position
-    int index = 1; // Index to track the position in the result array
+        int size = rows * cols;
+        int steps = 1; // Initial length of movement
+        int dir = 0; // Direction index
+        int index = 1; // Index to track the position in the result array
+        
+        while (index < size) {
+            for (int i = 0; i < steps; i++) {
+                r += directions[dir][0];
+                c += directions[dir][1];
+                
+                if (isValid(r, c, rows, cols)) {
+                    ans[index] = new int[]{r, c};
+                    index++;
+                }
+            }
+            dir = (dir + 1) % 4; // Turn to next direction
 
-    while (index < size) {
-        // Move to the right
-        for (int j = 1; j <= len; j++) {
-            if (isValid(x, y + j, rows, cols))
-                ans[index] = new int[]{x, y + j};
-                index++;
+            // Increase steps after every two directions (after East and West)
+            if (dir == 0 || dir == 2) {
+                steps++;
+            }
         }
-        y = y + len; // Update y-coordinate after moving right
 
-        // Move down
-        for (int j = 1; j <= len; j++) {
-            if (isValid(x + j, y, rows, cols))
-                ans[index] = new int[]{x + j, y};
-                index++;
-        }
-        x = x +  len; // Update x-coordinate after moving down
-        len++;    // Increase length after moving down is over
-
-        // Move to the left
-        for (int j = 1; j <= len; j++) {
-            if (isValid(x, y - j, rows, cols))
-                ans[index] = new int[]{x, y - j};
-                index++;
-        }
-        y = y - len; // Update y-coordinate after moving left
-
-        // Move up
-        for (int j = 1; j <= len; j++) {
-            if (isValid(x - j, y, rows, cols))
-                ans[index] = new int[]{x - j, y};
-                index++;
-        }
-        x = x - len; // Update x-coordinate after moving up
-        len++;
+        return ans;
     }
 
-    return ans;  
-}
 
 // Check if the given position is within the bounds of the matrix
 public static boolean isValid(int i, int j, int rows, int columns) {
