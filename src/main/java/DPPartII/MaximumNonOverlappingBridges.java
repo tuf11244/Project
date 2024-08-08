@@ -24,10 +24,11 @@ public class MaximumNonOverlappingBridges {
              bridge[i] = new Bridges(bridges[i][0], bridges[i][1]);
          }
          int answer = 0;
+         //Sort based on the north values
          Arrays.sort(bridge);
          
          int[] dp = new int[bridges.length];
-         
+         //Apply LIS on on the south values
          for(int i = 0; i < bridges.length;i++){
              int max = 0;
              
