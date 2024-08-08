@@ -3,51 +3,66 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package RecurssionPracticeQuestionPart2;
-
+import java.util.*;
 /**
  *Date: 08/06/2024
  *https://leetcode.com/problems/integer-to-english-words/
  * @author parth
  */
 public class IntegerToWords {
-    private static final String[] BELOW_20 = {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
-    private static final String[] TENS = {"", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
-    private static final String[] HUNDRED = {"Hundred"};
-    private static final String[] THOUSANDS = {"", "Thousand", "Million", "Billion"};
+    private static final Map<Integer, String> belowTen = Map.of(
+        0, "", 1, "One", 2, "Two", 3, "Three", 4, "Four", 5, "Five", 
+        6, "Six", 7, "Seven", 8, "Eight", 9, "Nine"
+    );
+
+    private static final Map<Integer, String> belowTwenty = Map.of(
+        10, "Ten", 11, "Eleven", 12, "Twelve", 13, "Thirteen", 14, "Fourteen", 
+        15, "Fifteen", 16, "Sixteen", 17, "Seventeen", 18, "Eighteen", 19, "Nineteen"
+    );
+
+    private static final Map<Integer, String> belowHundred = Map.of(
+        2, "Twenty", 3, "Thirty", 4, "Forty", 5, "Fifty", 
+        6, "Sixty", 7, "Seventy", 8, "Eighty", 9, "Ninety"
+    );
 
     
     public static void main(String[] args){
-        System.out.println(numberToWords(1234567));
+        System.out.println(numberToWords(123456));
     }
-   
-    public static  String numberToWords(int num) {
+     public static  String numberToWords(int num) {
         if (num == 0) {
             return "Zero";
         }
-        int i = 0;
-        String word = "";
-        while (num != 0) {
-            if (num % 1000 != 0) {
-                word = numberToWord(num % 1000) + THOUSANDS[i] + " " + word;
-            }
-            num /= 1000;
-            i++;
+        return solve(num);
+    }
+   
+    public static String solve(int num) {
+        if (num < 10) {
+            return belowTen.get(num);
         }
-        return word.trim();
+
+        if (num < 20) {
+            return belowTwenty.get(num);
+        }
+
+        if (num < 100) { // 89 = "Eighty Nine"
+            return belowHundred.get(num / 10) + (num % 10 != 0 ? " " + belowTen.get(num % 10) : "");
+        }
+
+        if (num < 1000) { // 879 / 100 = 8 "Eight"
+            return solve(num / 100) + " Hundred" + (num % 100 != 0 ? " " + solve(num % 100) : "");
+        }
+
+        if (num < 1000000) {
+            return solve(num / 1000) + " Thousand" + (num % 1000 != 0 ? " " + solve(num % 1000) : "");
+        }
+
+        if (num < 1000000000) {
+            return solve(num / 1000000) + " Million" + (num % 1000000 != 0 ? " " + solve(num % 1000000) : "");
+        }
+
+        return solve(num / 1000000000) + " Billion" + (num % 1000000000 != 0 ? " " + solve(num % 1000000000) : "");
     }
 
-    private static  String numberToWord(int num) {
-        if (num == 0) {
-            return "";
-        } else if (num < 20) {
-            return BELOW_20[num] + " ";
-        } else if (num < 100) {
-            return TENS[num / 10] + " " + numberToWord(num % 10);
-        } else {
-            return BELOW_20[num / 100] + " " + HUNDRED[0] + " " + numberToWord(num % 100);
-        }
-    }
-    
- 
 }
 
