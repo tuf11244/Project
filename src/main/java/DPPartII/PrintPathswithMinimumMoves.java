@@ -38,12 +38,12 @@ public class PrintPathswithMinimumMoves {
             }
         }
         
-        Queue<Pair> queue = new LinkedList<>();
-        queue.add(new Pair(0,arr[0],dp[0],0+""));
+        Queue<Step> queue = new LinkedList<>();
+        queue.add(new Step(0,arr[0],dp[0],0+""));
         
         while(!queue.isEmpty()){
             
-            Pair rem = queue.poll();
+            Step rem = queue.poll();
             
             if(rem.jumps == 0){
                 System.out.println(rem.psf + ".");
@@ -52,7 +52,7 @@ public class PrintPathswithMinimumMoves {
             for(int j = 1; j <= rem.size && rem.index + j < arr.length;j++){
                 int currentIdx = rem.index + j;
                 if(dp[currentIdx] != null && dp[currentIdx] == rem.jumps - 1){
-                    queue.add(new Pair(currentIdx,arr[currentIdx],dp[currentIdx],rem.psf + "->" + currentIdx));
+                    queue.add(new Step(currentIdx,arr[currentIdx],dp[currentIdx],rem.psf + "->" + currentIdx));
                 }
             }
         }
@@ -61,13 +61,13 @@ public class PrintPathswithMinimumMoves {
     }
 }
 
-class Pair{
+class Step{
     int index;
     int size;
     int jumps;
     String psf;
     
-    public Pair(int index, int size, int jumps, String psf){
+    public Step(int index, int size, int jumps, String psf){
         this.index = index;
         this.size = size;
         this.jumps = jumps;
