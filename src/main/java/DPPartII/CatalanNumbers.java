@@ -10,6 +10,10 @@ package DPPartII;
  * https://leetcode.com/problems/unique-binary-search-trees/
  * Count Number of valleys and mountains hackerearth
  * Combinations of Balanced parantheses
+ * Non Intersecting Chords in Circle = catalan (n/2)
+ * Ways of Polygon Triangulation = catalan(n-2)
+ * Dyck Words
+ * Maze Paths above Diagonal = catalan(n-1)
  * @author parth
  */
 public class CatalanNumbers {
