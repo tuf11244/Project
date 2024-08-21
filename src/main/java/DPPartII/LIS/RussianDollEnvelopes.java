@@ -43,6 +43,63 @@ public class RussianDollEnvelopes {
         }
         return answer;
     }
+    
+    
+    public static int maxEnvelopesUsingBS(int[][] envelopes){
+         if (envelopes == null || envelopes.length == 0 || envelopes[0].length != 2) {
+            return 0;
+        }
+
+        // Sort the envelopes: first by width in ascending order,
+        // if the width is the same, sort by height in descending order
+        Arrays.sort(envelopes, (a, b) -> {
+            if (a[0] == b[0]) {
+                return b[1] - a[1];
+            } else {
+                return a[0] - b[0];
+            }
+        });
+
+        // Extract the heights from the sorted envelopes
+        int[] height = new int[envelopes.length];
+        for (int i = 0; i < envelopes.length; i++) {
+            height[i] = envelopes[i][1];
+        }
+        
+        List<Integer> sorted = new ArrayList<>();
+
+        for(int i = 0; i < height.length;i++){
+            
+            int index = lowerBoundBS(sorted,height[i]);
+            
+            if(index == -1){
+                sorted.add(height[i]);
+            }else{
+                sorted.set(index, height[i]);
+            }
+        }
+        
+        
+        return sorted.size();
+    }
+    
+    public static int lowerBoundBS(List<Integer> sorted, int target){
+        int low = 0;
+        int end = sorted.size();
+        int answer = -1;
+        
+        while(low < end){
+            int mid = low + (end - low)/2;
+            
+            if(sorted.get(mid) < target){
+                low = mid + 1;
+            }else{
+                answer = mid;
+                end = mid;
+            }
+        }
+        return answer;
+    }
 }
  class Envelope implements Comparable<Envelope>{
     int width;
