@@ -19,6 +19,8 @@ public class LCS {
     }
     
     public static int longestCommonSubsequence(String text1, String text2) {
+        //the length is text1.length() + 1 because of the dash
+        //dash represents the state when the character doesn;t want to come in the subsequence 
         int[][] dp = new int[text1.length()+1][text2.length()+1];
 
         for(int i = dp.length - 2; i >= 0; i--){
