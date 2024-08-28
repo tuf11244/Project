@@ -83,7 +83,7 @@ class MergeBST{
             if (!seen.add(currentNode.value)) return null; // Cycle detected
 
             // Process the left child
-            if (currentNode.left != null && roots.containsKey(currentNode.left.val)) {
+            if (currentNode.left != null && roots.containsKey(currentNode.left.value)) {
                 // Replace the left child with the subtree and add it to the queue for further processing
                 currentNode.left = roots.get(currentNode.left.value);
                 queue.add(currentNode.left);
