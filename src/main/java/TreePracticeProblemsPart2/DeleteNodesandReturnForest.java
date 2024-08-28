@@ -34,8 +34,8 @@ public class DeleteNodesandReturnForest {
  * }
  */
 class Delete {
-    public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
-        List<TreeNode> result = new ArrayList<>();
+    public List<Node> delNodes(Node root, int[] to_delete) {
+        List<Node> result = new ArrayList<>();
         Set<Integer> toDelete = new HashSet<>();
 
         for (int num : to_delete) {
@@ -51,7 +51,7 @@ class Delete {
         return result;
     }
 
-     private TreeNode deleteHelper(TreeNode root, Set<Integer> toDelete, List<TreeNode> result) {
+     private Node deleteHelper(Node root, Set<Integer> toDelete, List<Node> result) {
         if (root == null) {
             return null;
         }

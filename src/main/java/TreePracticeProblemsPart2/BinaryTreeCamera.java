@@ -35,7 +35,7 @@ public class BinaryTreeCamera {
 class Camera {
     private int camera; // Make it an instance variable
 
-    public int minCameraCover(TreeNode root) {
+    public int minCameraCover(Node root) {
         camera = 0; // Reset the camera count each time the method is called
         if (helper(root) == -1) {
             camera++;
@@ -43,7 +43,7 @@ class Camera {
         return camera;
     }
 
-    private int helper(TreeNode root) {
+    private int helper(Node root) {
         if (root == null) {
             return 1; // I am covered
         }

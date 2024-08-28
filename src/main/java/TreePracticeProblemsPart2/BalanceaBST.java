@@ -34,14 +34,14 @@ public class BalanceaBST {
  * }
  */
 class Soln {
-    public TreeNode balanceBST(TreeNode root) {
+    public Node balanceBST(Node root) {
         List<Integer> list = new ArrayList<>();
         inorderTraversal(root,list);
-        TreeNode node = construct(0,list.size()-1,list);
+        Node node = construct(0,list.size()-1,list);
         return node;
     }
     
-    public void inorderTraversal(TreeNode root, List<Integer> list){
+    public void inorderTraversal(Node root, List<Integer> list){
         if(root == null){
             return;
         }
@@ -50,12 +50,12 @@ class Soln {
         inorderTraversal(root.right,list);
     }
 
-    public TreeNode construct(int left,int right, List<Integer> list){
+    public Node construct(int left,int right, List<Integer> list){
             if(left > right){
                 return null;
             }
             int mid = left + (right - left)/2;
-            TreeNode root = new TreeNode(list.get(mid));
+            Node root = new Node(list.get(mid));
             root.left = construct(left,mid-1,list);
             root.right = construct(mid+1,right,list);
             return root;

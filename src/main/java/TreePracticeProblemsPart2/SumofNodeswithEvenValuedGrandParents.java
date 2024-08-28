@@ -22,14 +22,14 @@ public class SumofNodeswithEvenValuedGrandParents {
 
 class GrandParents {
     public int sum;
-    public int sumEvenGrandparent(TreeNode root) {
-        HashMap<TreeNode,TreeNode> hm = new HashMap<>();
+    public int sumEvenGrandparent(Node root) {
+        HashMap<Node,Node> hm = new HashMap<>();
         getParents(root,null,hm);
         sum = 0;
         inOrder(root,hm);
         return sum;
     }
-    public void getParents(TreeNode root, TreeNode parent, HashMap<TreeNode,TreeNode> hm){
+    public void getParents(Node root, Node parent, HashMap<Node,Node> hm){
         if(root == null){
             return;
         }
@@ -38,15 +38,15 @@ class GrandParents {
         getParents(root.right,root,hm);
     }
 
-    public void inOrder(TreeNode root,HashMap<TreeNode,TreeNode> hm){
+    public void inOrder(Node root,HashMap<Node,Node> hm){
       if (root == null) {
             return;
         }
 
         inOrder(root.left, hm);
 
-        TreeNode parent = hm.getOrDefault(root, null);
-        TreeNode grandParent = hm.getOrDefault(parent, null);
+        Node parent = hm.getOrDefault(root, null);
+        Node grandParent = hm.getOrDefault(parent, null);
 
         if (grandParent != null && grandParent.val % 2 == 0) {
             sum += root.val;

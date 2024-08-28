@@ -6,7 +6,7 @@ package TreePracticeProblemsPart2;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.*;
 /**
  *Date: 10/19/2023
  * https://leetcode.com/problems/merge-bsts-to-create-single-bst/
@@ -51,38 +51,60 @@ class MergeBST{
   
     }
     public Node canMerge(List<Node> trees){
-        if(trees.size() == 0 || trees == null){
-            return null;
-        }
+        HashMap<Integer,Node> roots = new HashMap<>();
+        HashMap<Integer,Node> leaves = new HashMap<>();
+        HashSet<Integer> seen = new HashSet<>();
         
-        //Start with the first BST and merge it with the rest
-        Node mergedRoot = trees.get(0);
-        for(int i = 0; i < trees.size();i++){
-            mergedRoot = merge(mergedRoot,trees.get(i));
+        // Step 1: Populate maps with potential roots and leaves
+        for (Node root : trees) {
+            if (roots.containsKey(root.value)) return null; // Duplicate root found
+            roots.put(root.value, root);
+            if (root.left != null) leaves.put(root.left.value, root);
+            if (root.right != null) leaves.put(root.right.value, root);
         }
-       
-        if(isValidBST(mergedRoot,Integer.MIN_VALUE,Integer.MAX_VALUE)){
-            return mergedRoot;
-        }   
+
+        // Step 2: Identify the true root of the final BST
+        Node potentialRoot = null;
+        for (Node root : trees) {
+            if (!leaves.containsKey(root.value)) {
+                if (potentialRoot != null) return null; // Multiple roots found
+                potentialRoot = root;
+            }
+        }
+        if (potentialRoot == null) return null; // No valid root found
+
+        // Step 3: Merge the trees using BFS
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(potentialRoot);
+
+        while (!queue.isEmpty()) {
+            Node currentNode = queue.poll();
+
+            if (!seen.add(currentNode.value)) return null; // Cycle detected
+
+            // Process the left child
+            if (currentNode.left != null && roots.containsKey(currentNode.left.val)) {
+                // Replace the left child with the subtree and add it to the queue for further processing
+                currentNode.left = roots.get(currentNode.left.value);
+                queue.add(currentNode.left);
+            }
+
+            // Process the right child
+            if (currentNode.right != null && roots.containsKey(currentNode.right.value)) {
+                // Replace the right child with the subtree and add it to the queue for further processing
+                currentNode.right = roots.get(currentNode.right.value);
+                queue.add(currentNode.right);
+            }
+        }
+
+        // Step 4: Validate the final BST
+        if (seen.size() == trees.size() && isValidBST(potentialRoot, Integer.MIN_VALUE, Integer.MAX_VALUE)) {
+            return potentialRoot;
+        }
+
         return null;
     }
-    private Node merge(Node node1,Node node2){
-        if(node1 == null){
-            return node2; //if node1 is null return node2
-        }
-        if(node2 == null){
-            return node1; //if node2 is null return node1
-        }
-        //Compare the node value and merge them accordingly 
-        if(node1.value < node2.value){
-            node1.right = merge(node1.right,node2);
-            return node1;
-        }
-        else{
-            node2.left = merge(node1,node2.left);
-            return node2;
-        }
-    }
+   
     private boolean isValidBST(Node node,int min, int max){
         if(node == null){
             return true;
