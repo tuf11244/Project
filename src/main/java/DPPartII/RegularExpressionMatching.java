@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
-package StringsPart2;
+package DPPartII;
 
 /**
  *https://leetcode.com/problems/regular-expression-matching/description/
@@ -23,9 +23,9 @@ public class RegularExpressionMatching {
         for(int i = 0; i < dp.length;i++){
             for(int j = 0; j < dp[0].length;j++){
                 //First cell or the top left most corner
-                if(i == 0 && j == 0){
+                if(i == 0 && j == 0){ //Empty character
                    dp[i][j] = true; 
-                }else if(i == 0){
+                }else if(i == 0){ //Empty character cannot satisfy any characters in the String 
                     dp[i][j] = false;
                 }else if(j == 0){
                    //pc == pattter character 
