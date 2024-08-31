@@ -36,7 +36,8 @@ public class LongestKUniqueCharactersSubstring {
         
         int i = -1;
         int j = -1;
-        
+        int startIndex = -1;
+        int endIndex = -1;
         HashMap<Character,Integer> hm = new HashMap<>();
         
         while(true){
@@ -55,6 +56,8 @@ public class LongestKUniqueCharactersSubstring {
                 }else if(hm.size() == k){
                     int length = i - j;
                     if(length > maxLength){
+                        startIndex = i;
+                        endIndex = j;
                     maxLength = length;
                 } 
                 }
@@ -82,6 +85,7 @@ public class LongestKUniqueCharactersSubstring {
                 break;
             }       
     }
+        System.out.println(s.subSequence(endIndex, startIndex+1));
         return maxLength;
     }  
 }
