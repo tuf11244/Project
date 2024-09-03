@@ -32,7 +32,7 @@ public class PathSumII {
  *     }
  * }
  */
-class Solution {
+class PathsumII {
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
         List<List<Integer>> answer = new ArrayList<>();
         List<Integer> temp = new ArrayList<>();

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package DPPartII;
-
+import java.util.*;
 /**
  *Date: 08/20/2024
  *https://leetcode.com/problems/longest-common-subsequence/
@@ -16,6 +16,7 @@ public class LCS {
      */
     public static void main(String args[]) {
         // TODO code application logic here
+        System.out.println(longestCommonSubsequence("abcd","abcd"));
     }
     
     public static int longestCommonSubsequence(String text1, String text2) {
@@ -34,6 +35,10 @@ public class LCS {
                     dp[i][j] = Math.max(dp[i][j+1],dp[i+1][j]);
                 }
             }
+        }
+        
+        for(int[] arr : dp){
+            System.out.println(Arrays.toString(arr));
         }
         return dp[0][0];
     }
