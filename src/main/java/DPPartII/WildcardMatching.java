@@ -41,14 +41,14 @@ public class WildcardMatching {
                     char pc = p.charAt(i);
                     char sc = s.charAt(j);
 
-                    if(pc == '?'){
+                    if(pc == '?'){ //look at the diagonal
                         dp[i][j] = dp[i+1][j+1];
                     }else if(pc == '*'){
                         dp[i][j] = dp[i][j+1] || dp[i+1][j];
                     }else{
-                        if(pc == sc){
+                        if(pc == sc){ //if the characters are same look at the diagonal
                             dp[i][j] = dp[i+1][j+1];
-                        }else{
+                        }else{ //its false becuase the characters are not same
                             dp[i][j] = false;
                         }
                     }
