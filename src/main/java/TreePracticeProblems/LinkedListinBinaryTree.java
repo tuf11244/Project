@@ -17,17 +17,28 @@ public class LinkedListinBinaryTree{
         if(node == null){
             return false; //Reached a leaf node in the binary tree
         }
-        if(head == null){
-            return true;    //Empty list is always a subpath
-        }
-        // Check if the current node matches the linked list node
-        if(node.value == head.value){
-            // If there's a match, continue searching in left or right subtree
-            return isSubPath(head.next,node.left) || isSubPath(head.next,node.right);
-        }       
-        // If there's no match, start over from the root of the binary tree
-       return isSubPath(head,node.left) || isSubPath(head,node.right);
+        
+        // Check if there's a matching subpath starting at this node
+        return dfs(head, node) || isSubPath(head, node.left) || isSubPath(head, node.right);
      
+    }
+    private static  boolean dfs(ListNode head, Node node) {
+        if (head == null) {
+            // We've matched the entire linked list
+            return true;
+        }
+        if (node == null) {
+            // Reached a leaf in the tree but still have nodes left in the list
+            return false;
+        }
+        
+        // Check if current node matches and continue recursively
+        if (head.value == node.value) {
+            return dfs(head.next, node.left) || dfs(head.next, node.right);
+        }
+        
+        // No match at the current node
+        return false;
     }
     private class ListNode{
         int value;
