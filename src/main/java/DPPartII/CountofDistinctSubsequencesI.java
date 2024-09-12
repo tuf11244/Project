@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package DPPartII;
-
+import java.util.*;
 /**
  *Date: 08/27/2024
  * https://leetcode.com/problems/distinct-subsequences/
@@ -16,8 +16,9 @@ public class CountofDistinctSubsequencesI {
      */
     public static void main(String args[]) {
         // TODO code application logic here
+        System.out.println(numDistinct("rabbit","rabbit"));
     }
-    public int numDistinct(String s, String t) {
+    public static int numDistinct(String s, String t) {
         int m = s.length();
         int n = t.length();
         
@@ -41,6 +42,10 @@ public class CountofDistinctSubsequencesI {
                     dp[i][j] = dp[i - 1][j];
                 }
             }
+        }
+        
+        for(int[] arr:  dp){
+            System.out.println(Arrays.toString(arr));
         }
         
         return dp[m][n];
