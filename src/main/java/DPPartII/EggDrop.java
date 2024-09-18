@@ -7,6 +7,7 @@ package DPPartII;
 /**
  *Date: 09/12/2024
  *https://www.geeksforgeeks.org/egg-dropping-puzzle-dp-11/
+ * https://leetcode.com/problems/super-egg-drop/
  * @author parth
  */
 public class EggDrop {
@@ -17,7 +18,7 @@ public class EggDrop {
     public static void main(String args[]) {
         // TODO code application logic here
     }
-    
+    //Brute Force Time Complexity : O(e * f * f)
     public static int eggDrop(int floors, int eggs){
         
         int[][] dp = new int[eggs + 1][floors + 1];
@@ -38,6 +39,45 @@ public class EggDrop {
                         min = Math.min(val,min);
                     }
                     dp[i][j] = min + 1;
+                }
+            }
+        }
+        return dp[eggs][floors];
+    }
+    
+    
+    //Below uses Binary Search 
+    //Time Complexity : O(e * f * log f)
+    public int superEggDrop(int eggs, int floors) {
+        int[][] dp = new int[eggs + 1][floors + 1];
+        
+        for (int i = 1; i <= eggs; i++) {
+            for (int j = 1; j <= floors; j++) {
+                if (j == 1) {
+                    dp[i][j] = 1; // Only one floor requires one drop
+                } else if (i == 1) {
+                    dp[i][j] = j; // With one egg, worst case is j drops
+                } else {
+                    // Use binary search to optimize the decision of where to drop the egg
+                    int low = 1, high = j, minMoves = Integer.MAX_VALUE;
+                    while (low <= high) {
+                        int mid = (low + high) / 2;
+                        int eggBreaks = dp[i - 1][mid - 1]; // Egg breaks
+                        int eggSurvives = dp[i][j - mid];   // Egg survives
+                        
+                        // Max of both cases since we want the worst-case scenario
+                        int worst = Math.max(eggBreaks, eggSurvives);
+                        
+                        minMoves = Math.min(minMoves, worst);
+                        
+                        // Binary search logic to minimize the worst-case number of moves
+                        if (eggBreaks > eggSurvives) {
+                            high = mid - 1; //Seach for the lower floors
+                        } else {
+                            low = mid + 1; //Search for the higher floors
+                        }
+                    }
+                    dp[i][j] = minMoves + 1;
                 }
             }
         }
