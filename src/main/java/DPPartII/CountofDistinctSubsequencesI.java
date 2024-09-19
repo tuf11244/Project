@@ -19,35 +19,71 @@ public class CountofDistinctSubsequencesI {
         System.out.println(numDistinct("rabbit","rabbit"));
     }
     public static int numDistinct(String s, String t) {
-        int m = s.length();
-        int n = t.length();
+     int[][] dp = new int[t.length() +1][s.length() +1];
+     
+     for(int i = dp.length - 1; i >= 0; i--){
+         for(int j = dp[0].length - 1; j >= 0;j--){
+             if(i == dp.length - 1 && j == dp[0].length - 1){
+                 dp[i][j] = 1;
+             }else if(i == dp.length - 1){
+                 dp[i][j] = 1;
+             }else if(j == dp[0].length - 1){
+                 dp[i][j] = 0;
+             }else {
+                 char c1 = t.charAt(i);
+                 char c2 = s.charAt(j);
+                 
+                 if(c1 == c2){
+                     dp[i][j] = dp[i][j+1] + dp[i+1][j+1];
+                 }else{
+                     dp[i][j] = dp[i][j+1];
+                 }
+             }
+         }
+     }
+        return dp[0][0];
+     
+    }
+    
+    
+    public static int numDistinctMemo(String s, String t){
+       int[][] dp = new int[s.length() + 1][t.length() + 1];
         
-        // dp[i][j] will be storing the count of subsequences of s[0..i-1] that equals t[0..j-1]
-        int[][] dp = new int[m + 1][n + 1];
-        
-        // Initializing the dp array
-        for (int i = 0; i <= m; i++) {
-            dp[i][0] = 1; // empty string t is a subsequence of any prefix of s
+        // Initialize dp with -1 (for memoization)
+        for(int[] arr : dp){
+            Arrays.fill(arr,-1);
         }
         
-        for (int i = 1; i <= m; i++) {
-            for (int j = 1; j <= n; j++) {
-                // If characters match, we can consider two options:
-                // 1. Exclude current character of s
-                // 2. Include current character of s
-                if (s.charAt(i - 1) == t.charAt(j - 1)) {
-                    dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
-                } else {
-                    // If characters don't match, we can only exclude current character of s
-                    dp[i][j] = dp[i - 1][j];
-                }
-            }
+        return helper(s, t, 0, 0, dp);
+    }
+    
+    public static int helper(String s, String t, int i, int j,int[][] dp){
+        // Base cases:
+        if(j == t.length()) {  // If target is fully matched
+            return 1;
+        }
+        if(i == s.length()) {  // If source is exhausted and target is not
+            return 0;
         }
         
-        for(int[] arr:  dp){
-            System.out.println(Arrays.toString(arr));
+        // Check memoized result
+        if(dp[i][j] != -1) {
+            return dp[i][j];
         }
         
-        return dp[m][n];
+        int result = 0;
+        
+        // When characters match, we have two choices: include or skip
+        if(s.charAt(i) == t.charAt(j)) {
+            result += helper(s, t, i + 1, j + 1, dp);  // Include the character
+        }
+        
+        // Always skip the character in source `s` and move forward
+        result += helper(s, t, i + 1, j, dp);
+        
+        // Memoize the result
+        dp[i][j] = result;
+        
+        return result;
     }
 }
