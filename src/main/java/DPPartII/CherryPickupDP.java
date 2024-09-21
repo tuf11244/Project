@@ -83,4 +83,56 @@ public class CherryPickupDP {
          dp[r1][c1][r2][c2] = cherry + maxCherries;
          return dp[r1][c1][r2][c2];
      }
+     
+     
+     
+     //We can also do this in 3D dp 
+     //You don't need to explicitly track c2 because it can be computed as c2 = r1 + c1 - r2.
+     public static int helper(int r1, int c1, int r2, int[][] grid, int[][][] dp) {
+        int c2 = r1 + c1 - r2; // Calculate c2 based on r1, c1, and r2
+        
+        // Base cases: Out of bounds or hitting a thorn (-1)
+        if (r1 >= grid.length || r2 >= grid.length || c1 >= grid[0].length || c2 >= grid[0].length || 
+            grid[r1][c1] == -1 || grid[r2][c2] == -1) {
+            return Integer.MIN_VALUE; // Invalid path
+        }
+        
+        // If both persons reach the bottom-right corner
+        if (r1 == grid.length - 1 && c1 == grid[0].length - 1) {
+            return grid[r1][c1]; // Only one person can be at the destination at a time
+        }
+        
+        // If this state has already been calculated
+        if (dp[r1][c1][r2] != -1) {
+            return dp[r1][c1][r2];
+        }
+        
+        int cherry = 0;
+        
+        // Collect cherries at the current positions, avoid double-counting
+        if (r1 == r2 && c1 == c2) {
+            cherry += grid[r1][c1];
+        } else {
+            cherry += grid[r1][c1] + grid[r2][c2];
+        }
+        
+        // Explore all 4 possible moves
+        int f1 = helper(r1, c1 + 1, r2, grid, dp);      // Both go right
+        int f2 = helper(r1 + 1, c1, r2, grid, dp);      // First goes down, second stays
+        int f3 = helper(r1, c1 + 1, r2 + 1, grid, dp);  // First goes right, second goes down
+        int f4 = helper(r1 + 1, c1, r2 + 1, grid, dp);  // Both go down
+        
+        // Take the maximum valid move
+        int maxCherries = Math.max(Math.max(f1, f2), Math.max(f3, f4));
+        
+        // If all moves return Integer.MIN_VALUE, it means no valid path is available
+        if (maxCherries == Integer.MIN_VALUE) {
+            dp[r1][c1][r2] = Integer.MIN_VALUE;
+            return Integer.MIN_VALUE;
+        }
+        
+        // Update dp array and return the total cherries collected
+        dp[r1][c1][r2] = cherry + maxCherries;
+        return dp[r1][c1][r2];
+    }
 }
