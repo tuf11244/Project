@@ -16,7 +16,7 @@ public class CountofDistinctSubsequencesI {
      */
     public static void main(String args[]) {
         // TODO code application logic here
-        System.out.println(numDistinct("rabbit","rabbit"));
+        System.out.println(numDistinct("raabbit","rabbit"));
     }
     public static int numDistinct(String s, String t) {
      int[][] dp = new int[t.length() +1][s.length() +1];
@@ -40,7 +40,11 @@ public class CountofDistinctSubsequencesI {
                  }
              }
          }
-     }
+     } 
+     
+         for(int[] arr : dp){
+             System.out.println(Arrays.toString(arr));
+         }
         return dp[0][0];
      
     }
