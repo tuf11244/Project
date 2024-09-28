@@ -7,6 +7,7 @@ package DPPartII.LCSVariation;
 /**
  *Date: 09/25/2024
  *https://leetcode.com/problems/maximum-length-of-repeated-subarray/
+ * Same code as longest common substring
  * @author parth
  */
 public class MaximumLengthofRepeatedSubarray {
