@@ -16,8 +16,9 @@ public class PalindromePartitioning {
      */
     public static void main(String args[]) {
         // TODO code application logic here
+        List<List<String>> answer = partition("aab");
     }
-    public List<List<String>> partition(String s) {
+    public static List<List<String>> partition(String s) {
         List<List<String>> result = new ArrayList<>();
         boolean[][] dp = new boolean[s.length()][s.length()];
         for(int g = 0; g < dp.length;g++){
@@ -44,7 +45,7 @@ public class PalindromePartitioning {
 
     }
 
-    private void dfs(int start, String s, boolean[][] dp, List<String> currentPartition, List<List<String>> result) {
+    private static  void dfs(int start, String s, boolean[][] dp, List<String> currentPartition, List<List<String>> result) {
         if (start == s.length()) {
             result.add(new ArrayList<>(currentPartition)); // Found a valid partition, add to result
             return;
