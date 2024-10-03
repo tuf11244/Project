@@ -37,6 +37,17 @@ public class LowestCommonAncestorIII {
         }
         return null;
     }
+    
+    //O(1) space
+    public Ancestor lowestCommonAncestorII(Ancestor p, Ancestor q) {
+        Ancestor a = p;
+        Ancestor b = q;
+        while (a != b) {
+            a = a.parent == null ? q : a.parent;
+            b = b.parent == null ? p : b.parent;
+        }
+        return a;
+    }
 }
 
 class Ancestor{
