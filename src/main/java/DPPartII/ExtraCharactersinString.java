@@ -52,4 +52,38 @@ public class ExtraCharactersinString {
         System.out.println(Arrays.toString(dp));
         return dp[n];  // The answer will be the minimum extra chars for the entire string  
     }
+    
+    
+    //Recursion with Memoization 
+    public int minExtraCharMemo(String s, String[] dictionary){
+         Set<String> wordSet = new HashSet<>();  // For O(1) lookups
+
+        for(String word : dictionary){
+            wordSet.add(word);
+        }
+        int [] dp = new int[s.length() + 1];
+        Arrays.fill(dp,-1);
+        return helper(0,s,wordSet,dp);
+    }
+    
+    public int helper(int index, String s, Set<String> wordSet, int[] dp){
+        if(index >= s.length()){
+            return 0;
+        }
+        if(dp[index] != -1){
+            return dp[index];
+        }
+        int result = 1 + helper(index+1,s,wordSet,dp);
+        
+        for(int j = index; j < s.length();j++){
+            String current = s.substring(index, j + 1);
+            
+            if(wordSet.contains(current)){
+                result = Math.min(result,helper(j+1,s,wordSet,dp));
+            }
+        }
+        
+        dp[index] = result;
+        return result;
+    }
 }
