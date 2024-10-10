@@ -38,4 +38,34 @@ public class MaximumWidthRamp {
 
         return maxRamp;
     }
+    
+    
+    //Approach 2 : Using 2 pointers
+    //We find the maximum Element on right side 
+    
+    public static int maxWidthRampApproach2(int[] nums){
+        
+        int[] maxonRightSide = new int[nums.length];
+        
+        maxonRightSide[nums.length - 1] = nums[nums.length - 1];
+        
+        for(int i = nums.length - 2; i >= 0; i--){
+            maxonRightSide[i] = Math.max(nums[i],maxonRightSide[i+1]);
+        }
+        
+        int ramp = 0;
+        int i = 0; 
+        int j = 0;
+        
+        while(j < nums.length){
+            
+            while(nums[i] > maxonRightSide[j]){
+                i++;
+            }
+            
+            ramp = Math.max(ramp, j-i);
+            j++;
+        }
+        return ramp;
+    }
 }
