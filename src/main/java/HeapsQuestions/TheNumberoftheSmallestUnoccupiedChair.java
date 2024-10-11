@@ -84,4 +84,4 @@ class OccupiedChair {
         this.chairNumber = chairNumber;
     }
 }
-}
+
