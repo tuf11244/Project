@@ -78,12 +78,13 @@ public class WordBreak {
             if(wordDict.contains(split) && helperII(j,s,wordDict,dp)){
                 
                 dp[idx] = true;
+                return true;
             }
         }
         
         dp[idx] = false;
         
-        return dp[s.length()];
+        return false;
     }
             
 }
