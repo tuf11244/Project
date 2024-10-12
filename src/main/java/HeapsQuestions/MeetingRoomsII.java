@@ -10,6 +10,7 @@ import java.util.PriorityQueue;
 /**
  * Date: 04/03/2024
  *https://leetcode.com/problems/meeting-rooms-ii/
+ * https://leetcode.com/problems/divide-intervals-into-minimum-number-of-groups/
  * @author parth
  */
 public class MeetingRoomsII {
