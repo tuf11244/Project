@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package DPPartII;
-
+import java.util.*;
 /**
  * Date: 12/20/2023
  *https://leetcode.com/problems/jump-game-vii/
@@ -36,5 +36,37 @@ public class JumpGameVII {
         }
 
         return dp[n - 1] == 1;
+    }
+    
+    public static boolean canReachBFS(String s, int minJump, int maxJump) {
+        
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(0);
+
+        // Keeps track of the farthest index we've processed
+        int farthest = 0;
+
+        while (!queue.isEmpty()) {
+            int current = queue.poll();
+
+            // If we've reached the end of the string, return true
+            if (current == s.length() - 1) {
+                return true;
+            }
+
+            // We only start adding new jumps from the farthest point we haven't processed yet
+            int start = Math.max(current + minJump, farthest + 1);
+
+            for (int i = start; i <= Math.min(current + maxJump, s.length() - 1); i++) {
+                if (s.charAt(i) == '0') {
+                    queue.add(i);
+                }
+            }
+
+            // Update the farthest point we have processed
+            farthest = Math.max(farthest, current + maxJump);
+        }
+
+        return false;
     }
 }
