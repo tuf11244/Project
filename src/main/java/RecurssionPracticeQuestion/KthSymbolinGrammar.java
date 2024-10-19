@@ -13,16 +13,7 @@ package RecurssionPracticeQuestion;
 public class KthSymbolinGrammar {
 
     public static void main(String args[]) {
-     //   System.out.println(kthSymbol(4,4));
-     
-      System.out.println(findkthBit(4));
-      String answer = findkthBit(4);
-      for(int i = 0; i < answer.length();i++){
-          if(i == 11-1){
-              System.out.println(answer.charAt(i));
-          }
-      }
-    //    System.out.println(invert("0110"));;
+    
     }
     public static int kthSymbol(int n,int k){
        if(n == 1 && k == 1){
@@ -34,35 +25,27 @@ public class KthSymbolinGrammar {
       }
         return kthSymbol(n-1,k-middle)^ 1;
     }
-    public static String findkthBit(int n){
-        if(n == 1){
-            return "0";
+    public static char findkthBit(int n, int k){
+         if (n == 1 && k == 1) {
+            return '0'; // Base case: S(1) is "0"
         }
-        return findkthBit(n-1) + "1" + reverse(invert(findkthBit(n-1)));
-    }
-    public static String reverse(String S){
-        String reverse = "";
-        for(int i = S.length()-1; i >= 0;i--){
-            reverse = reverse + S.charAt(i);
+        
+        int middle = (int) (Math.pow(2, n-1));
+        
+        if (k == middle) {
+            return '1'; // The middle element is always '1'
+        } else if (k < middle) {
+            return findkthBit(n - 1, k); // First half, same as S(n-1)
+        } else {
+            // Second half, mirrored and inverted
+            char mirroredChar = findkthBit(n - 1, middle * 2 - k); // k-mapped to the first half
+            return invert(mirroredChar); // Invert the mirrored character
         }
-        return reverse;
     }
-    private static String invert(String binaryString) {
-        StringBuilder invertedStringBuilder = new StringBuilder();
-
-        for (int i = 0; i < binaryString.length(); i++) {
-            char currentChar = binaryString.charAt(i);
-            char invertedChar;
-
-            if (currentChar == '0') {
-                invertedChar = '1';
-            } else {
-                invertedChar = '0';
-            }
-
-            invertedStringBuilder.append(invertedChar);
-        }
-
-        return invertedStringBuilder.toString();
+    
+    
+    private static char invert(char bit) {
+        return bit == '0' ? '1' : '0'; // Invert '0' to '1' and '1' to '0'
     }
+   
 }
