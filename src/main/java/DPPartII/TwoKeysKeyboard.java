@@ -30,7 +30,7 @@ public class TwoKeysKeyboard {
                 }
        }
 
-       if(n!=1){
+       if(n!=1){ //that means n is prime
          answer = answer + n;
        }
         return answer;
