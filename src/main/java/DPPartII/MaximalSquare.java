@@ -7,6 +7,7 @@ import java.util.*;
 /**
  *Date: 08/01/2024
  *https://leetcode.com/problems/maximal-square/
+ *https://leetcode.com/problems/count-square-submatrices-with-all-ones/
  * @author parth
  */
 public class MaximalSquare {
@@ -50,5 +51,39 @@ public class MaximalSquare {
         
         return maxSide * maxSide;
         
+    }
+    
+    
+    
+    
+    public int countSquares(int[][] matrix) {
+        
+        int count = 0;
+        int[][] dp = new int[matrix.length][matrix[0].length];
+
+        for(int i = matrix.length - 1; i >= 0; i--){
+            for(int j = matrix[0].length - 1; j >= 0;j--){
+                  if(i == matrix.length - 1 || j == matrix[0].length - 1){
+                     dp[i][j] = matrix[i][j];
+                     count = count + dp[i][j];
+
+                  }else{
+                    
+                    if(matrix[i][j] == 1){
+                        int horizontal = dp[i][j+1];
+                        int vertical = dp[i+1][j];
+                        int diagonal = dp[i+1][j+1];
+                        
+                        dp[i][j] = matrix[i][j] + Math.min(horizontal, Math.min(vertical,diagonal));
+                        count = count + dp[i][j];
+                    }
+
+
+                  }
+                  
+                    
+            }
+        }
+        return count;
     }
 }
