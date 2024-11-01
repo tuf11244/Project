@@ -16,6 +16,8 @@ public class MinimumTotalDistanceTravelled {
      */
     public static void main(String args[]) {
         // TODO code application logic here
+        
+      //  System.out.println(Long.MAX_VALUE * Integer.MAX_VALUE);
     }
     
     public long minimumTotalDistance(List<Integer> robot, int[][] factory){
@@ -58,6 +60,8 @@ public class MinimumTotalDistanceTravelled {
          long skip = helper(robot,factory,i,j+1,dp);
          
          dp[i][j] = Math.min(take, skip);
+         
+         return dp[i][j];
     }
     
     
