@@ -22,7 +22,9 @@ public class DeleteandEarn {
     public static int deleteAndEarn(int[] nums) {
 
       int[] dp = new int[10001];
-
+      
+      
+      //Frequency Map
       for(int val : nums){
         dp[val] = dp[val] + 1;
       }
