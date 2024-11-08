@@ -7,6 +7,7 @@ import java.util.*;
 /**
  *Date: 06/29/2024
  * https://www.geeksforgeeks.org/problems/subset-sum-problem-1611555638/1
+ * https://leetcode.com/problems/partition-equal-subset-sum/
  * @author parth
  */
 public class SubsetSumProblem {
@@ -59,5 +60,34 @@ public class SubsetSumProblem {
             System.out.println(Arrays.toString(row));
         }
         return dp[arr.length][target];
+    }
+    
+    //Top Down Approach
+    public static Boolean isSubsetSum(int arr[], int sum) {
+        // code here
+        Boolean [][] dp = new Boolean[arr.length][sum+1];
+        return helper(arr,sum,0,dp);
+    }
+    public static Boolean helper(int[] arr, int sum, int index,Boolean[][] dp){
+        if(sum == 0){
+            return true;
+        }
+        if(index >= arr.length || sum < 0){
+            return false;
+        }
+        
+        if(dp[index][sum] != null){
+            return dp[index][sum];
+        }
+        
+        boolean pick = false;
+        boolean skip = false;
+        if(arr[index] <= sum){
+            pick = helper(arr,sum - arr[index],index+1,dp);
+        }   
+        
+        skip = helper(arr,sum,index+1,dp);
+        
+        return dp[index][sum] = pick || skip;
     }
 }

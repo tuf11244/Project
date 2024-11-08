@@ -18,7 +18,7 @@ public class KnapsackProblem {
         int[] values = {15,14,10,45,30};
         int[] weight = {2,5,1,3,4};
         
-     //   System.out.println(knapSackProblem(values,weight,7));
+        System.out.println(knapSackProblem(values,weight,7));
        System.out.println(unboundedKnapSack(values,weight,13));
     }
     
