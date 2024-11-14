@@ -42,15 +42,15 @@ public class MinimizedMaximumofProductsDistricbutedtoAnyStore {
 
     public boolean isValid(int maxProducts, int n, int[] quantities) {
         int requiredShops = 0;
-
-        for (int quantity : quantities) {
-            requiredShops += (quantity + maxProducts - 1) / maxProducts;  // Equivalent to ceiling division
-
-            if (requiredShops > n) {
-                return false;
+        
+        for(int i =0; i < quantities.length;i++){
+            
+            if(quantities[i] % maxProducts > 0){
+                requiredShops = requiredShops + (quantities[i]/maxProducts) + 1; //extra shop for the remainder
+            }else{
+                requiredShops = requiredShops + (quantities[i]/maxProducts);
             }
         }
-        
         return requiredShops <= n;
     }
 }
