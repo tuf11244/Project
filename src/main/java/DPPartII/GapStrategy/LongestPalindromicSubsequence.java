@@ -7,6 +7,8 @@ package DPPartII.GapStrategy;
 /**
  *Date: 08/22/2024
  *https://leetcode.com/problems/longest-palindromic-subsequence/
+ * Method 2 : you can reverse the given string and find the LCS between the string and reverse string 
+ * that would also give you longest Palindromic Subsequence (Per Aditya Verma);
  * @author parth
  */
 public class LongestPalindromicSubsequence {
