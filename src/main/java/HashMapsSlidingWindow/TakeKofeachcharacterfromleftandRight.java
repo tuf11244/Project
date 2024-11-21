@@ -39,13 +39,13 @@ public class TakeKofeachcharacterfromleftandRight {
         
         int i = 0;
         int j = 0;
-        int minToBeDeleted = s.length();
+        int minToBeDeleted = 0;
         while(i < s.length()){
              if(s.charAt(i) == 'a'){
                 countA--;
             }else if(s.charAt(i) == 'b'){
                 countB--;
-            }else{
+            }else if(s.charAt(i) == 'c'){
                 countC--;
             }
              
@@ -54,15 +54,15 @@ public class TakeKofeachcharacterfromleftandRight {
                 countA++;
                     }else if(s.charAt(j) == 'b'){
                 countB++;
-                    }else{
-                countC++;
+                    }else if(s.charAt(j) == 'c'){
+                 countC++;
                 }
                  
                  j++;
              }
              
-             minToBeDeleted = Math.min(minToBeDeleted,i-j+1);        
-             
+             minToBeDeleted = Math.max(minToBeDeleted,i-j+1);        
+             i++;
         }
         
         return s.length() - minToBeDeleted;
