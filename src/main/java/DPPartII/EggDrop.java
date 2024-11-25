@@ -4,6 +4,8 @@
  */
 package DPPartII;
 
+import java.util.Arrays;
+
 /**
  *Date: 09/12/2024
  *https://www.geeksforgeeks.org/egg-dropping-puzzle-dp-11/
@@ -83,4 +85,49 @@ public class EggDrop {
         }
         return dp[eggs][floors];
     }
+    
+    //Recursion + Memoization + Binary Search 
+    class Solution {
+    int[][] dp = new int[101][10001];
+    
+    public Solution(){
+        for(int[] arr : dp){
+            Arrays.fill(arr,-1);
+        }
+    }
+
+    public int superEggDrop(int e, int f) {
+        if(f == 0 || f == 1){
+                return f;
+        }
+
+        if(e == 0 || e ==1){
+                return f;
+        }
+        if(dp[e][f] != -1){
+            return dp[e][f];
+        }
+
+        int attempts = Integer.MAX_VALUE;
+         // Use binary search to optimize the critical floor search
+        int low = 1, high = f;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            int breaks = superEggDrop(e - 1, mid - 1); // Egg breaks
+            int survives = superEggDrop(e, f - mid);  // Egg survives
+
+            int temp = 1 + Math.max(breaks, survives);
+            attempts = Math.min(attempts, temp);
+
+            // Adjust the binary search range
+            if (breaks > survives) {
+                high = mid - 1; // Search in the lower half
+            } else {
+                low = mid + 1;  // Search in the upper half
+            }
+        }
+        dp[e][f] = attempts;
+        return attempts;
+    }
+}
 }
