@@ -8,6 +8,7 @@ import java.util.Scanner;
  *Date: 09/23/2023
  * https://leetcode.com/problems/binary-tree-maximum-path-sum/
  * https://leetcode.com/problems/path-sum/ (Date: 09/29/2023 : function hasPathSum)
+ * https://www.geeksforgeeks.org/find-maximum-path-sum-two-leaves-binary-tree/ (Date : 11/25/2024 : function maximumPathSumLeafToLeaf())
  * @author parth
  */
 public class MaximumPathSum {
@@ -64,8 +65,8 @@ public class MaximumPathSum {
         int left = maximumPathSum(node.left);
         int right = maximumPathSum(node.right);
         
-        int temp = Math.max(Math.max(left, right) + node.value,node.value);
-        int answer = Math.max(left+right+node.value, temp);
+        int temp = Math.max(Math.max(left, right) + node.value,node.value); //When it doesn't want to be the part
+        int answer = Math.max(left+right+node.value, temp); //when it wants to be the part
         result = Math.max(result,answer);
         return temp;
     }

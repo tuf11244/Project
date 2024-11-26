@@ -63,8 +63,8 @@ public class DiameterofBinaryTree {
        int left = diameter(node.left);
        int right = diameter(node.right);
        
-       int temp = Math.max(left, right) + 1;
-       int answer = Math.max(temp,left+right+1);
+       int temp = Math.max(left, right) + 1; //When the node doesn;t want to be the part of answer
+       int answer = Math.max(temp,left+right+1); //When the node wants to be the part of answer
        result = Math.max(result,answer);
         
         return temp;
