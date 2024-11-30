@@ -25,6 +25,7 @@ public class dummy {
         l2.add("Parth");
         l2.add("John");
         
+       
         System.out.println(l1.equals(l2));
         System.out.println(minSwap("1234","3412"));
     }
