@@ -1,8 +1,10 @@
+package GraphProblemsPartIII;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
-package GraphProblemsPartIII;
+
 import java.util.*;
 /**
  *Date : POTD 11/26/2024
@@ -49,13 +51,13 @@ public class ShortestDistanceAfterRoadAdditionQueriesI {
     }
 
     public int bfs(List<Edge>[] graph, int src, int dest) {
-        Queue<Pair> queue = new LinkedList<>();
+        Queue<pair> queue = new LinkedList<>();
         HashSet<Integer> visited = new HashSet<>();
-        queue.add(new Pair(src, 0));
+        queue.add(new pair(src, 0));
 
         // BFS to find the shortest path from src to dest
         while (!queue.isEmpty()) {
-            Pair rem = queue.poll();
+            pair rem = queue.poll();
 
             // If we reach the destination, return the number of steps
             if (rem.v == dest) {
@@ -69,7 +71,7 @@ public class ShortestDistanceAfterRoadAdditionQueriesI {
             // Visit all neighbors
             for (Edge e : graph[rem.v]) {
                 if (!visited.contains(e.nbg)) {
-                    queue.add(new Pair(e.nbg, rem.steps + 1));
+                    queue.add(new pair(e.nbg, rem.steps + 1));
                 }
             }
         }
@@ -78,11 +80,11 @@ public class ShortestDistanceAfterRoadAdditionQueriesI {
     }
 }
 
-class Pair {
+class pair {
     int v;
     int steps;
 
-    public Pair(int v, int steps) {
+    public pair(int v, int steps) {
         this.v = v;
         this.steps = steps;
     }
