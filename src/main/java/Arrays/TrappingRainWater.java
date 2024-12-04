@@ -46,4 +46,39 @@ public class TrappingRainWater {
         System.out.println("The water it holds is " + sum);
     }
     
+     
+     public static int rainTrappedOptimized(int[] arr){
+         int n = arr.length;
+         int left = 0;
+         int right = arr.length -1;
+         
+         int maxLeft = 0;
+         int maxRight = 0;
+         int total = 0;
+         
+         while(left <= right){
+             
+             if(arr[left] <= arr[right]){
+                 
+                 if(arr[left] > maxLeft){
+                     maxLeft = arr[left];
+                 }else{
+                     total = total + maxLeft - arr[left];
+                 }
+                 
+                 left++;
+             }else{
+                 
+                 if(arr[right] > maxRight){
+                     maxRight = arr[right];
+                 }else{
+                     total = total + maxRight - arr[right];
+                 }
+                 
+                 right--;
+             }
+             
+         }
+        return total;
+     }
 }
