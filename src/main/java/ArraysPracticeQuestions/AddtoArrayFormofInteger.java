@@ -19,7 +19,7 @@ public class AddtoArrayFormofInteger {
      */
     public static void main(String args[]) {
         int[] nums = {9,9,9,9,9,9,9,9,9,9};
-        addToArrayForm(nums,1);
+        addToArrayFormII(nums,1);
     }
     public static void addToArrayForm(int[] nums, int k){
        
@@ -36,5 +36,49 @@ public class AddtoArrayFormofInteger {
         System.out.println(result);
     }
     
+    
+    public static void addToArrayFormII(int[] nums, int k){
+        
+        String add = String.valueOf(k);
+        int i = nums.length - 1;
+        int j = add.length() - 1;
+        
+        List<Integer> result = new ArrayList<>();
+        
+        int carry = 0;
+        while(i >= 0 && j >= 0){
+            int sum;
+            if(carry > 0){
+                sum = nums[i] + carry + add.charAt(j) - '0';
+            }else{
+                sum = nums[i] + add.charAt(j) - '0';
+            }
+            
+            result.add(0,sum%10);
+            carry = sum/10;
+            i--;
+            j--;
+            
+        }
+        
+        while(i >= 0){
+            int sum = nums[i] + carry;
+            result.add(0,sum%10);
+            carry = sum/10;
+            i--;
+        }
+        
+        while(j >= 0){
+            int sum = add.charAt(j) - '0' + carry;
+            result.add(0,sum%10);
+            carry = sum/10;
+            j--;
+        }
+        
+        if(carry > 0){
+            result.add(0,carry);
+        }
+        System.out.println(result);
+    }
     
 }
