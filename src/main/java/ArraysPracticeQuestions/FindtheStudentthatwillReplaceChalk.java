@@ -5,7 +5,8 @@
 package ArraysPracticeQuestions;
 
 /**
- *
+ *https://leetcode.com/problems/find-the-student-that-will-replace-the-chalk/
+ * Date: 09/01/2024
  * @author parth
  */
 public class FindtheStudentthatwillReplaceChalk {
