@@ -41,4 +41,27 @@ public class ProductofArrayExceptSelf {
         }
         return result;
     }
+    
+    
+    public static int[] productExceptSelfConstantSpace(int[] nums){
+        
+        int result[] = new int[nums.length];
+        
+        //Left hand product stored in result array
+        result[0] = 1;
+        
+        for(int i = 1; i < nums.length;i++){
+            result[i] = result[i-1] * nums[i-1];
+        }
+        
+        int rightProduct = 1;
+        
+        result[nums.length-1] = result[nums.length - 1] * rightProduct;
+        
+        for(int i = nums.length - 2; i>=0; i--){
+            rightProduct = rightProduct * nums[i+1];
+            result[i] = result[i] * rightProduct;
+         }
+        return result;
+    }
 }
