@@ -28,24 +28,23 @@ public class ArrangingCoins {
     }
     
     //O(LogN) Binary Search 
-    public static int arrangeCoinsBinarySearch(int n) {
-       long left = 0;
-       long right = n;
+   public static int arrangeCoinsBS(int n) {
+       long low = 0;
+       long end = n;
+        int answer = 0;
+       while(low <= end){
+            long mid = low + (end - low)/2;
 
-        while (left <= right) {
-            long mid = left + (right - left) / 2;
-            long sum = mid * (mid + 1) / 2;
+            long sum = (mid * (mid  + 1))/2;
 
-            if (sum == n) {
-                return (int) mid;
-            } else if (sum < n) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
+            if(sum <= n){
+                answer =(int) mid;
+                low = mid + 1;
+            }else{
+                 end = mid - 1;
             }
-        }
+       }
 
-        // At this point, 'right' is the largest integer whose sum is less than or equal to n.
-        return (int) right;
+       return answer;
     }
 }
