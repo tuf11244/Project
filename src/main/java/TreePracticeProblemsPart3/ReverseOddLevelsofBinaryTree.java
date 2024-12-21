@@ -72,6 +72,28 @@ public class ReverseOddLevelsofBinaryTree extends TreeNodes {
 
         return root;
     }
+    
+    
+    public TreeNode reverseOddLevelsDFS(TreeNode root){
+        dfs(root.left,root.right,1);
+        
+        return root;
+    }
+    public void dfs(TreeNode left, TreeNode right, int level){
+        
+        if(left == null || right == null){
+            return;
+        }
+        
+        if(level % 2 != 0){
+            int temp = right.val;
+            right.val = left.val;
+            left.val = temp;  
+        }
+        
+        dfs(left.left,right.right,level+1);
+        dfs(left.right,right.left,level+1);
+    }
 }
 class Pair{
     TreeNode node;
