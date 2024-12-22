@@ -27,7 +27,7 @@ public class MedianofTwoSortedArrays {
         }
         int low = 0;
         int end = n1;
-        int left = (n1 + n2 + 1)/2;
+        int left = (n1 + n2 + 1)/2; //the number of elements on the left hand side 
         int totalLength = n1 + n2;
         
         while(low <= end){
@@ -64,7 +64,7 @@ public class MedianofTwoSortedArrays {
             }
             else if(left1 > right2){
                 end = mid1 -1;
-            }else{
+            }else{ // if left2 > right1
                  low = mid1 + 1;
             }
         }
