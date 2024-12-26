@@ -40,12 +40,12 @@ public class MaximumValueataGivenIndexinBoundedArray {
             // Calculate the sum of elements on the left side of the index in O(1)
             long leftCount = Math.min((long) index, midVal - 1);
             long leftSum = getSumElements(leftCount, midVal);
-            leftSum += Math.max(0, index - midVal + 1); //For remaining Ones
+            leftSum += Math.max(0, index - (midVal - 1)); //For remaining Ones
 
             // Calculate the sum of elements on the right side of the index in O(1)
             long rightCount = Math.min((long) n - index - 1, midVal - 1);
             long rightSum = getSumElements(rightCount, midVal);
-            rightSum += Math.max(0, n - index - 1 - midVal + 1); //For remainign Ones
+            rightSum += Math.max(0, n - index  - 1 - (midVal - 1)); //For remainign Ones
 
             // Check if the sum of both sides along with midVal is less than or equal to maxSum
             if (leftSum + rightSum + midVal <= maxSum) {
