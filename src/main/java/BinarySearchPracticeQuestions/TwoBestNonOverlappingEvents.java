@@ -41,7 +41,7 @@ public class TwoBestNonOverlappingEvents {
             if (idx != -1) {
                 currentValue += maxValues[idx];
             }
-
+            
             answer = Math.max(answer, currentValue);
         }
 
@@ -50,19 +50,17 @@ public class TwoBestNonOverlappingEvents {
 
     // Binary search to find the latest non-overlapping event
     private int binarySearch(int[][] events, int index) {
-        int low = 0, high = index - 1;
+        int low = 0, high = events.length;
+        int answer = -1;
         while (low <= high) {
             int mid = low + (high - low) / 2;
             if (events[mid][1] < events[index][0]) {
-                if (events[mid + 1][1] < events[index][0]) {
-                    low = mid + 1;
-                } else {
-                    return mid;
-                }
+                answer = mid;
+                low = mid + 1;
             } else {
                 high = mid - 1;
             }
         }
-        return -1; // No non-overlapping event found
+        return answer; // No non-overlapping event found
     }
 }
