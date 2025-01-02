@@ -28,21 +28,24 @@ public class MergeSortedArray {
     }
     
     public static void mergeOptimized(int[] nums1, int m, int[] nums2, int n){
-        int pointer1 = m-1;
-        int pointer2 = n-1;
+       int i = m - 1; // Pointer for the last element in nums1's initial part
+        int j = n - 1; // Pointer for the last element in nums2
+        int k = m + n - 1; // Pointer for the last position in nums1
         
-        int i = m + n - 1;
-        
-        while(pointer2 >= 0){
-            if(pointer1 >= 0  && nums1[pointer1] > nums2[pointer2]){
-                nums1[i] = nums1[pointer1];
-                i--;
-                pointer1--;
-            }else{
-                nums1[i] = nums2[pointer2];
-                i--;
-                pointer2--;
+        // Merge nums1 and nums2 from the end
+        while (i >= 0 && j >= 0) {
+            if (nums1[i] > nums2[j]) {
+                nums1[k--] = nums1[i--];
+            } else {
+                nums1[k--] = nums2[j--];
             }
         }
+        
+        // If there are remaining elements in nums2, copy them
+        while (j >= 0) {
+            nums1[k--] = nums2[j--];
+        }
+        
+        // No need to handle remaining elements of nums1, as they are already in place
     }
 }
