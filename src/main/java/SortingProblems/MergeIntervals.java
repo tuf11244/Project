@@ -55,3 +55,34 @@ public class MergeIntervals {
         
     }
 }
+
+//class Solution {
+//    public int[][] merge(int[][] intervals) {
+//        // Sort the intervals by their start times
+//        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+//        List<int[]> list = new ArrayList<>();
+//
+//        // Initialize the current interval to the first one
+//        int[] currentInterval = intervals[0];
+//
+//        for (int i = 1; i < intervals.length; i++) {
+//            int[] nextInterval = intervals[i];
+//            // If current interval does not overlap with next
+//            if (currentInterval[1] < nextInterval[0]) {
+//                list.add(currentInterval); // Add to the result list
+//                currentInterval = nextInterval; // Move to the next interval
+//            } else {
+//                // Merge intervals
+//                currentInterval[1] = Math.max(currentInterval[1], nextInterval[1]);
+//            }
+//        }
+//
+//        // Add the last interval
+//        list.add(currentInterval);
+//
+//        // Convert list to 2D array
+//        return list.toArray(new int[list.size()][]);
+//    }
+//}
+//
+//}
