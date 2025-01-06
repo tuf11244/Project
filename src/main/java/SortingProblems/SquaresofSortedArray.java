@@ -28,4 +28,28 @@ public class SquaresofSortedArray {
         Arrays.sort(answer);
         return answer;
     }
+    
+    //O(n) approach 
+    public int[] sortedSquaresN(int[] nums) {
+        int n = nums.length;
+        int[] answer = new int[n];
+        int left = 0, right = n - 1;
+        int idx = n - 1;
+
+        while (left <= right) {
+            int leftSquare = nums[left] * nums[left];
+            int rightSquare = nums[right] * nums[right];
+
+            if (leftSquare > rightSquare) {
+                answer[idx] = leftSquare;
+                left++;
+            } else {
+                answer[idx] = rightSquare;
+                right--;
+            }
+            idx--;
+        }
+
+        return answer;
+    }
 }
