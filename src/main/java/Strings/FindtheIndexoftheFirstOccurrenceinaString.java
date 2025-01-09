@@ -37,5 +37,16 @@ public class FindtheIndexoftheFirstOccurrenceinaString {
         }
         return -1;
     }
-  
+    
+    public static int strStrMethod2(String haystack, String needle){ 
+     for(int i = 0; i <= haystack.length()-needle.length();i++){
+           String substring = haystack.substring(i,i+needle.length());
+
+           if(substring.equals(needle)){
+               return i;
+           }
+     }
+
+     return -1;
+	}
 }
