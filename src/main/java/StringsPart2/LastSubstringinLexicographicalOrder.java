@@ -74,5 +74,28 @@ public class LastSubstringinLexicographicalOrder {
     }
    
     
+    
+    public String lastSubstring2(String s) {
+        int n = s.length();
+        int i = 0, j = 1, step = 0; // Initialize pointers and step
+        
+        while (j + step < n) { 
+            char a = s.charAt(i + step); // Current character from candidate i
+            char b = s.charAt(j + step); // Current character from candidate j
+            
+            if (a == b) { // Case 1: Characters are equal
+                step++; // Continue comparing further
+            } else if (a < b) { // Case 2: Candidate j is better
+                i = Math.max(i + step + 1, j); // Update i to j
+                j = i + 1; // Reset j to explore the next candidate
+                step = 0; // Reset comparison offset
+            } else { // Case 3: Candidate i is still better
+                j = j + step + 1; // Move j to the next candidate
+                step = 0; // Reset comparison offset
+            }
+        }
+        
+        return s.substring(i); // Return the largest substring starting at i
+    }
    
 }

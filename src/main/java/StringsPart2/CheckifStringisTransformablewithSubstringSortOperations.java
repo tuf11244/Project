@@ -5,6 +5,7 @@
 package StringsPart2;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.*;
 /**
  * Date: 01/07/2023
  *https://leetcode.com/problems/check-if-string-is-transformable-with-substring-sort-operations
@@ -63,4 +64,46 @@ public class CheckifStringisTransformablewithSubstringSortOperations {
 	    return true;
 	    
 	}
+    
+    
+    public boolean isTranformable(String s, String t){
+        
+        // Create an array of queues for each digit
+        Queue<Integer> [] positions  = new Queue[10];
+        //Size is 10 because digits are between 0 to 9 
+        
+        for(int i = 0; i < positions.length;i++){
+            positions[i] = new LinkedList<>();
+        }
+        
+         // Fill the queues with the indices of each digit in the string `s`
+         for(int i = 0; i < s.length();i++){
+             //positions[s.charAt(i) - '0'] would point to the queue
+             int digit = s.charAt(i) - '0';
+             positions[digit].add(i);
+         }
+         
+          // Process each character in the target string `t`
+          for(int i = 0; i < t.length();i++){
+              int currentDigit = t.charAt(i) - '0';
+              
+               // If no occurrences of the digit exist in `s`, return false
+               if(positions[currentDigit].isEmpty()){
+                   return false;
+               }
+               
+               // Check if there are any smaller digits blocking the current one
+               for(int smallerDigit = 0; smallerDigit < currentDigit; smallerDigit++){
+                   if (!positions[smallerDigit].isEmpty() 
+                    && positions[smallerDigit].peek() < positions[currentDigit].peek()) {
+                    return false; // Smaller digit blocks the current digit
+                }
+               }
+               
+               // Remove the used occurrence of the current digit
+            positions[currentDigit].poll();
+          }
+          
+          return true;
+    }
 }
