@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * Date: 12/20/2023
  *https://leetcode.com/problems/number-of-substrings-with-only-1s/
+ * https://leetcode.com/problems/number-of-zero-filled-subarrays/
  * @author parth
  */
 public class NumberofSubstringswithonly1s {

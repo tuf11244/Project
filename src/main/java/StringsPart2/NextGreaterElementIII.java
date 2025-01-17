@@ -6,6 +6,7 @@ package StringsPart2;
 
 /**
  *https://leetcode.com/problems/next-greater-element-iii/
+ * https://leetcode.com/problems/next-permutation/
  * Date: 12/20/2023
  * @author parth
  */
