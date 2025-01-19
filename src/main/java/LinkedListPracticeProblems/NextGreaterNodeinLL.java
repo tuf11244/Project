@@ -11,6 +11,7 @@ import java.util.Stack;
 /**
  *Date: 11/09/2023
  * https://leetcode.com/problems/next-greater-node-in-linked-list/
+ * Solved it by myself on 01/19/2025 check leetcode
  * @author parth
  */
 public class NextGreaterNodeinLL {
