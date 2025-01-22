@@ -13,65 +13,42 @@ public class SplitStringtoMakePalindrome {
 
   public static void main(String[] args) {
 		System.out.println("Hello World");
-		System.out.println(checkPalindromeFormation("ulacfd","jizalu"));
+		//System.out.println(checkPalindromeFormationOp("xxxxf","xecab"));
 		
 	}
-	public static boolean checkPalindromeFormation(String a,String b){
-	    if(a.length() == 1 && b.length() == 1){
-	        return true;
-	    }
-	    for(int i = 0; i < a.length();i++){
-	        String aprefix = a.substring(0,i+1);
-	        String asuffix = a.substring(i+1);
-	        String bprefix = b.substring(0,i+1);
-	        String bsuffix = b.substring(i+1);
-	        if(isPalindrome(aprefix+bsuffix) || isPalindrome(bprefix+asuffix)){
-	            return true;
-	        }
-	    }
-	    return false;
-	}
-	public static boolean isPalindrome(String result){
-	    return result.equals(reverse(result));
-	}
-	public static String reverse(String s){
-	    String reverse = "";
-	    for(int i = s.length()-1; i >= 0;i--){
-	        reverse = reverse + s.charAt(i);
-	    }
-	    return reverse;
-	}
-   
-}
-
-//Optimized Method;
-class Solution {
-    public boolean checkPalindromeFormation(String a, String b) {
-        if(a.length() == 1 && b.length() == 1){
-	        return true;
-	    }
+	public boolean checkPalindromeFormation(String a, String b) {
+        // Check if there's any split that can make the strings form a palindrome
         return canFormPalindrome(a, b) || canFormPalindrome(b, a);
-	
     }
-    public  boolean canFormPalindrome(String a, String b) {
-        int len = a.length();
-
-        for (int i = 0; i < len / 2; i++) {
-            if (a.charAt(i) != b.charAt(len - 1 - i)) {
-                return isPalindrome(a.substring(i, len - i)) || isPalindrome(b.substring(i, len - i));
-            }
+    
+    // Helper function to check if a part of a and b can form a palindrome
+    private boolean canFormPalindrome(String a, String b) {
+        int left = 0;
+        int right = a.length() - 1;
+        
+        // Move inward and check for the symmetry of characters in both strings
+        while (left < right) {
+           if(a.charAt(left) == b.charAt(right)){
+               left++;
+               right--;
+           }else{
+               return isPalindrome(a.substring(left,right+1)) || isPalindrome(b.substring(left,right+1));
+           }
         }
-
+        return true; // If we reached the center, it's already a palindrome
+    }
+    
+    // Helper function to check if a part of the string is a palindrome
+    private boolean isPalindrome(String str) {
+        int left = 0;
+        int right = str.length()-1;
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
         return true;
     }
-    public  boolean isPalindrome(String result){
-	    return result.equals(reverse(result));
-	}
-	public  String reverse(String s){
-	    StringBuilder reverse = new StringBuilder();
-        for (int i = s.length() - 1; i >= 0; i--) {
-            reverse.append(s.charAt(i));
-        }
-        return reverse.toString();
-	}
 }
