@@ -18,13 +18,15 @@ public class PowerofThree {
         // TODO code application logic here
     }
     
-    public static boolean isPowerOfThree(int number){
-        if(number < 1){
+    public static boolean isPowerOfThree(int n){
+       if(n == 1){
+            return true;
+        }
+
+        if(n <= 0 || n % 3 != 0){
             return false;
         }
-//        if(number == 1){
-//            return true;
-//        }
-        return number == 1 || isPowerOfThree(number/3);
+        
+        return isPowerOfThree(n/3);
     }
 }
