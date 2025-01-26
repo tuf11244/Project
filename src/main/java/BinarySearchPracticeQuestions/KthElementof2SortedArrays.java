@@ -48,7 +48,7 @@ public class KthElementof2SortedArrays {
         int low = Math.max(0, k-n2);
         int end = Math.min(k,n1);
         int left = k;
-        while(low <= end){
+        
             while(low <= end){
             int mid1 = (low + end)/2;
             int mid2 = left - mid1;
@@ -81,7 +81,6 @@ public class KthElementof2SortedArrays {
             }else{
                  low = mid1 + 1;
             }
-        }
         }
         return 0;
     }
