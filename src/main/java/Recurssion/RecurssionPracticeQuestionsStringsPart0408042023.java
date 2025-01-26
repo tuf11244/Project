@@ -5,6 +5,7 @@
 package Recurssion;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -22,9 +23,11 @@ public class RecurssionPracticeQuestionsStringsPart0408042023 {
         //System.out.println(str.substring(2));
         //System.out.println(removeAllthea(str));  //Question 1
         //System.out.println(removetheString(str)); //Question 2
-        System.out.println(subSequence(" ","abc")); //Question 4
+        //System.out.println(subSequence(" ","abc")); //Question 4
         //System.out.println(subSequencewithAscii("","abc")); //Question 5
         // TODO code application logic here
+        
+        printSubsequence("abc","");
     }
     
     //Question 1: Remove all the a's in the String 
@@ -99,6 +102,38 @@ public class RecurssionPracticeQuestionsStringsPart0408042023 {
         
         return first; 
        
+        
+    }
+    
+    //Pepcoding easy format
+    public static List<String> getSubsequence(String s){
+         if(s.length() == 0){
+             List<String> list = new ArrayList<>();
+             list.add("");
+             return list;
+         }
+         char ch = s.charAt(0);
+         List<String> remaining = getSubsequence(s.substring(1));
+         
+         List<String> result = new ArrayList<>();
+         
+         for(int i = 0; i < remaining.size();i++){
+              result.add(""+remaining.get(i));
+              result.add(ch+remaining.get(i));
+         }
+         
+         return result;
+     }
+    
+    public static void printSubsequence(String s,String unprocessed){
+        if(s.length() == 0){
+            System.out.println(unprocessed);
+            return;
+        }
+        
+        printSubsequence(s.substring(1), unprocessed + s.charAt(0));
+        printSubsequence(s.substring(1),unprocessed);
+        
         
     }
     

@@ -16,14 +16,14 @@ public class Permutations08082023 {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-       // permutations("","parth");
+       // permutations("","abc");
       //  System.out.println(permutationsList("","parth"));
        // System.out.println(permutationsList("","parth").size());
-      // permutationswithSpaces("A","BCD");
+       permutationswithSpaces("A","BCD");
        //permutationswithCases("","abc");
        ArrayList<String> answer = new ArrayList<>();
-       permutationswithLetterCase("","a1B2",answer);
-        System.out.println(answer);
+//       permutationswithLetterCase("","a1B2",answer);
+        //System.out.println(answer);
         // TODO code application logic here
     }
     

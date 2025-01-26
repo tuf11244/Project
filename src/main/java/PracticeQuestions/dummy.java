@@ -27,7 +27,13 @@ public class dummy {
         
        
         System.out.println(l1.equals(l2));
-        System.out.println(minSwap("1234","3412"));
+      //  System.out.println(minSwap("1234","3412"));
+        
+//        for(String s : getSubsequence("abc")){
+//            System.out.println(s);
+//        }
+        
+        System.out.println(getSubsequence("abc"));
     }
     
      public static int minSwap(String s,String t)
@@ -66,4 +72,25 @@ public class dummy {
     }
     return swap;
 }
+     public static List<String> getSubsequence(String s){
+         if(s.length() == 0){
+             List<String> list = new ArrayList<>();
+             list.add("");
+             return list;
+         }
+         char ch = s.charAt(0);
+         List<String> remaining = getSubsequence(s.substring(1));
+         
+         List<String> result = new ArrayList<>();
+         
+         for(int i = 0; i < remaining.size();i++){
+              result.add(""+remaining.get(i));
+              result.add(ch+remaining.get(i));
+         }
+         
+         return result;
+     }
 }
+     
+     //
+  

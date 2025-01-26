@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  *Date: 01/01/2024
+ * https://leetcode.com/problems/permutations/
  * https://leetcode.com/problems/permutations-ii/
  * @author parth
  */
@@ -18,6 +19,31 @@ public class PermutationsII {
    
     public static void main(String args[]) {
         // TODO code application logic here
+    }
+    
+    public List<List<Integer>> permute(int[] nums) {
+      List<List<Integer>> answer = new ArrayList<>();
+      boolean[] used = new boolean[nums.length];
+
+      generatePermutations(nums,answer,used,new ArrayList<>());
+        return answer;
+    }
+
+    public void generatePermutations(int[] nums, List<List<Integer>> answer, boolean[] used, List<Integer> temp){
+        if(temp.size() == nums.length){
+            answer.add(new ArrayList<>(temp));
+            return;
+        }
+
+        for(int i = 0; i < nums.length;i++){
+            if(used[i] == false){
+                used[i] = true;
+                temp.add(nums[i]);
+                generatePermutations(nums,answer,used,temp);
+                used[i] = false;
+                temp.remove(temp.size()-1);
+            }
+        }
     }
     public static List<List<Integer>> permuteUnique(int[] nums) {
         List<List<Integer>> answer = new ArrayList<>();
