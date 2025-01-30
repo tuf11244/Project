@@ -48,20 +48,20 @@ public class CrossWordPuzzle {
     }
     public static void solve(char[][] board, String[] words, int pointer){
         String word = words[pointer];
-        if(pointer == words.length-1){
+        if(pointer == words.length){
             print(board);
             return;
         }
         for(int i = 0; i < board.length;i++){
             for(int j = 0; j < board[0].length;j++){
                 if(board[i][j] == '-' || board[i][j] == word.charAt(0)){
-                    if(canPlaceHorizontally(board,word,i,j) && isValid(board,i,j)){
+                    if(canPlaceHorizontally(board,word,i,j)){
                      boolean[] wePlaced = placeHorizontally(board,word,i,j);
                         solve(board,words,pointer+1);
                         unplaceHorizontally(board,wePlaced,i,j);
                     }
                 }
-                    if(canPlaceVertically(board,word,i,j) && isValid(board,i,j)){
+                    if(canPlaceVertically(board,word,i,j)){
                      boolean[] wePlaced  = placeVertically(board,word,i,j);
                         solve(board,words,pointer+1);
                         unplaceVertically(board,wePlaced,i,j);
@@ -69,12 +69,8 @@ public class CrossWordPuzzle {
             }
         }
     }
-    public static boolean isValid(char[][] board, int row, int column){
-        return row >= 0 && row < board.length && column >= 0 && column < board[0].length;
-    }
-    
+   
     //canPlaceHorizontally Function 
-    
     public static boolean canPlaceHorizontally(char[][] board, String word, int i, int j){
         //check left side
         if(j-1 >= 0 && board[i][j-1] != '+'){
