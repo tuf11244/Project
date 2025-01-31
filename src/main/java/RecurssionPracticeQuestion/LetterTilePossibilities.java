@@ -14,75 +14,23 @@ import java.util.ArrayList;
 public class LetterTilePossibilities {
 
    
-    public static void main(String args[]) {
-        ArrayList<String> answers = subsets("","AAABBC");
-        System.out.print(answers + " ");
-        System.out.println("");
-        System.out.print(removeDuplicates(answers) + " ");
-        ArrayList<String> removeDuplicates = removeDuplicates(answers);
-        permutationsCount(removeDuplicates);
-        //System.out.println("");
-    }
-    //Same as printing subsequences
-    public static ArrayList<String> subsets(String processed, String unprocessed){
-        if(unprocessed.isEmpty()){
-         ArrayList<String> subsets = new ArrayList<>();
-         subsets.add(processed);
-         return subsets;
+    public int numTilePossibilities(String tiles) {
+        int[] count = new int[26];  // Frequency array for letters
+        for (char c : tiles.toCharArray()) {
+            count[c - 'A']++;
         }
-        char ch = unprocessed.charAt(0);
-        String first = processed + ch;
-        String second = processed;
-        //Recurssion Calls
-       ArrayList<String> left =  subsets(first,unprocessed.substring(1));
-       ArrayList<String> right = subsets(second,unprocessed.substring(1));
-        left.addAll(right);
-        return left;
+        return backtrack(count);
     }
-    public static ArrayList<String> removeDuplicates(ArrayList<String> answers){
-        ArrayList<String> removeDuplicates = new ArrayList<>();
-        
-        for(String S : answers){
-            if(removeDuplicates.contains(S) || S.isEmpty()){
-                continue;
-            }
-            else{
-                removeDuplicates.add(S);
+
+    private int backtrack(int[] count) {
+        int sum = 0;
+        for (int i = 0; i < 26; i++) {
+            if (count[i] > 0) {
+                count[i]--;  // Use one character
+                sum += 1 + backtrack(count);  // Count current string + recursive calls
+                count[i]++;  // Restore character frequency
             }
         }
-        return removeDuplicates;
-    }
-    public static void permutationsCount(ArrayList<String> removeDuplicates){
-        ArrayList<String> permutations = new ArrayList<>();
-        for(String x : removeDuplicates){
-            permutations("",x,permutations);
-        }
-        //System.out.println(permutations);
-        numTilePossibilities(permutations);
-    }
-    private static void permutations(String processed,String unprocessed, ArrayList<String> permutations){
-        if(unprocessed.isEmpty()){
-            permutations.add(processed);
-            return;
-        }
-        char ch = unprocessed.charAt(0);
-       for(int i = 0; i <= processed.length();i++){
-           String first = processed.substring(0,i);
-           String second = processed.substring(i, processed.length());
-           permutations(first+ch+second,unprocessed.substring(1),permutations);
-       }
-    }
-    
-    public static void numTilePossibilities(ArrayList<String> permutations){
-        ArrayList<String> finalAnswer = new ArrayList<>();
-        for(String w : permutations){
-            if(finalAnswer.contains(w)){
-                continue;
-            }else{
-                finalAnswer.add(w);
-            }           
-        }
-        System.out.println("");
-        System.out.println("The total tile possibilites are " + finalAnswer.size());
+        return sum;
     }
 }

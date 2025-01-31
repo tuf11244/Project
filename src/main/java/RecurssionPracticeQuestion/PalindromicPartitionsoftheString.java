@@ -23,6 +23,7 @@ public class PalindromicPartitionsoftheString {
             System.out.println(processed);
             return;
         }
+        //System.out.println(processed);
         for(int i = 0; i < unprocessed.length();i++){
             String prefix = unprocessed.substring(0,i+1);
             String remaining = unprocessed.substring(i+1);
