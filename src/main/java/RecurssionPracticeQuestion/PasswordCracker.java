@@ -18,8 +18,8 @@ public class PasswordCracker {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        List<String> passwords = List.of("ab","ba");
-        String attempt = "aba";
+        List<String> passwords = List.of("abra","ka", "dabra");
+        String attempt = "abrakadabra";
         String result = passwordCracker(passwords, attempt);
         System.out.println(result);
     }
