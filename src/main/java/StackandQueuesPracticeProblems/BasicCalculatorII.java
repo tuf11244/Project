@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
-package StringsPart2;
+package StackandQueuesPracticeProblems;
 import java.util.Stack;
 /**
  *https://leetcode.com/problems/basic-calculator-ii/
