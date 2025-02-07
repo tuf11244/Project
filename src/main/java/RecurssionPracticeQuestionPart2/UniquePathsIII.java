@@ -5,67 +5,59 @@
 package RecurssionPracticeQuestionPart2;
 
 /**
- *https://leetcode.com/problems/unique-paths-iii/
- * Date: 11/14/2023
+ *Date: 10/03/2024
+ * https://leetcode.com/problems/unique-paths-iii/
  * @author parth
  */
 public class UniquePathsIII {
 
-    public static boolean visited[][];
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
-        int[][] grid = {
-            {1,0,0,0},
-            {0,0,0,0},
-            {0,0,2,-1}
-        };
-        visited = new boolean[grid.length][grid[0].length];
-        System.out.println(uniquePathsIII(grid));
+        // TODO code application logic here
     }
+    
     public static int uniquePathsIII(int[][] grid){
-        int emptycells = 0;
-        int row = 0;
-        int column = 0;
-        for(int i = 0; i < grid.length ;i++){
-            for(int j = 0; j < grid[0].length;j++){
-               if(grid[i][j] == 0){
-                  emptycells = emptycells + 1;
-               }
-               else if(grid[i][j] == 1){
-                  row = i;
-                  column = j;
-               }
-            }
-        }
-         return uniquePathHelper(grid,row,column,emptycells);
-    }
-    public static boolean isValid(int[][] grid, int row, int column){
-        return row >= 0 && row < grid.length && column >= 0 && column < grid[0].length;
-    }
-    private static int uniquePathHelper(int[][] grid, int row, int column, int emptycells) {
-            if (!isValid(grid,row,column)|| grid[row][column] == -1 || visited[row][column]){
-                return 0;
-            }
-               
-            if (grid[row][column] == 2)
-                if(emptycells == -1){
-                    return 1;
-                }else{
-                    return 0;
+       int startX = -1, startY = -1, validCells = 1; // Count the starting point as valid
+        
+        // Find the start and count valid cells
+        for(int i = 0; i < grid.length; i++) {
+            for(int j = 0; j < grid[0].length; j++) {
+                if(grid[i][j] == 1) { 
+                    startX = i;
+                    startY = j;
+                } else if(grid[i][j] == 0) {
+                    validCells++; // Count all empty cells as valid
                 }
-            //grid[row][column] = -1;
-            visited[row][column] = true;
-            emptycells = emptycells - 1;
-            int totalPaths = uniquePathHelper(grid, row + 1, column, emptycells) +
-                    uniquePathHelper(grid, row, column + 1, emptycells) +
-                    uniquePathHelper(grid, row - 1, column, emptycells) +
-                    uniquePathHelper(grid, row, column - 1, emptycells);
-
-           // grid[row][column] = 0; // backtrack
-           visited[row][column] = false;
-            emptycells = emptycells +1;
-
-            return totalPaths;
+            }
         }
+        return backtrack(grid, startX, startY, validCells);
     }
-   
 
+    private static int backtrack(int[][] grid, int x, int y, int validCells) {
+        if(!isValid(grid, x, y) || grid[x][y] == -1) return 0; // Invalid or visited cell
+        
+        // If we've reached the end and visited all valid cells
+        if(grid[x][y] == 2) {
+            return validCells == 0 ? 1 : 0;
+        }
+        
+        // Mark the cell as visited
+        grid[x][y] = -1;
+        int paths = backtrack(grid, x + 1, y, validCells - 1) + 
+                    backtrack(grid, x - 1, y, validCells - 1) +
+                    backtrack(grid, x, y + 1, validCells - 1) +
+                    backtrack(grid, x, y - 1, validCells - 1);
+        
+        // Unmark the cell (backtrack)
+        grid[x][y] = 0;
+        
+        return paths;
+    }
+    
+    public static boolean isValid(int[][] grid, int row, int col){
+        return row >= 0 && row < grid.length && col >= 0 && col < grid[0].length;
+    }
+            
+}
