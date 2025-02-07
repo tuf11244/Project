@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
-package RecurssionPracticeQuestionPart2;
+package MathsforDSA;
 
 /**
  *https://leetcode.com/problems/reach-a-number/

@@ -29,7 +29,7 @@ public class PartitiontoKequalSumSubsets {
         
         int subsetSum = numsSum / k;
         
-        Arrays.sort(nums); // Reverse the array to start with the largest elements
+        
         
         boolean[] visited = new boolean[nums.length];
         
