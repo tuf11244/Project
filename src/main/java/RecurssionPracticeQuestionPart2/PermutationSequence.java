@@ -1,57 +1,48 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
- */
 package RecurssionPracticeQuestionPart2;
-//https://leetcode.com/problems/permutation-sequence/
+
 import java.util.ArrayList;
-import java.util.Collections;
-/**
- *
- * @author parth
- */
+import java.util.List;
+
 public class PermutationSequence {
+    static int[] fact; // Array to store precomputed factorials
 
     public static void main(String[] args) {
-        System.out.println("Hello World");
-	String answer = makeString(9,"");
-        ArrayList<String> list = new ArrayList<>();
+        System.out.println(getPermutation(4, 9)); // Example test case
+    }
 
-           permutations("",answer,list);
-            Collections.sort(list); 
-            System.out.println(list.size());
+    public static String getPermutation(int n, int k) {
+        String answer = "";
+        List<Integer> digits = new ArrayList<>();
 
-            String result = getPermutation(list,116907);
-            System.out.println(result);
-	}
-	public static String makeString(int n,String answer){
-	    if(n == 1){
-	        answer = answer + Integer.toString(n);
-	        return answer;
-	    }
-	    answer = answer + Integer.toString(n);
-	    return makeString(n-1,answer);
-	}
-	public static void permutations(String processed,String unprocessed, ArrayList<String> list){
-	    if(unprocessed.length() == 0){
-	        list.add(processed);
-	        return;
-	    }
-	    char ch = unprocessed.charAt(0);
-	    for(int i = 0; i <= processed.length();i++){
-	        String first = processed.substring(0,i);
-	        String second = processed.substring(i,processed.length());
-	        permutations(first+ch+second,unprocessed.substring(1),list);
-	    }
-	}
-	public static String getPermutation(ArrayList<String> list, int k){
-	    for(int i = 0; i < list.size();i++){
-	        if(i == k-1){
-	            return list.get(i);
-	        }
-	    }
-	    return "null";
-	}
-	
+        // Precompute factorials
+        fact = new int[n + 1];
+        fact[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            fact[i] = fact[i - 1] * i;
+            digits.add(i);
+        }
+
+        return helper(answer, digits, n, k);
+    }
+
+    public static String helper(String answer, List<Integer> digits, int n, int k) {
+        if (n == 1) {
+            answer += digits.get(0);
+            return answer;
+        }
+
+        // Calculate the index
+        int index = k / fact[n - 1];
+
+        if (k % fact[n - 1] == 0) {
+            index--;
+        }
+
+        answer += digits.get(index);
+        digits.remove(index);
+
+        k -= fact[n - 1] * index;
+
+        return helper(answer, digits, n - 1, k);
+    }
 }
-
