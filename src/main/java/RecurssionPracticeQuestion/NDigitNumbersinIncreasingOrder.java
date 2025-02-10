@@ -43,4 +43,19 @@ public class NDigitNumbersinIncreasingOrder {
             increasingNumberHelper(i+1,N-1,a,answer);
         }
     }
+    
+    /* Can also be solved using backtracking
+    private static void increasingNumberHelper(int last, int N, StringBuilder sb, ArrayList<Integer> answer){
+        //Base Case : When all the slots are filled
+        if(N == 0){
+          answer.add(Integer.valueOf(sb.toString()));
+        return;
+        }
+        for(int i = last; i<=9;i++){
+                sb.append(i);
+                increasingNumberHelper(i+1,N-1,sb,answer);
+                sb.deleteCharAt(sb.length()-1);
+        }
+    }
+    */
 }
