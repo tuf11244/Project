@@ -34,3 +34,31 @@ public class LetterTilePossibilities {
         return sum;
     }
 }
+
+
+/* Easy way but use space
+public int numTilePossibilities(String tiles) {
+       HashSet<String> set = new HashSet<>();
+       StringBuilder sb = new StringBuilder();
+       boolean[] used = new boolean[tiles.length()];
+
+        backtrack(tiles,set,sb,used);
+       return set.size()-1;
+    }
+
+    public void backtrack(String tiles, HashSet<String> set, StringBuilder sb, boolean[] used){
+
+        set.add(sb.toString());
+
+        for(int i = 0; i < tiles.length();i++){
+            if(used[i] == false){
+                used[i] = true;
+                sb.append(tiles.charAt(i));
+                backtrack(tiles,set,sb,used);
+                used[i] = false;
+                sb.deleteCharAt(sb.length()-1);
+            }
+        }
+    }
+
+*/
