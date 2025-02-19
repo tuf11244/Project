@@ -1,4 +1,4 @@
-package LinkedListPracticeProblems;
+package LambdaExpression;
 import java.util.*;
 
 /**
