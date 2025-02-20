@@ -1,4 +1,4 @@
-package LambdaExpression;
+package LinkedListPracticeProblems;
 import java.util.*;
 
 /**
@@ -18,15 +18,15 @@ public class AllOneDataStructure {
 
 class AllOne {
     
-    private HashMap<String, Node> hm;  // Maps each key to its respective node in the doubly linked list
-    private Node head;  // Dummy node at the start of the linked list
-    private Node tail;  // Dummy node at the end of the linked list
+    private HashMap<String, Allone> hm;  // Maps each key to its respective node in the doubly linked list
+    private Allone head;  // Dummy node at the start of the linked list
+    private Allone tail;  // Dummy node at the end of the linked list
     
     // Constructor to initialize the data structure
     public AllOne() {
         hm = new HashMap<>();
-        head = new Node(0); // Dummy Node (count = 0)
-        tail = new Node(0); // Dummy Node (count = 0)
+        head = new Allone(0); // Dummy Allone (count = 0)
+        tail = new Allone(0); // Dummy Allone (count = 0)
         
         head.next = tail;  // Connect head to tail
         tail.previous = head;  // Connect tail to head
@@ -42,7 +42,7 @@ class AllOne {
             head.next.keys.add(key);  // Add the key to the set of keys with count = 1
             hm.put(key, head.next);  // Map the key to the node with count = 1
         } else {  // If the key exists in the HashMap
-            Node currentAd = hm.get(key);
+            Allone currentAd = hm.get(key);
             int currentCount = currentAd.count;
 
             // If the next node does not exist or does not have the required count, create it
@@ -70,7 +70,7 @@ class AllOne {
             return;
         }
         
-        Node currentAd = hm.get(key);
+        Allone currentAd = hm.get(key);
         int currentCount = currentAd.count;
         
         // Remove the key from the current node
@@ -110,8 +110,8 @@ class AllOne {
     }
     
     // Helper function to add a node after a given node with the specified count
-    private void addNode(Node prev, int count) {
-        Node newNode = new Node(count);  // Create a new node with the specified count
+    private void addNode(Allone prev, int count) {
+        Allone newNode = new Allone(count);  // Create a new node with the specified count
         
         newNode.next = prev.next;  // Link the new node to the next node
         prev.next.previous = newNode;  // Update the previous node's pointer to the new node
@@ -121,21 +121,21 @@ class AllOne {
     }
     
     // Helper function to remove a node from the list
-    private void removeNode(Node node) {
+    private void removeNode(Allone node) {
         node.previous.next = node.next;  // Link the previous node to the next node
         node.next.previous = node.previous;  // Link the next node to the previous node
     }
 }
 
-class Node {
+class Allone {
     
     int count;  // The count or frequency of keys in this node
     LinkedHashSet<String> keys;  // Set of keys that have the same count
-    Node previous;  // Pointer to the previous node
-    Node next;  // Pointer to the next node
+    Allone previous;  // Pointer to the previous node
+    Allone next;  // Pointer to the next node
     
     // Constructor to initialize the node with a given count
-    public Node(int count) {
+    public Allone(int count) {
         this.count = count;
         this.keys = new LinkedHashSet<>();  // Initialize the set to store keys
     }
