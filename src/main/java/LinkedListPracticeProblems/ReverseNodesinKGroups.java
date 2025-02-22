@@ -13,9 +13,9 @@ import java.util.*;
 public class ReverseNodesinKGroups {
     
     // Instance variables for managing the final reversed list
-    private ListNode answer; // Stores the head of the final reversed linked list
+    private Node answer; // Stores the head of the final reversed linked list
     private boolean toggle;  // Used to track whether this is the first reversed group
-    private ListNode EndNode; // Stores the last node of the reversed portion
+    private Node EndNode; // Stores the last node of the reversed portion
 
     // Constructor to initialize the class variables
     public ReverseNodesinKGroups() {
@@ -30,17 +30,17 @@ public class ReverseNodesinKGroups {
      * @param k The group size for reversal.
      * @return The modified linked list after reversing every k nodes.
      */
-    public ListNode reverseKGroup(ListNode head, int k) {
-        ListNode temp = head; // Pointer to traverse the linked list
+    public Node reverseKGroup(Node head, int k) {
+        Node temp = head; // Pointer to traverse the linked list
         int count = 0; // Counts the number of nodes in the current group
-        ListNode startNode = head; // Pointer to the start of the current k-group
+        Node startNode = head; // Pointer to the start of the current k-group
         toggle = true; // Track the first k-group
 
         while (temp != null) { // Traverse through the linked list
             count++; // Increment count for the current group
 
             if (count == k) { // When k nodes are found
-                ListNode newNode = temp.next; // Store the next node after k-group
+                Node newNode = temp.next; // Store the next node after k-group
                 temp.next = null; // Break the link to isolate the k-group
 
                 addNode(startNode); // Reverse the k-group and attach it
@@ -69,9 +69,9 @@ public class ReverseNodesinKGroups {
      * Reverses the k-sized group and appends it to the result.
      * @param node The starting node of the k-group.
      */
-    public void addNode(ListNode node) {
-        ListNode reverseNode = reverse(node); // Reverse the k-group
-        ListNode endNode = getEndNode(reverseNode); // Get the last node of the reversed k-group
+    public void addNode(Node node) {
+        Node reverseNode = reverse(node); // Reverse the k-group
+        Node endNode = getEndNode(reverseNode); // Get the last node of the reversed k-group
 
         if (toggle) { // If this is the first reversed group, set the answer
             answer = reverseNode;
@@ -88,12 +88,12 @@ public class ReverseNodesinKGroups {
      * @param head The head of the list to be reversed.
      * @return The new head after reversal.
      */
-    public ListNode reverse(ListNode head) {
-        ListNode prev = null; // Stores the previous node
-        ListNode present = head; // Current node pointer
+    public Node reverse(Node head) {
+        Node prev = null; // Stores the previous node
+        Node present = head; // Current node pointer
 
         while (present != null) { // Traverse through the list
-            ListNode next = present.next; // Store next node
+            Node next = present.next; // Store next node
             present.next = prev; // Reverse the link
             prev = present; // Move prev forward
             present = next; // Move present forward
@@ -107,8 +107,8 @@ public class ReverseNodesinKGroups {
      * @param head The head of the list.
      * @return The last node.
      */
-    public ListNode getEndNode(ListNode head) {
-        ListNode temp = head; // Pointer to traverse the list
+    public Node getEndNode(Node head) {
+        Node temp = head; // Pointer to traverse the list
 
         while (temp.next != null) { // Traverse until the last node
             temp = temp.next;
@@ -121,17 +121,17 @@ public class ReverseNodesinKGroups {
 /**
  * Definition for singly-linked list nodes.
  */
-class ListNode {
+class Node {
     int val;
-    ListNode next;
+    Node next;
 
     // Constructor for a single node
-    public ListNode(int val) {
+    public Node(int val) {
         this.val = val;
     }
 
     // Constructor for a node with a next pointer
-    public ListNode(int val, ListNode next) {
+    public Node(int val, Node next) {
         this.val = val;
         this.next = next;
     }

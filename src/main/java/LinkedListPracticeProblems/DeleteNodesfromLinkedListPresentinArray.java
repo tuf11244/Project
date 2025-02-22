@@ -18,7 +18,7 @@ public class DeleteNodesfromLinkedListPresentinArray {
         // TODO code application logic here
     }
     
-    public ListNode modifiedList(int[] nums, ListNode head) {
+    public Node modifiedList(int[] nums, Node head) {
         HashSet<Integer> set = new HashSet<>();
         
         // Add all nums to the set
@@ -27,10 +27,10 @@ public class DeleteNodesfromLinkedListPresentinArray {
         }
         
         // Use a dummy node to simplify edge case handling
-        ListNode dummy = new ListNode(-1);
+        Node dummy = new Node(-1);
         dummy.next = head;
-        ListNode prev = dummy;
-        ListNode current = head;
+        Node prev = dummy;
+        Node current = head;
         
         // Traverse the linked list
         while (current != null) {
