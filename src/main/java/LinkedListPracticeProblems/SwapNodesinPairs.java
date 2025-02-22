@@ -88,7 +88,7 @@ public class SwapNodesinPairs {
         
         LL.display();
         
-        LL.swapinPairs();
+       // LL.swapinPairs();
         
         System.out.println("");
         

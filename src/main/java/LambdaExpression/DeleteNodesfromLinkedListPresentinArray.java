@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
-package LinkedListPracticeProblems;
+package LambdaExpression;
 import java.util.*;
 /**
  *Date: 09/05/2024
@@ -50,11 +50,11 @@ public class DeleteNodesfromLinkedListPresentinArray {
 }
 
  // Definition for singly-linked list.
-  class ListNode {
+  class Node {
       int val;
-      ListNode next;
-      ListNode() {}
-      ListNode(int val) { this.val = val; }
-      ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+      Node next;
+      Node() {}
+      Node(int val) { this.val = val; }
+      Node(int val, Node next) { this.val = val; this.next = next; }
   }
  
