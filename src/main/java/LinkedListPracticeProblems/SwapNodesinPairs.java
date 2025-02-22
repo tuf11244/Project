@@ -30,7 +30,7 @@ public class SwapNodesinPairs {
         }
     }
    
-    
+    /*
    public ListNode swapPairs(ListNode head) {
         if(head == null){
             return null;
@@ -66,7 +66,7 @@ public class SwapNodesinPairs {
         return head;
     }
 
-        
+   */     
 
     private class Node{
         int value;
