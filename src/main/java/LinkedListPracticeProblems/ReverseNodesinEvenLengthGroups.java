@@ -29,54 +29,68 @@ public class ReverseNodesinEvenLengthGroups {
             temp = temp.next;
         }
     }
-    public void reverseNodes(){
-        reverseNodes(head);
-    }
-    private void reverseNodes(Node node){
-        //Intitialize Dummy Node
-        Node dummy = new Node(0);
-        dummy.next = head;
+    public Node reverseEvenLengthGroups(Node head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        Node temp = head;
+        Node prevNode = null; // Tracks the last node of the previous group
+        int group = 1; // Group sizes start at 1
         
-        //Pointer to the end of previous revered group
-        Node previousGroupEnd = dummy;
-        
-        Node current = node;
-        
-        int groupLength = 1;
-        
-        while(current!=null){
-             // Check if the current group has even length
-            if (groupLength % 2 == 0) {
-                // Reverse the current even-length group
-                previousGroupEnd.next = reverse(previousGroupEnd.next, current.next);
-                
-                // Update the pointer to the end of the reversed group
-                previousGroupEnd = current;
+        while (temp != null) {
+            int count = 0;
+            Node groupStart = temp; // Start of the current group
+
+            // Count the nodes in this group
+            Node node = temp;
+            while (node != null && count < group) {
+                count++;
+                node = node.next;
             }
 
-            // Move to the next node
-            current = current.next;
-            
-            // Increment the length of the current group
-            groupLength++;
-        }
-        head = dummy.next;
-        
-    }
-    private Node reverse(Node start, Node end){
-        Node previous = null;
-        Node current = start;
-        Node next = current.next;
-        
-        while(current!=end){
-            current.next = previous;
-            previous = current;
-            current = next;
-            if(next!=null){
-                next = next.next;
+            // If group size is even, reverse it
+            if (count % 2 == 0) {
+                Node nextGroupStart = node; // Save start of next group
+                Node reversedGroup = reverse(groupStart, count); // Reverse groupStart for count nodes
+
+                // Connect previous group with reversed group
+                if (prevNode != null) {
+                    prevNode.next = reversedGroup;
+                } else {
+                    head = reversedGroup; // If it's the first group, update head
+                }
+
+                // Move `groupStart` to its new position
+                groupStart.next = nextGroupStart;
+                prevNode = groupStart;
+                temp = nextGroupStart;
+            } else {
+                // If not reversed, just move prevNode
+                prevNode = temp;
+                for (int i = 0; i < count; i++) {
+                    prevNode = temp;
+                    temp = temp.next;
+                }
             }
+
+            group++; // Move to the next group
         }
-        return previous;
+
+        return head;
+    }
+
+    // Reverse a linked list for a given length
+    private Node reverse(Node head, int k) {
+        Node prev = null;
+        Node present = head;
+        while (k-- > 0 && present != null) {
+            Node next = present.next;
+            present.next = prev;
+            prev = present;
+            present = next;
+        }
+        return prev; // New head of the reversed group
     }
 
     private class Node{
@@ -105,7 +119,7 @@ public class ReverseNodesinEvenLengthGroups {
        
        LL.display();
         System.out.println(" ");
-        LL.reverseNodes();
+        //LL.reverseNodes();
         LL.display();
     }
 }
