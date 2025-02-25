@@ -90,3 +90,55 @@ class LinkedList3{
         }       
     }
 }
+
+/*
+public void reorderList(ListNode head) {
+        if (head == null || head.next == null) return;
+
+        // Step 1: Find the middle of the LinkedList
+        ListNode middle = findMiddle(head);
+        
+        // Step 2: Reverse the Second half
+        ListNode reverseSecondHalf = reverse(middle.next);
+        middle.next = null; // Split the list into two halves
+        
+        // Step 3: Join them
+        merge(head, reverseSecondHalf);  // Pass head, NOT middle
+    }
+
+    public void merge(ListNode first, ListNode second) {
+        while (second != null) {
+            ListNode temp1 = first.next;
+            ListNode temp2 = second.next;
+
+            first.next = second;
+            second.next = temp1;
+
+            first = temp1; // Move forward
+            second = temp2;
+        }
+    }
+    public ListNode reverse(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+
+        while (curr != null) {
+            ListNode nextNode = curr.next; // Store next node
+            curr.next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+        return prev;
+    }
+    
+
+    public ListNode findMiddle(ListNode head) {
+        ListNode slow = head, fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+*/
