@@ -15,44 +15,48 @@ public class ImplementQueueUsingStacks {
 
     public static void main(String args[]) {
         QueueUsingStacks queue = new QueueUsingStacks();
-        queue.add(3);
-        queue.add(2);
-        queue.add(1);
         
-        System.out.println("Peek " + queue.peek());
-        System.out.println("Remove " + queue.remove());
-        System.out.println("Peek " + queue.peek());
+        
+        
         
       
    
 }
 }
 class QueueUsingStacks{
-    private Stack<Integer> first;
-    private Stack<Integer> second;
     
-    QueueUsingStacks(){
-        first = new Stack<>();
-        second = new Stack<>();
+     Stack<Integer> st1; // Main stack for push
+    Stack<Integer> st2; // Stack for pop and peek
+
+    public QueueUsingStacks(){
+        st1 = new Stack<>();
+        st2 = new Stack<>();
     }
-    public void add(int item){
-        first.push(item);
+    
+    public void push(int x) {
+        st1.push(x); // Simply push to st1
     }
-    public int remove(){
-        while(!first.empty()){
-            second.push(first.pop());
+    
+    public int pop() {
+        if (st2.isEmpty()){
+            while (!st1.isEmpty()) {
+                st2.push(st1.pop()); // Transfer elements only when needed
+            }
         }
-        int removed = second.pop();
-        while(!second.empty()){
-          first.push(second.pop());
+        return st2.pop();
     }
-        return removed;
-    }
-    public int peek(){
-        while(!first.empty()){
-            second.push(first.pop());
+    
+    public int peek() {
+        if (st2.isEmpty()) {
+            while (!st1.isEmpty()) {
+                st2.push(st1.pop()); // Transfer elements only when needed
+            }
         }
-        return second.peek();
+        return st2.peek();
+    }
+    
+    public boolean empty() {
+        return st1.isEmpty() && st2.isEmpty();
     }
     
 }

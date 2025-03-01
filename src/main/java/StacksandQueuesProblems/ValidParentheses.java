@@ -84,54 +84,43 @@ public class ValidParentheses {
        
 }
     //Method 3 for question 3 
-    public static  int minInsertions(String expression){
-        int count = 0; 
-        Stack<Character> stack = new Stack<>();
-        for(int i = 0; i < expression.length();i++){
-            char currentChar = expression.charAt(i);
-            if(currentChar == '('){
-                if(stack.empty()){
-                    stack.push(currentChar);
-                }else{
-                    if(stack.peek()== '('){
-                        stack.push(currentChar);
-                    }else{
-                        count = count + 1;
-                        stack.pop();
-                        stack.pop();
-                        stack.push(currentChar);
-                    }
+    public static  int minInsertions(String s){
+       int i = 0;
+        Stack<Character> st = new Stack<>();
+        int count = 0;
+
+        while (i < s.length()) {
+            char ch = s.charAt(i);
+
+            if (ch == '(') {
+                st.push(ch);
+            } else {
+                // Handling ')'
+                if (st.isEmpty()) {
+                    count++; // Need one '(' before this ')'
+                } else if (st.peek() == '(') {
+                    st.pop(); // Pair with '('
+                } else {
+                    count++; // Need an extra ')'
                 }
-            }else{
-                if(stack.empty()){
-                    count = count + 1;
-                    stack.push('(');
-                    stack.push(currentChar);
-                }else{
-                    if(stack.peek()== '('){
-                        stack.push(currentChar);
-                    }else{
-                        stack.pop();
-                        stack.pop();
-                    }
-                }
-                
-            }     
-                
-   }
-        if(stack.empty()){
-            return count;
-        }else{
-            while(!stack.empty()){
-                char top = stack.pop();
-                if(top == '('){
-                    count = count + 2;
-                }else{
-                    count = count + 1;
-                    stack.pop();
+
+                // Check next character
+                if (i + 1 < s.length() && s.charAt(i + 1) == ')') {
+                    i++; // Skip next ')'
+                } else {
+                    count++; // Need one more ')' to balance single ')'
                 }
             }
+
+            i++;
         }
+
+        // Each remaining '(' needs "2 )"
+        while (!st.isEmpty()) {
+            st.pop();
+            count += 2;
+        }
+
         return count;
    
 }

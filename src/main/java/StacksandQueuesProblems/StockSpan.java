@@ -6,6 +6,7 @@ package StacksandQueuesProblems;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Stack;
+import java.util.*;
 /**
  * Date: 09/11/2023
  *https://www.geeksforgeeks.org/the-stock-span-problem/
@@ -50,4 +51,33 @@ public class StockSpan {
         System.out.println(Arrays.toString(arr));
         System.out.println(queue);
     }
+    
+    
+    public ArrayList<Integer> calculateSpan(int[] arr) {
+        // write code here
+        
+        ArrayList<Integer> answer = new ArrayList<>();
+        Stack<Integer> st = new Stack<>();
+        
+        answer.add(1);
+        st.push(0); //we are storing indexes
+        
+        for(int i = 1; i < arr.length;i++){
+            
+            while (!st.isEmpty() && arr[st.peek()] <= arr[i]) {
+                st.pop();
+            }
+
+            if (st.isEmpty()) {
+                answer.add(i + 1); // If stack is empty, entire range contributes to span
+            } else {
+                answer.add(i - st.peek()); // Span is current index - last higher index
+            }
+
+            st.push(i); // Push current index
+        }
+        
+        return answer;
+    }
+    
 }
