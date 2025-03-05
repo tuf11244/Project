@@ -3,103 +3,110 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package StacksandQueuesProblems;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Stack;
 
 /**
- *Date: 09/11/2023
- * https://leetcode.com/problems/largest-rectangle-in-histogram/
+ * Date: 09/11/2023
+ * Problem: https://leetcode.com/problems/largest-rectangle-in-histogram/
  * @author parth
  */
 public class LargestAreaHistogram {
-
-    public static void main(String args[]) {
-        System.out.println("Hello World");
-        int[] arr = {6,2,5,4,5,1,6};
-        LinkedList<Integer> right = NearestSmallestElementToRight(arr);
-        LinkedList<Integer> left = NearestSmallestElementToLeft(arr);
-        LinkedList<Integer> width = widthofMaxHistogram(right,left);
-        int[] area = areaofMaxHistogram(arr,width);
-        System.out.println("Left Smallest Index " + left);
-        System.out.println("Right Smallest Index " + right);
-        System.out.println("Width of the Histogram " + width);
-        System.out.println("Area of the Histogram " + Arrays.toString(area));
-        System.out.println("Area of the maximum Histogram " + maxInArea(area));
-        // TODO code application logic here
-    }
-    public static LinkedList<Integer> NearestSmallestElementToLeft(int[] arr) {
-        Stack<Integer> stack = new Stack<>();
-        LinkedList<Integer> queue = new LinkedList<>();
-        Stack<Integer> indexStack = new Stack<>();
-        int falseIndex = -1;
-        for(int i = 0; i < arr.length;i++){
-         while (!stack.isEmpty() && arr[i] <= stack.peek()) {
-                stack.pop();
-                indexStack.pop();
-            }
-
-            if (stack.isEmpty()) {
-                queue.add(falseIndex);
-            } else {
-                queue.add(indexStack.peek());
-            }
-
-            stack.push(arr[i]);
-            indexStack.push(i);
-    }
-        return queue;
-}
-public static LinkedList<Integer> NearestSmallestElementToRight(int[] arr) {
-        Stack<Integer> stack = new Stack<>();
-        LinkedList<Integer> queue = new LinkedList<>();
-        Stack<Integer> indexStack = new Stack<>();
-        int falseIndex = 7;
-        for(int i = arr.length-1; i >= 0;i--){
-         while (!stack.isEmpty() && arr[i] <= stack.peek()) {
-                stack.pop();
-                indexStack.pop();
-            }
-
-            if (stack.isEmpty()) {
-                queue.add(falseIndex);
-            } else {
-                queue.add(indexStack.peek());
-            }
-
-            stack.push(arr[i]);
-            indexStack.push(i);
-    }
-    // Reverse the queue to get the correct order
-        LinkedList<Integer> reversedQueue = new LinkedList<>();
-        while (!queue.isEmpty()) {
-            reversedQueue.add(queue.removeLast());
-        }
-        return reversedQueue;
-
-    }
-public static LinkedList<Integer> widthofMaxHistogram(LinkedList<Integer> right, LinkedList<Integer> left){
-    LinkedList<Integer> width = new LinkedList<>();
-    for(int i = 0; i < right.size();i++){
-        width.add(right.get(i)-left.get(i)-1);
-    }
-    return width;
     
-}
-public static int[] areaofMaxHistogram(int[] arr, LinkedList<Integer> width){
-    int[] area = new int[arr.length];
-    for(int i = 0; i < arr.length;i++){
-        area[i] = arr[i] * width.get(i);
-    }
-    return area;
-}
-public static int maxInArea(int[] area){
-    int max = 0;
-    for(int i = 0; i < area.length;i++){
-        if(area[i] > max){
-            max = area[i];
+    /**
+     * Function to calculate the largest rectangular area in a histogram.
+     * @param heights an array representing the heights of histogram bars
+     * @return the maximum area of any rectangle in the histogram
+     */
+    public int largestRectangleArea(int[] heights) {
+        
+        // Arrays to store the nearest smaller index on the left and right
+        int[] nearestSmallerIdxOnLeft = function1(heights);
+        int[] nearestSmallerIdxOnRight = function2(heights);
+
+        int maxHeight = 0; // Variable to store the maximum rectangular area
+
+        // Iterate through each bar in the histogram
+        for(int i = 0; i < heights.length; i++){
+            // Calculate width using the nearest smaller elements on both sides
+            int width = nearestSmallerIdxOnRight[i] - nearestSmallerIdxOnLeft[i] - 1;
+            int heightOfHistogram = heights[i];
+
+            // Update the maximum area found so far
+            maxHeight = Math.max(maxHeight, heightOfHistogram * width);
         }
+
+        return maxHeight;
     }
-    return max;
-}
+
+    /**
+     * Function to find the index of the nearest smaller element to the left for each bar.
+     * @param heights array representing the histogram
+     * @return an array where arr[i] contains the index of the nearest smaller element on the left of heights[i]
+     */
+    public int[] function1(int[] heights) {
+        int[] arr = new int[heights.length]; // Array to store results
+
+        arr[0] = -1; // The first element has no smaller element on the left, so set it to -1
+
+        Stack<Integer> st = new Stack<>(); // Stack to maintain indices
+        st.push(0); // Push the first index
+
+        // Iterate through the heights array
+        for(int i = 1; i < heights.length; i++) {
+
+            // Pop elements from stack while they are greater than or equal to the current element
+            while(!st.isEmpty() && heights[st.peek()] >= heights[i]) {
+                st.pop();
+            }
+
+            // If stack is empty, it means there is no smaller element on the left
+            if(st.isEmpty()) {
+                arr[i] = -1;
+            } else {
+                arr[i] = st.peek(); // The top element is the nearest smaller element
+            }
+
+            st.push(i); // Push the current index onto the stack
+        }
+
+        return arr;
+    }
+
+    /**
+     * Function to find the index of the nearest smaller element to the right for each bar.
+     * @param heights array representing the histogram
+     * @return an array where arr[i] contains the index of the nearest smaller element on the right of heights[i]
+     */
+    public int[] function2(int[] heights) {
+        int[] arr = new int[heights.length]; // Array to store results
+
+        // The last element has no smaller element on the right, so set it to the length of the array
+        arr[arr.length - 1] = arr.length; 
+
+        Stack<Integer> st = new Stack<>(); // Stack to maintain indices
+        st.push(arr.length - 1); // Push the last index
+
+        // Iterate from right to left
+        for(int i = heights.length - 2; i >= 0; i--) {
+
+            // Pop elements from stack while they are greater than or equal to the current element
+            while(!st.isEmpty() && heights[st.peek()] >= heights[i]) {
+                st.pop();
+            }
+
+            // If stack is empty, it means there is no smaller element on the right
+            if(st.isEmpty()) {
+                arr[i] = heights.length; 
+            } else {
+                arr[i] = st.peek(); // The top element is the nearest smaller element
+            }
+
+            st.push(i); // Push the current index onto the stack
+        }
+
+        return arr;
+    }
 }
