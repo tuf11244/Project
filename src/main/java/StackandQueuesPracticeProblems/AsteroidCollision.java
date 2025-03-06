@@ -39,3 +39,4 @@ public class AsteroidCollision {
         return result;
     }
 }
+
