@@ -36,6 +36,54 @@ public class LongestValidParentheses {
     }
 
     return maxLength;
-}
+    }
+    
+    
+    public static int longestValidParenthesesConstantSpace(String input){
+        int open = 0;
+        int close = 0;
+        int maxLength = 0;
+        
+        //We traverse the string from 0 to n
+        for(int i = 0; i < input.length();i++){
+            char ch = input.charAt(i);
+            
+            if(ch == '('){
+                open++;
+            }else{
+                close++;
+            }
+            
+            if(open == close){ //Means it valid 
+                maxLength = Math.max(open+close,maxLength);
+            }else if(close > open){
+                //Reset the open and close 
+                open = 0;
+                close = 0;
+            }
+        }
+        
+        open = 0;
+        close = 0;
+        //We traverse the string from n to 0;
+        for(int i = input.length()-1; i >= 0; i--){
+            char ch = input.charAt(i);
+            
+            if(ch == '('){
+                open++;
+            }else{
+                close++;
+            }
+            
+            if(open == close){ //Means it valid 
+                maxLength = Math.max(open+close,maxLength);
+            }else if(open > close){
+                //Reset the open and close 
+                open = 0;
+                close = 0;
+            }
+        }
+        return maxLength;
+    }
 
 }

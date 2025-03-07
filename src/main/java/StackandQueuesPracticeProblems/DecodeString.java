@@ -21,31 +21,49 @@ public class DecodeString {
         System.out.println(decodeString("3[a]2[bc]"));
     }
      public static String decodeString(String s) {
+        Stack<String> st = new Stack<>();
         Stack<Integer> numStack = new Stack<>();
-        Stack<String> strStack = new Stack<>();
-        StringBuilder currentString = new StringBuilder();
-        int num = 0;
+        int i = 0;
 
-        for (char ch : s.toCharArray()) {
+        while (i < s.length()) {
+            char ch = s.charAt(i);
+
             if (Character.isDigit(ch)) {
-                num = num * 10 + (ch - '0');
-            } else if (ch == '[') {
-                numStack.push(num);
-                strStack.push(currentString.toString());
-                currentString = new StringBuilder();
-                num = 0;
-            } else if (ch == ']') {
-                StringBuilder decodedString = new StringBuilder(strStack.pop());
-                int repeatTimes = numStack.pop();
-                for (int i = 0; i < repeatTimes; i++) {
-                    decodedString.append(currentString);
+                int val = 0;
+                while (i < s.length() && Character.isDigit(s.charAt(i))) {
+                    val = val * 10 + (s.charAt(i) - '0');
+                    i++;
                 }
-                currentString = decodedString;
-            } else {
-                currentString.append(ch);
+                numStack.push(val);
+                i--; // Adjust for increment in loop
+            
+            } else if (ch == '[') {
+                st.push("["); // Push an opening bracket as a marker
+            } else if (ch == ']') {
+                // Construct the repeated string
+                StringBuilder sb = new StringBuilder();
+                while (!st.isEmpty() && !st.peek().equals("[")) {
+                    sb.insert(0, st.pop()); // Maintain order
+                }
+                st.pop(); // Remove the '[' marker
+
+                int count = numStack.pop();
+                String repeated = sb.toString().repeat(count); // Repeat the extracted string
+
+                st.push(repeated); // Push the expanded result back onto the stack
+            } else { 
+                // It's a letter, so push it onto the stack
+                st.push(String.valueOf(ch));
             }
+            i++;
         }
 
-        return currentString.toString();
+        // Construct final string from stack
+        StringBuilder result = new StringBuilder();
+        while (!st.isEmpty()) {
+            result.insert(0, st.pop()); // Maintain order
+        }
+
+        return result.toString();
     }
 }
