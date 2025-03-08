@@ -16,19 +16,24 @@ public class Pattern132 {
     }
 
     public static boolean find132pattern(int[] nums) {
+        if (nums.length < 3) return false;
+
         Stack<Integer> stack = new Stack<>();
-        int maxK = Integer.MIN_VALUE;
-        
+        int thirdElement = Integer.MIN_VALUE;  // Represents the "2" in the "132" pattern
+
+        // Traverse from right to left
         for (int i = nums.length - 1; i >= 0; i--) {
-            if (nums[i] < maxK) {
-                return true;
-            }
+            // If we find a "1" (nums[i] < thirdElement), return true
+            if (nums[i] < thirdElement) return true;
+
+            // Maintain a decreasing stack and find the potential "2"
             while (!stack.isEmpty() && nums[i] > stack.peek()) {
-                maxK = stack.pop();
+                thirdElement = stack.pop();  // Pop from stack → found a valid "2"
             }
-            stack.push(nums[i]);
+
+            stack.push(nums[i]);  // Push current element as potential "3"
         }
-        
+
         return false;
     }
 }
