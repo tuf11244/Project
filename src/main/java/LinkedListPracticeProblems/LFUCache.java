@@ -1,6 +1,5 @@
 package LinkedListPracticeProblems;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +19,7 @@ import java.util.Map;
 class LFUCache {
     int capacity; // Maximum number of elements in the cache
     int minFreq; // Tracks the minimum frequency in the cache
-    HashMap<Integer, Node> hm; // Stores key-to-node mapping
+    HashMap<Integer, CacheNode> hm; // Stores key-to-node mapping
     HashMap<Integer, DLL> freqMap; // Stores frequency-to-DoublyLinkedList mapping
 
     /**
@@ -43,7 +42,7 @@ class LFUCache {
             return -1; // Key does not exist in cache
         }
         
-        Node node = hm.get(key);
+        CacheNode node = hm.get(key);
         update(node); // Increase frequency and update cache
         return node.val;
     }
@@ -58,7 +57,7 @@ class LFUCache {
         if (capacity == 0) return; // Edge case: If cache has zero capacity, do nothing.
 
         if (hm.containsKey(key)) { // Key already exists
-            Node node = hm.get(key);
+            CacheNode node = hm.get(key);
             node.val = value; // Update value
             update(node); // Update frequency
             return;
@@ -66,7 +65,7 @@ class LFUCache {
 
         if (hm.size() == capacity) { // Cache is full, need to evict least frequently used node
             DLL minFreqList = freqMap.get(minFreq); // Get the DLL of least frequently used elements
-            Node nodeToRemove = minFreqList.removeTail(); // Remove least recently used node in that frequency
+            CacheNode nodeToRemove = minFreqList.removeTail(); // Remove least recently used node in that frequency
             hm.remove(nodeToRemove.key); // Remove from key-node map
             if (minFreqList.isEmpty()) { // If the list is empty, remove it from the frequency map
                 freqMap.remove(minFreq);
@@ -74,7 +73,7 @@ class LFUCache {
         }
 
         // Insert new node with frequency 1
-        Node newNode = new Node(key, value, 1);
+        CacheNode newNode = new CacheNode(key, value, 1);
         hm.put(key, newNode); // Store in key-node map
         minFreq = 1; // Reset minFreq to 1 since new node has frequency 1
 
@@ -87,7 +86,7 @@ class LFUCache {
      * Updates the frequency of a node when it is accessed.
      * @param node - The node whose frequency needs to be updated.
      */
-    private void update(Node node) {
+    private void update(CacheNode node) {
         int freq = node.freq;
         
         // Remove node from its current frequency list
@@ -107,12 +106,12 @@ class LFUCache {
 }
 
 /**
- * Node class represents a key-value pair in the LFU cache.
+ * CacheNode class represents a key-value pair in the LFU cache.
  * It contains frequency and doubly linked list pointers.
  */
-class Node {
+class CacheNode {
     int key, val, freq;
-    Node next, prev;
+    CacheNode next, prev;
 
     /**
      * Constructor initializes a new node.
@@ -120,7 +119,7 @@ class Node {
      * @param val - The value of the node.
      * @param freq - The frequency of the node.
      */
-    public Node(int key, int val, int freq) {
+    public CacheNode(int key, int val, int freq) {
         this.key = key;
         this.val = val;
         this.freq = freq;
@@ -132,14 +131,14 @@ class Node {
  * It helps efficiently insert, remove, and access elements.
  */
 class DLL {
-    Node head, tail;
+    CacheNode head, tail;
 
     /**
      * Constructor initializes an empty doubly linked list with dummy head and tail.
      */
     public DLL() {
-        head = new Node(0, 0, 0);
-        tail = new Node(0, 0, 0);
+        head = new CacheNode(0, 0, 0);
+        tail = new CacheNode(0, 0, 0);
         head.next = tail;
         tail.prev = head;
     }
@@ -148,7 +147,7 @@ class DLL {
      * Adds a node to the front of the DLL (Most recently used position).
      * @param node - The node to add.
      */
-    public void addNode(Node node) {
+    public void addNode(CacheNode node) {
         node.next = head.next;
         node.prev = head;
         head.next.prev = node;
@@ -159,7 +158,7 @@ class DLL {
      * Removes a node from the DLL.
      * @param node - The node to remove.
      */
-    public void removeNode(Node node) {
+    public void removeNode(CacheNode node) {
         node.prev.next = node.next;
         node.next.prev = node.prev;
     }
@@ -168,9 +167,9 @@ class DLL {
      * Removes and returns the least recently used (last) node in the DLL.
      * @return The removed node.
      */
-    public Node removeTail() {
+    public CacheNode removeTail() {
         if (isEmpty()) return null; // Edge case: Empty list
-        Node lastNode = tail.prev; // Last node before dummy tail
+        CacheNode lastNode = tail.prev; // Last node before dummy tail
         removeNode(lastNode); // Remove it
         return lastNode;
     }
