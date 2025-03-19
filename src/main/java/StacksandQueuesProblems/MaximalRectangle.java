@@ -91,7 +91,7 @@ public class MaximalRectangle {
 
         Stack<Integer> st = new Stack<>();
         st.push(arr.length-1);
-        for(int i = heights.length -2; i >= 0; i--){
+        for(int i = heights.length -2; i >= 0;i--){
 
                 while(!st.isEmpty() && heights[st.peek()] >= heights[i]){
                      st.pop();
