@@ -91,3 +91,39 @@ public class DiameterofBinaryTree {
         // TODO code application logic here
     }
 }
+/*
+PepCoding Method
+public int diameterOfBinaryTree(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        Pair p = helper(root);
+
+        return p.dia;
+        
+    }
+    public Pair helper(TreeNode root){
+        if(root == null){
+            Pair p = new Pair();
+            p.ht = -1;
+            p.dia = 0;
+            return p;
+        }
+
+        Pair left = helper(root.left);
+        Pair right = helper(root.right);
+
+        Pair answer = new Pair();
+        answer.ht = Math.max(left.ht,right.ht) + 1;
+        int factor1 = left.ht + right.ht + 2; //when root wants to be a part 
+        answer.dia = Math.max(factor1,Math.max(left.dia,right.dia));
+
+        return answer;
+    }
+}
+
+class Pair{
+    int ht;
+    int dia;
+}
+*/

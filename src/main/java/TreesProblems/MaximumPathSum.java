@@ -71,23 +71,43 @@ public class MaximumPathSum {
         return temp;
     }
     public int maximumPathSumLeafToLeaf(){
-        maximumPathSumLeaftoLeaf(root);
-        return result;
+        Pair p = maximumPathSumLeaftoLeaf(root);
+        return p.LTLMaxPathSum;
     }
-    private int maximumPathSumLeaftoLeaf(Node node){
-        if(node == null){
-            return 0;
-        }
-        int left = maximumPathSumLeaftoLeaf(node.left);
-        int right = maximumPathSumLeaftoLeaf(node.right);
+    private Pair maximumPathSumLeaftoLeaf(Node node){
         
-        int temp = Math.max(left, right) + node.value;
-        if(node.left == null && node.right == null){
-            temp = Math.max(temp,node.value);
+        if(node == null){
+            Pair p = new Pair();
+            p.LTLMaxPathSum = Integer.MIN_VALUE;
+            p.NTLMaxPathSum = Integer.MIN_VALUE;
+            return p;
         }
-        int answer = Math.max(temp,left+right+node.value);
-        result = Math.max(result, answer);
-        return temp;
+        
+        //Its a leaf Node
+        if(node.left == null && node.right == null){
+            Pair p = new Pair();
+            p.LTLMaxPathSum = Integer.MIN_VALUE; //since its a leaf node , a leaf to Leaf Max Path Sum cannot exits
+            p.NTLMaxPathSum = node.value;
+            
+            return p;
+        } 
+        
+        Pair left = maximumPathSumLeaftoLeaf(node.left);
+        Pair right = maximumPathSumLeaftoLeaf(node.right);
+        
+        Pair answer = new Pair();
+        answer.LTLMaxPathSum = Integer.MIN_VALUE;
+        answer.NTLMaxPathSum = Integer.MIN_VALUE;
+        
+        answer.LTLMaxPathSum = Math.max(left.LTLMaxPathSum,right.LTLMaxPathSum);
+        
+        if(node.left != null && node.right != null){
+            answer.LTLMaxPathSum = Math.max(answer.LTLMaxPathSum, left.NTLMaxPathSum + right.NTLMaxPathSum + node.value);
+        }
+        
+        answer.NTLMaxPathSum = Math.max(left.NTLMaxPathSum,right.NTLMaxPathSum) + node.value;
+        
+        return answer;
     }
     public boolean hasPathSum(){
         return hasPathSum(root,22);
@@ -106,7 +126,10 @@ public class MaximumPathSum {
     
     
     
-    
+    private class Pair{
+        int LTLMaxPathSum;
+        int NTLMaxPathSum;
+    }
     
     private class Node{
         int value;
