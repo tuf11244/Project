@@ -155,3 +155,66 @@ public class MaximumPathSum {
         System.out.println("Maximum Path sum from leaf node to leaf node " + tree.maximumPathSumLeafToLeaf());
     }
 }
+/*
+class Solution {
+    
+    public int maxPathSum(TreeNode root) {
+        // Call the helper function to compute the max path sum
+        Pair p = helper(root);
+        return p.NTNMaxPathSum; // Return the max node-to-node path sum
+    }
+
+    public Pair helper(TreeNode root) {
+        // Base case: If the node is null, return default values
+        if (root == null) {
+            Pair p = new Pair();
+            p.NTNMaxPathSum = Integer.MIN_VALUE; // Since there's no path, set it to the smallest possible value
+            p.RTNMaxPathSum = 0; // No contribution from an empty node
+            return p;
+        }
+
+        // Recursively compute left and right subtree results
+        Pair left = helper(root.left);
+        Pair right = helper(root.right);
+
+        Pair answer = new Pair();
+
+        // Calculate root-to-node max path sum
+        // Either take the current node alone or extend from left/right subtree
+        answer.RTNMaxPathSum = Math.max(root.val, Math.max(left.RTNMaxPathSum, right.RTNMaxPathSum) + root.val);
+       
+        // Calculate node-to-node max path sum
+        // This considers:
+        // 1. Max path sum from the left subtree
+        // 2. Max path sum from the right subtree
+        // 3. A new path that includes the root and both left and right subtree contributions
+        // 4. Just the root itself (in case it's the highest value alone)
+        // 5. The best root-to-node path sum (ensuring a path is always considered)
+        answer.NTNMaxPathSum = getMax(
+            left.NTNMaxPathSum,  // Max path in the left subtree
+            right.NTNMaxPathSum, // Max path in the right subtree
+            left.RTNMaxPathSum + root.val + right.RTNMaxPathSum, // Path through the root
+            root.val, // The root node alone
+            answer.RTNMaxPathSum // The best root-to-node path sum
+        );
+
+        return answer;
+    }
+
+    // Utility function to find the maximum value among multiple integers
+    public int getMax(int... arr) {
+        int max = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            max = Math.max(max, arr[i]);
+        }
+        return max;
+    }
+}
+
+// Helper class to store two values for each node
+class Pair {
+    int NTNMaxPathSum; // Node-to-Node Max Path Sum
+    int RTNMaxPathSum; // Root-to-Node Max Path Sum (includes root)
+}
+
+*/
