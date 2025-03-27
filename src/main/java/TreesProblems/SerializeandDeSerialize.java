@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package TreesProblems;
-
+import java.util.*;
 /**
  * Date: 09/29/2023
  *https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
@@ -11,7 +11,6 @@ package TreesProblems;
  */
 public class SerializeandDeSerialize {
     private Node root;
-    private int index;
     public SerializeandDeSerialize(){
             
         }
@@ -27,17 +26,26 @@ public class SerializeandDeSerialize {
     }
     public Node deserialize(String data){
        String[] values = data.split(","); //converting the string to array
-       return deserializehelper(values);
+       Queue<String> queue = new LinkedList<>();
+       
+       for(int i = 0; i < values.length;i++){
+           queue.add(values[i]);
+       }
+       return deserializehelper(queue);
     }
-    private Node deserializehelper(String[] values){
-        if(index >= values.length || values[index].equals("null")){
-            index = index + 1;
+    private Node deserializehelper(Queue<String> queue){
+        if(queue.isEmpty()){
             return null;
         }
-        Node node = new Node(Integer.parseInt(values[index]));
-        index = index + 1;
-        node.left = deserializehelper(values);
-        node.right = deserializehelper(values);
+        
+        String rem = queue.poll();
+        if(rem.equals("null")){
+            return null;
+        }
+        Node node = new Node(Integer.valueOf(rem));
+        
+        node.left = deserializehelper(queue);
+        node.right = deserializehelper(queue);
         
         return node;
         

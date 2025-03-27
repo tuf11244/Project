@@ -13,29 +13,29 @@ public class LowestCommonAncestor {
     private Node root;
     private Node p;
     private Node q;
+    private Node LCA;
     public LowestCommonAncestor(){
         
     }
     public Node lowestCommonAncestor(){
-        return lowestCommonAncestor(root,p,q);
+        LCA = null;
+        lowestCommonAncestor(root,p,q);
+        return LCA;
     }
-    private Node lowestCommonAncestor(Node node, Node p, Node q){
+    private boolean lowestCommonAncestor(Node node, Node p, Node q){
         if(node == null){
-            return null;
+            return false;
         }
-        if(node == p || node == q){
-            return node;
-        }
-        Node left = lowestCommonAncestor(node.left,p,q);
-        Node right = lowestCommonAncestor(node.right,p,q);
+        boolean self = (node == p) || (node == q);
         
-        if(left!=null && right!=null){
-            return node;
+        boolean left = lowestCommonAncestor(node.left,p,q);
+        boolean right = lowestCommonAncestor(node.right,p,q);
+        
+        if((left && right) || (self && left) || (self && right)){
+            LCA = node;
         }
-        if(left == null){
-            return right;
-        }
-        return left;
+        
+        return self || left || right;
     }
     
     
