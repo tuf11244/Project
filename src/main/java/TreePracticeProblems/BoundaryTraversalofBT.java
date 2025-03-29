@@ -5,7 +5,7 @@
 package TreePracticeProblems;
 
 import java.util.Scanner;
-
+import java.util.*;
 /**
  *
  * @author parth
@@ -20,79 +20,104 @@ public class BoundaryTraversalofBT {
        Scanner scanner = new Scanner(System.in);
        tree.insert(scanner);
        
-       tree.printBoundary();
-        
         
     }
 }
 class BoundaryTraversal{
     private Node root;
+    private List<Integer> left;
+    private List<Integer> right;
+    private List<Integer> boundary;
     public BoundaryTraversal(){
         
+        boundaryTraversal(root);
+        
     }
-    public void leafNodes(){
-        leafNodes(root);
-    }
-    private void leafNodes(Node node){
+    
+    public void  boundaryTraversal(Node node){
+        List<Integer> answer = new ArrayList<>();
+        
         if(node == null){
             return;
         }
-        leafNodes(node.left);
+        
         if(node.left == null && node.right == null){
-            System.out.print(node.value + " ");
+            answer.add(node.value);
         }
-        leafNodes(node.right);
+        
+        answer.add(node.value);
+        left = new ArrayList<>();
+        right = new ArrayList<>();
+        boundary = new ArrayList<>();
+        
+        
+        getLeftBoundary(node.left);
+        getRightBoundary(node.right);
+        getLeafNodes(node);
+        
+        for(int i = 0; i < left.size();i++){
+            answer.add(left.get(i));
+        }
+        for(int i = 0; i < boundary.size();i++){
+            answer.add(boundary.get(i));
+        }
+        
+        for(int i = right.size()-1; i >= 0; i--){
+            answer.add(right.get(i));
+        }   
+        
+        System.out.println(answer);
     }
-    public void leftBoundary(){
-        leftBoundary(root);
-    }
-    private void leftBoundary(Node node){
+    
+    public void getLeftBoundary(Node node){
         if(node == null){
             return;
         }
-        if(node.left!= null){
-         System.out.print(node.value + " ");
-         leftBoundary(node.left);
+        while(node.left != null || node.right != null){
+             
+            if(node.left != null){
+                left.add(node.value);
+                node = node.left;
+            }else if(node.right != null){
+                left.add(node.value);
+                node = node.right;
+            }
+                
         }
-        else if(node.right!= null){
-         System.out.print(node.value + " ");
-         leftBoundary(node.right);
     }
-    }
-    public void rightBoundary(){
-        rightBoundary(root);
-    }
-    private void rightBoundary(Node node){
+    public void getRightBoundary(Node node){
         if(node == null){
             return;
         }
-        if(node.right!= null){ 
-            rightBoundary(node.right);
-            System.out.print(node.value + " ");
-    } else if(node.left!= null){
-            rightBoundary(node.left);
-            System.out.println(node.value + " ");
+        while(node.left != null || node.right != null){
+             
+            if(node.right != null){
+                right.add(node.value);
+                node = node.right;
+            }else if(node.left != null){
+                right.add(node.value);
+                node = node.left;
+            }
+                
+        }
     }
-    }    
-    public void printBoundary(){
-        printBoundary(root);
-    }
-    private void printBoundary(Node node){
+    public void getLeafNodes(Node node){
         if(node == null){
             return;
         }
-        System.out.print(node.value + " ");
         
-        //Print left Boundary 
-        leftBoundary(node.left);
+        if(node.left == null && node.right == null){
+            boundary.add(node.value);
+            return;
+        }
         
-        //Print all leaf Nodes 
-        leafNodes(node.left);
-        leafNodes(node.right);
-        
-        //Print right Boundary
-        rightBoundary(node.right);
+        getLeafNodes(node.left);
+        getLeafNodes(node.right);
     }
+    
+   
+      
+    
     public void insert(Scanner scanner){
         System.out.println("Please enter the root value : "); 
         int value = scanner.nextInt();
