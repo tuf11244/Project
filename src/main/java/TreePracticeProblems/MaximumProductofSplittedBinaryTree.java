@@ -19,66 +19,61 @@ public class MaximumProductofSplittedBinaryTree {
     public static void main(String args[]) {
        Solution5 tree = new Solution5();
        Scanner scanner = new Scanner(System.in);
-       tree.insert(scanner);
-       
-       int ans = tree.maxProduct();
-        System.out.println(ans);
+      
+ 
     }
 }
 class Solution5{
-    private Node root;
-    private int maxProduct = Integer.MIN_VALUE;
-    private int totalSum = 0;
-    public void insert(Scanner scanner){
-        System.out.println("Enter the root value ");
-        int value = scanner.nextInt();
-        root = new Node(value);
-        insert(root,scanner);
-    }
-    private void insert(Node node, Scanner scanner){
-        System.out.println("Do you want to enter value to the left of " + node.value);
-        boolean left = scanner.nextBoolean();
-        if(left){
-            System.out.println("Enter the value to the left of " + node.value);
-            int value = scanner.nextInt();
-            node.left = new Node(value);
-            insert(node.left,scanner);
-        }
-        System.out.println("Do you want to enter value to the right of " + node.value);
-        boolean right = scanner.nextBoolean();
-        if(right){
-            System.out.println("Enter the value to the right of " + node.value);
-            int value = scanner.nextInt();
-            node.right = new Node(value);
-            insert(node.right,scanner);
-        }
-    }
-    public int maxProduct(){
-    totalSum = subtreeSum(root);
-        maxProduct(root);
-        return maxProduct;
-    }
-    private int subtreeSum(Node node){
-        if(node == null){
+    public int MOD = (int)1e9 + 7;
+    public long SUM;
+    public long maxP;
+
+    public int maxProduct(Node root) {
+        if (root == null) {
             return 0;
         }
-        int sumLeft = subtreeSum(node.left);
-        int sumRight = subtreeSum(node.right);
-        int subtreeSum = node.value + sumLeft + sumRight;
-        totalSum = totalSum + subtreeSum;
-        return subtreeSum;
+
+        // Calculate the total sum of the tree
+        SUM = totalSum(root);
+
+        // Calculate the maximum product
+        find(root);
+
+        // Return the result with modulo
+        return (int)(maxP % MOD);
     }
-    
-    private int maxProduct(Node node){
-        if(node == null){
+
+    public long find(Node root) {
+        if (root == null) {
             return 0;
         }
-         int sumLeft = maxProduct(node.left);
-        int sumRight = maxProduct(node.right);
-        int subtreeSum = node.value + sumLeft + sumRight;
-        int product = subtreeSum * (totalSum - subtreeSum);
-        maxProduct = Math.max(maxProduct, product);
-        return subtreeSum;
+
+        // Get the sum of left and right subtrees
+        long left = find(root.left);
+        long right = find(root.right);
+
+        // Calculate the sum of the current subtree
+        long subTreeSum = root.value + left + right;
+
+        // Calculate the remaining sum (totalSum - subTreeSum)
+        long remainingSum = SUM - subTreeSum;
+
+        // Update max product
+        maxP = Math.max(maxP, remainingSum * subTreeSum);
+
+        return subTreeSum;
+    }
+
+    public long totalSum(Node root) {
+        if (root == null) {
+            return 0;
+        }
+        // Recursively calculate the sum of left and right subtrees
+        long left = totalSum(root.left);
+        long right = totalSum(root.right);
+
+        // Return the total sum of the current subtree
+        return root.value + left + right;
     }
     private class Node{
         int value;
