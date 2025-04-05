@@ -3,138 +3,107 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package TreePracticeProblems;
-
+import java.util.*;
 /**
- *
+ *Date: 04/02/2025
  * @author parth
  */
 //https://leetcode.com/problems/operations-on-tree/
-class LockingTree{
-    private Node root;
-    private int[] parent;
-    public LockingTree(int[] parent){
-        this.parent = parent;
-        this.root = buildTree(parent);
-    }
-    public Node buildTree(int[] parent){
-       Node[] nodes = new Node[parent.length];
-       for(int i = 0; i < parent.length;i++){
-           nodes[i] = new Node(i);
-       }
-       for (int i = 0; i < parent.length; i++) {
-            if (parent[i] != -1) {
-                Node parentNode = nodes[parent[i]];
-                if (parentNode.left == null) {
-                    parentNode.left = nodes[i];
-                } else {
-                    parentNode.right = nodes[i];
-                }
-            }
+class LockingTree {
+    HashMap<Integer, Integer> locked;
+    int[] parents;
+    HashMap<Integer, List<Integer>> parentMap;
+
+    public LockingTree(int[] parent) {
+        locked = new HashMap<>();
+        parents = parent;
+        parentMap = new HashMap<>();
+
+        // Build parent-child mapping once
+        for (int i = 0; i < parent.length; i++) {
+            parentMap.putIfAbsent(parent[i], new ArrayList<>());
+            parentMap.get(parent[i]).add(i);
         }
-        return nodes[0];
-    }
-    public boolean lock(int num, int user){
-        Node node = findNode(root,num);
-        if(node != null && !node.locked){
-            node.locked = true;
-            node.lockedby = user;
-            return true;
-        }
-        return false;
-    }
-    public boolean unlock(int num, int user){
-        Node node = findNode(root,num);
-        if(node!= null && node.locked && node.lockedby == user){
-            node.locked = false;
-            node.lockedby = -1;
-            return true;
-        }
-        return false;
-    }
-    public boolean upgrade(int num, int user){
-        //Condition 1 : node is unlocked
-        //Condition 2 : Any descentdants locked by any user 
-        //Condition 3 : it doesnt have any locked ancestors
-        Node node = findNode(root,num);
-        if(node!= null && !node.locked && hasLockedDescendant(node) && !hasLockedAncestors(node)){
-            unlockDescendant(node);
-            node.locked = true;
-            node.lockedby = user;
-            return true;
-        }
-        return false;
-    }
-    private boolean hasLockedDescendant(Node node){
-        if(node == null){
-            return false;
-        }
-        return node.locked || hasLockedDescendant(node.left) || hasLockedDescendant(node.right) ;
-    }
-    private boolean hasLockedAncestors(Node node){
-        if(node == null){
-            return false;
-        }
-        if(node.locked){
-            return true;
-        }
-        return hasLockedAncestors(findNode(root,parent[node.value]));
-    }
-    private void unlockDescendant(Node node){
-        if(node == null){
-            return;
-        }
-        if(node.locked){
-            node.locked = false;
-            node.lockedby = - 1;
-        }
-        unlockDescendant(node.left);
-        unlockDescendant(node.right);
-    }
-    private Node findNode(Node node, int num){
-        if(node == null){
-            return null;
-        }
-        if(node.value == num){
-            return node;
-        }
-        Node left = findNode(node.left,num);
-        if(left != null){
-            return left;
-        }
-        return findNode(node.right,num);
     }
 
-    public void display(){
-       display(root,"Root value is :");
-    }
-    private void display(Node node, String details){
-        if(node == null){
-            return;
+    public boolean lock(int num, int user) {
+        if (locked.containsKey(num)) {
+            return false;
         }
-        System.out.println(details + node.value);
-        display(node.left,"The left child of " + node.value + ":");
-        display(node.right,"The right child of " + node.value + ":");
+        locked.put(num, user);
+        return true;
     }
-    
-    private class Node{
-        int value;
-        Node left;
-        Node right;
-        boolean locked;
-        int lockedby;
-        public Node(int value){
-            this.value = value;
-            this.locked = false;
-            this.lockedby = -1;
+
+    public boolean unlock(int num, int user) {
+        if (!locked.containsKey(num) || locked.get(num) != user) {
+            return false;
         }
+        locked.remove(num);
+        return true;
+    }
+
+    public boolean upgrade(int num, int user) {
+        if (locked.containsKey(num)) return false; // Node must be unlocked
+        if (getLockedAncestors(num) > 0) return false; // No locked ancestor condition
+        if (getLockedDescendants(num) == 0) return false; // At least one locked descendant
+
+        // Unlock all locked descendants
+        List<Integer> lockedNodes = new ArrayList<>();
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(num);
+
+        while (!queue.isEmpty()) {
+            int node = queue.poll();
+            if (locked.containsKey(node)) {
+                lockedNodes.add(node);
+            }
+            if (parentMap.containsKey(node)) {
+                queue.addAll(parentMap.get(node));
+            }
+        }
+
+        // Remove locked descendants
+        for (int node : lockedNodes) {
+            locked.remove(node);
+        }
+
+        // Lock the current node
+        locked.put(num, user);
+        return true;
+    }
+
+    private int getLockedDescendants(int num) {
+        int count = 0;
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(num);
+
+        while (!queue.isEmpty()) {
+            int node = queue.poll();
+            if (locked.containsKey(node)) count++;
+            if (parentMap.containsKey(node)) {
+                queue.addAll(parentMap.get(node));
+            }
+        }
+        return count;
+    }
+
+    private int getLockedAncestors(int num) {
+        int count = 0;
+        int ancestor = parents[num];
+
+        while (ancestor != -1) {
+            if (locked.containsKey(ancestor)) count++;
+            ancestor = parents[ancestor];
+        }
+        return count;
     }
 }
+
 public class OperationonTree{
 	public static void main(String[] args) {
 	System.out.println("Hello World");
 		int[] parent = {-1, 0, 0, 1, 1, 2, 2};
 		LockingTree tree = new LockingTree(parent);
-		tree.display();
 		System.out.println(tree.lock(2, 2)); // Output: true (node 2 is locked by user 2)
         System.out.println(tree.unlock(2, 2)); // Output: true (node 2 is unlocked by user 2)
         System.out.println(tree.upgrade(2, 2)); // Output: false (upgrade fails as per the conditions)
