@@ -9,7 +9,7 @@
 package TreePracticeProblemsPart2;
 
 /**
- *
+ *https://leetcode.com/problems/binary-tree-cameras/
  * @author parth
  */
 public class BinaryTreeCamera {
@@ -64,6 +64,6 @@ class Camera {
             return 1; // I am covered
         }
 
-        return -1; // I am not covered
+        return -1; // I am not covered  so I need the camera 
     }
 }
