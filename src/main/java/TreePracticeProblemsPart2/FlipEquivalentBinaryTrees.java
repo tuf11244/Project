@@ -44,9 +44,11 @@ public class FlipEquivalentBinaryTrees {
             }
 
             
-
+            //Check without the flip
             boolean isSimilar1 = flipEquiv(root1.left, root2.left);
             boolean isSimilar2 = flipEquiv(root1.right,root2.right);
+
+            //Check with the flip
             boolean isSymmetric1 = flipEquiv(root1.left, root2.right);
             boolean isSymmetric2 = flipEquiv(root1.right,root2.left);
 
