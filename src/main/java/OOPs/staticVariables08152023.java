@@ -4,6 +4,8 @@
  */
 package OOPs;
 
+import java.util.Objects;
+
 /**
  *
  * @author parth
@@ -36,6 +38,36 @@ class Human{
         this.salary = salary;
         this.marriageStatus = marriageStatus;
         Human.population = Human.population +1;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Human other = (Human) obj;
+        if (this.age != other.age) {
+            return false;
+        }
+        if (this.salary != other.salary) {
+            return false;
+        }
+        if (this.marriageStatus != other.marriageStatus) {
+            return false;
+        }
+        return Objects.equals(this.name, other.name);
     }
     
 }
