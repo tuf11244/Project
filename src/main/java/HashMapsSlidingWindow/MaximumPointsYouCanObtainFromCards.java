@@ -40,4 +40,28 @@ public class MaximumPointsYouCanObtainFromCards {
         // Edge case: take all cards (k == cardPoints.length)
         return k == cardPoints.length ? totalPoints : answer;
     }
+    
+    //Using 2 Pointer
+    public int maxScore2Pointers(int[] cardPoints, int k) {
+       
+       int leftSum = 0;
+       //Pick up all the elements from the left 
+       for(int i = 0; i < k;i++){
+            leftSum = leftSum + cardPoints[i];
+       }
+
+       int maxSum = leftSum;
+       int rightSum = 0;
+       int j = cardPoints.length - 1; //
+
+       for(int i = k-1; i >= 0; i--){
+
+            leftSum = leftSum - cardPoints[i];
+            rightSum = rightSum + cardPoints[j];
+            maxSum = Math.max(maxSum, leftSum + rightSum);
+            j--;
+       }
+       return maxSum;
+    }
+    
 }

@@ -54,4 +54,56 @@ public class MinimumNumberofOpertationstoMakeArrayContinuous {
         return answer;
         
     }
+    
+    public static int minOperationsUsingBinarySearch(int[] nums){
+        
+        int answer = Integer.MAX_VALUE;
+
+        //Create a HashSet for all the unqiue values
+        HashSet<Integer> set = new HashSet<>();
+        for(int i  = 0; i < nums.length;i++){
+            set.add(nums[i]);
+        }
+        //We are creating an array for all the unique values 
+        int[] arr = new int[set.size()];
+        int index = 0;
+        for(int num : set){
+            arr[index] = num;
+            index++;
+        }
+        //sort the arr 
+        Arrays.sort(arr);
+        
+        for(int i = 0; i < arr.length;i++){
+            
+            int targetElement = arr[i] + nums.length - 1;
+            int j = binarySearch(arr,targetElement);
+            
+            int inRange = j-i;
+            int outRange = nums.length - inRange;
+            
+            answer = Math.min(answer,outRange);
+        }
+           return answer;
+    }
+    
+    public static int binarySearch(int[] arr, int targetElement){
+        
+        int low = 0;
+        int end = arr.length - 1;
+        
+        while(low <= end){
+            int mid = low + (end-low)/2;
+             
+            if(arr[mid] <= targetElement){
+                low = mid+1;
+            }else{
+                end = mid - 1;
+            }
+            
+        }
+            
+        return low;
+        
+    }
 }
