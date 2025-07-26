@@ -13,6 +13,7 @@ public class KarpRabinAlgorithm {
     /**
      * @param args the command line arguments
      */
+    
     private static final int PRIME = 101;
     public static void main(String args[]) {
         String text = "ParthVrajeshbhaiNagindasLallubhaiGordhandasDesai";
