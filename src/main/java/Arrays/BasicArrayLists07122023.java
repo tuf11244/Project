@@ -62,5 +62,7 @@ public class BasicArrayLists07122023 {
         cars2.trimToSize();
         cars2.remove("Bugatti");
         System.out.print(cars2);
+
+        System.out.println("Did all the cars get printed ?");
     }
 }
